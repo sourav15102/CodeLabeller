@@ -43,6 +43,3 @@ deploy_job:
         - docker
     script:
         - echo "deploy started"
-
-only:
-    - branches
