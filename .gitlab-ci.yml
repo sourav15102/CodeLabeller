@@ -17,7 +17,7 @@ build_job:
         - grad
     script:
         - echo "maven build started"
-        - "mvn compile"
+        - mvn compile
 
 test_job:
     stage: test
@@ -25,7 +25,7 @@ test_job:
         - grad
     script:
         - echo "test started"
-        - "mvn started"
+        - mvn started
 
 
 package_job:
@@ -34,7 +34,7 @@ package_job:
         - grad
     script:
         - echo "package started"
-        - "mvn package"
+        - mvn package
 
 
 deploy_job:
