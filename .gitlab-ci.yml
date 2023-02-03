@@ -1,0 +1,48 @@
+image: maven:latest
+
+cache:
+  paths:
+    - .m2/repository
+
+stages:
+    build
+    test
+    package
+    deploy
+
+
+build_job:
+    stage: build
+    tags:
+        docker
+    script:
+        echo "maven build started"
+        "mvn compile"
+
+test_job:
+    stage: test
+    tags:
+        docker
+    script:
+        echo "test started"
+        "mvn started"
+
+
+package_job:
+    stage: package
+    tags:
+        docker
+    script:
+        echo "package started"
+        "mvn package"
+
+
+deploy_job:
+    stage: deploy
+    tags:
+        docker
+    script:
+        echo "deploy started"
+
+only:
+    branches
