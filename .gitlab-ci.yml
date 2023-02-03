@@ -14,7 +14,7 @@ stages:
 build_job:
     stage: build
     tags:
-        - docker
+        - grad
     script:
         - echo "maven build started"
         - "mvn compile"
@@ -22,7 +22,7 @@ build_job:
 test_job:
     stage: test
     tags:
-        - docker
+        - grad
     script:
         - echo "test started"
         - "mvn started"
@@ -31,7 +31,7 @@ test_job:
 package_job:
     stage: package
     tags:
-        - docker
+        - grad
     script:
         - echo "package started"
         - "mvn package"
@@ -40,6 +40,6 @@ package_job:
 deploy_job:
     stage: deploy
     tags:
-        - docker
+        - grad
     script:
         - echo "deploy started"
