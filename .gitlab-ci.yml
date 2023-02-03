@@ -13,16 +13,12 @@ stages:
 
 build_job:
     stage: build
-    tags:
-        - grad
     script:
         - echo "maven build started"
         - mvn compile
 
 test_job:
     stage: test
-    tags:
-        - grad
     script:
         - echo "test started"
         - mvn started
@@ -30,8 +26,6 @@ test_job:
 
 package_job:
     stage: package
-    tags:
-        - grad
     script:
         - echo "package started"
         - mvn package
@@ -39,7 +33,5 @@ package_job:
 
 deploy_job:
     stage: deploy
-    tags:
-        - grad
     script:
         - echo "deploy started"
