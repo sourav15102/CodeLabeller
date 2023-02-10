@@ -1,4 +1,4 @@
-image: maven:3-openjdk-8
+image: maven:latest
 
 cache:
   paths:
@@ -15,13 +15,19 @@ build_job:
     stage: build
     script:
         - echo "maven build started"
+        - mvn clean install
         - mvn compile
+    only:
+        - feature_authentication_authorization
+
 
 test_job:
     stage: test
     script:
         - echo "test started"
-        - mvn started
+        - mvn test
+    only:
+        - feature_authentication_authorization
 
 
 package_job:
@@ -29,9 +35,12 @@ package_job:
     script:
         - echo "package started"
         - mvn package
-
+    only:
+      - feature_authentication_authorization
 
 deploy_job:
     stage: deploy
     script:
         - echo "deploy started"
+    only:
+      - feature_authentication_authorization
