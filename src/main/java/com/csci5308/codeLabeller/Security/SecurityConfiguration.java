@@ -1,14 +1,10 @@
 package com.csci5308.codeLabeller.Security;
 
-import jakarta.servlet.FilterChain;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +14,6 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
-import java.net.http.HttpRequest;
 
 @Configuration
 public class SecurityConfiguration {
@@ -28,27 +23,40 @@ public class SecurityConfiguration {
         return new BCryptPasswordEncoder();
     }
 
-//    //first run script from user.ddl
-//    @Bean
-//    public UserDetailsManager userDetailsManager(DataSource dataSource){
-//        System.out.println(new BCryptPasswordEncoder().encode("1234"));
-//        return new JdbcUserDetailsManager(dataSource);
-//    }
+    //first run script from user.ddl
+    @Bean
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
+        return new JdbcUserDetailsManager(dataSource);
+    }
+
+    @Bean
+    public SecurityFilterChain authenticationFilter(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf().disable()
+                .authorizeHttpRequests()
+                .requestMatchers("/signup")
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin();
+
+        return httpSecurity.build();
+    }
 
 //    // In memory storage
-    @Bean
-    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
-        User user1 = (User) User.withUsername("sghai")
-                .password(passwordEncoder().encode("1234"))
-                .authorities("ANNOTATOR")
-                .build();
-
-        User user2 = (User) User.withUsername("aghai")
-                .password(passwordEncoder().encode("1234"))
-                .authorities("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(user1,user2);
-    }
+//    @Bean
+//    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
+//        User user1 = (User) User.withUsername("sghai")
+//                .password(passwordEncoder().encode("1234"))
+//                .authorities("ANNOTATOR")
+//                .build();
+//
+//        User user2 = (User) User.withUsername("aghai")
+//                .password(passwordEncoder().encode("1234"))
+//                .authorities("ADMIN", "ANNOTATOR")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(user1,user2);
+//    }
 
 }
