@@ -13,7 +13,6 @@ public class UserSignUpRepository {
     UserDetailsManager jdbcUserDetailsManager;
 
     public void registerTheUser(UserDetails user){
-        System.out.println(user.getUsername()+ ", "+user.getAuthorities());
         jdbcUserDetailsManager.createUser(user);
     }
 }

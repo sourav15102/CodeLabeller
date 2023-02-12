@@ -39,6 +39,8 @@ public class SecurityConfiguration {
                 .authenticated()
                 .and()
                 .formLogin();
+//                .loginPage("/login")
+//                .permitAll();
 
         return httpSecurity.build();
     }
