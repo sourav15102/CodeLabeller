@@ -35,6 +35,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/signup")
                 .permitAll()
+                .requestMatchers("/admin/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
