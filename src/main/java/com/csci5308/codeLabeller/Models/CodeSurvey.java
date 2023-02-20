@@ -2,6 +2,7 @@ package com.csci5308.codeLabeller.Models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.Set;
 
@@ -13,6 +14,9 @@ public class CodeSurvey {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonNull
     private Long surveyID;
+
+    @NonNull
+    private String username;
     private String surveyName;
     private String surveyLanguage;
     @OneToMany(mappedBy = "survey")

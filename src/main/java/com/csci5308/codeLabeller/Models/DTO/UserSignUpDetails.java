@@ -1,4 +1,4 @@
-package com.csci5308.codeLabeller.Models;
+package com.csci5308.codeLabeller.Models.DTO;
 
 import org.springframework.security.core.GrantedAuthority;
 

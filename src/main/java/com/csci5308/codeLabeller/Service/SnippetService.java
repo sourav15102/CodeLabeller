@@ -1,6 +1,6 @@
 package com.csci5308.codeLabeller.Service;
 
-import com.csci5308.codeLabeller.Models.AdminSnippetsAnnotationsDTO;
+import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
 import com.csci5308.codeLabeller.Repsoitory.SnippetRepository;
