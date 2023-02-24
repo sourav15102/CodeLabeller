@@ -15,4 +15,9 @@ public class UserSignUpRepository {
     public void registerTheUser(UserDetails user){
         jdbcUserDetailsManager.createUser(user);
     }
+
+    public UserDetails findByUsername(String username){
+        return jdbcUserDetailsManager.loadUserByUsername(username);
+    }
+
 }

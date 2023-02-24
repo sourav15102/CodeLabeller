@@ -1,7 +1,12 @@
 package com.csci5308.codeLabeller.Security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +23,8 @@ import javax.sql.DataSource;
 @Configuration
 public class SecurityConfiguration {
 
+    @Autowired
+    DataSource dataSource;
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -25,8 +32,21 @@ public class SecurityConfiguration {
 
     //first run script from user.ddl
     @Bean
-    public UserDetailsManager userDetailsManager(DataSource dataSource){
+    public UserDetailsManager userDetailsManager(){
         return new JdbcUserDetailsManager(dataSource);
+    }
+
+    @Bean
+    public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();
+        daoAuth.setUserDetailsService(userDetailsManager());
+        daoAuth.setPasswordEncoder(passwordEncoder());
+        return daoAuth;
     }
 
     @Bean
@@ -37,10 +57,12 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/admin/**")
                 .permitAll()
+                .requestMatchers("/login")
+                .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
+                .authenticationProvider(authenticationProvider());
 //                .loginPage("/login")
 //                .permitAll();
 
