@@ -29,7 +29,7 @@ public class UserSignUpService {
     @Autowired
     AuthenticationManager authManager;
 
-    public void registerUser(UserSignUpDetails user){
+    public AuthResponse registerUser(UserSignUpDetails user){
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
         Set<GrantedAuthority> authorities = new HashSet<>();
         if(user.getAuthority().equals(UserAuthority.ADMIN.toString())){
@@ -38,6 +38,10 @@ public class UserSignUpService {
         authorities.add(grantedAuthority);
 
         userSignUpRepository.registerTheUser(new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities));
+        String jwtToken = "JWT Token";
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwtToken(jwtToken);
+        return authResponse;
     }
 
     public AuthResponse authenticate(UserLoginDetails userLoginDetails){
