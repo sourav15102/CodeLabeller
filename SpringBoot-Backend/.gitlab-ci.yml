@@ -5,7 +5,7 @@ variables:
 default:
   image: docker:latest
   tags:
-    - projectrunner
+    - development
 
 stages:
   - build
