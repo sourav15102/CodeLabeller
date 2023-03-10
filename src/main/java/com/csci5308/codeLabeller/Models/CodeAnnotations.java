@@ -20,6 +20,7 @@ public class CodeAnnotations {
 
     private String name;
 
+    @ToString.Exclude
     @ManyToMany
     private Set<CodeSnippet> taggedSnippet;
 

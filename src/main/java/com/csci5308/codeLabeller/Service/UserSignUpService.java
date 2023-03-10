@@ -1,20 +1,27 @@
 package com.csci5308.codeLabeller.Service;
 
 import com.csci5308.codeLabeller.Enums.UserAuthority;
+import com.csci5308.codeLabeller.Models.Annotator;
+import com.csci5308.codeLabeller.Models.CodeSurvey;
 import com.csci5308.codeLabeller.Models.DTO.AuthResponse;
 import com.csci5308.codeLabeller.Models.DTO.UserLoginDetails;
 import com.csci5308.codeLabeller.Models.DTO.UserSignUpDetails;
+import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
+import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
 import com.csci5308.codeLabeller.Repsoitory.UserSignUpRepository;
+import com.csci5308.codeLabeller.Security.SecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,22 +30,27 @@ public class UserSignUpService {
 
     @Autowired
     UserSignUpRepository userSignUpRepository;
-
+    @Autowired
+    AnnotatorRepository annotatorRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
     AuthenticationManager authManager;
+    @Autowired
+    JwtService jwtService;
 
     public AuthResponse registerUser(UserSignUpDetails user){
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
         Set<GrantedAuthority> authorities = new HashSet<>();
-        if(user.getAuthority().equals(UserAuthority.ADMIN.toString())){
-            authorities.add(new SimpleGrantedAuthority(UserAuthority.ANNOTATOR.toString()));
-        }
         authorities.add(grantedAuthority);
-
-        userSignUpRepository.registerTheUser(new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities));
-        String jwtToken = "JWT Token";
+        UserDetails userDetails = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities);
+        userSignUpRepository.registerTheUser(userDetails);
+        if(user.getAuthority().equals(UserAuthority.ANNOTATOR.toString())){
+            Annotator annotator = new Annotator();
+            annotator.setUsername(user.getUsername());
+            annotatorRepository.save(annotator);
+        }
+        String jwtToken = jwtService.generateToken(userDetails);
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwtToken(jwtToken);
         return authResponse;
@@ -52,7 +64,7 @@ public class UserSignUpService {
                 )
         );
         UserDetails user = userSignUpRepository.findByUsername(userLoginDetails.getUsername());
-        String jwtToken = "JWT Token";
+        String jwtToken = jwtService.generateToken(user);
         AuthResponse authResponse = new AuthResponse();
         authResponse.setJwtToken(jwtToken);
         return authResponse;

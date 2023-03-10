@@ -18,6 +18,7 @@ public class CodeSnippet {
     @Lob
     private byte[] snippetText;
 
+    @ToString.Exclude
     @ManyToMany
     private Set<CodeAnnotations> tags;
 }

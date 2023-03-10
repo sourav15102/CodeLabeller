@@ -1,5 +1,6 @@
 package com.csci5308.codeLabeller.Security;
 
+import com.csci5308.codeLabeller.Components.JwtFilterChain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +19,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
 
@@ -24,29 +27,13 @@ import javax.sql.DataSource;
 public class SecurityConfiguration {
 
     @Autowired
-    DataSource dataSource;
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+    JwtFilterChain jwtFilterChain;
 
     //first run script from user.ddl
-    @Bean
-    public UserDetailsManager userDetailsManager(){
-        return new JdbcUserDetailsManager(dataSource);
-    }
 
     @Bean
     public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
-    public AuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();
-        daoAuth.setUserDetailsService(userDetailsManager());
-        daoAuth.setPasswordEncoder(passwordEncoder());
-        return daoAuth;
     }
 
     @Bean
@@ -55,34 +42,16 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/signup")
                 .permitAll()
-                .requestMatchers("/admin/**")
-                .permitAll()
                 .requestMatchers("/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
-                .authenticationProvider(authenticationProvider());
-//                .loginPage("/login")
-//                .permitAll();
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.addFilterBefore(jwtFilterChain, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
     }
-
-//    // In memory storage
-//    @Bean
-//    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
-//        User user1 = (User) User.withUsername("sghai")
-//                .password(passwordEncoder().encode("1234"))
-//                .authorities("ANNOTATOR")
-//                .build();
-//
-//        User user2 = (User) User.withUsername("aghai")
-//                .password(passwordEncoder().encode("1234"))
-//                .authorities("ADMIN", "ANNOTATOR")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user1,user2);
-//    }
 
 }

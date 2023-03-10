@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Set;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @ToString @AllArgsConstructor
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class CodeSurvey {
 
     @Id
@@ -19,9 +19,12 @@ public class CodeSurvey {
     private String username;
     private String surveyName;
     private String surveyLanguage;
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "survey")
     private Set<CodeSnippet> snippetList;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "survey")
     private Set<CodeAnnotations> annotationList;
 
