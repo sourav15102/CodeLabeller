@@ -1,5 +1,6 @@
 package com.csci5308.codeLabeller.Controller;
 
+import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
 import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Service.AnnotatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,16 @@ public class AnnotatorController {
 
     @PostMapping("{annotator_username}/survey/{survey_id}/approvalrequest/")
     public void submitSurveyApprovalRequest(){
-        
+        //
+    }
+
+    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/annotationstag")
+    public void tagSnippetWithAnnotations(@PathVariable("annotator_username") String annotatorUsername,
+                                                    @PathVariable("survey_id") Long surveyId,
+                                                    @PathVariable("snippet_id") Long snippetId,
+                                                    @RequestBody List<AnnotationResponse> annotationsTag){
+        annotatorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        annotatorService.tagSnippetWithAnnotations(annotatorUsername, surveyId, snippetId, annotationsTag);
     }
 
     @GetMapping("{annotator_username}/survey/approved/all/")
