@@ -7,11 +7,14 @@ import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
 import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AnnotationService {
@@ -53,4 +56,20 @@ public class AnnotationService {
         CodeAnnotations codeAnnotation = annotationsRepository.findById(id).get();
         return this.makeAnnotationResponse(codeAnnotation);
     }
+
+    public Set<CodeAnnotations> getAllCodeAnnotations(List<AnnotationResponse> annotationsTag){
+        Set<CodeAnnotations> codeAnnotationsSet = new HashSet<>();
+        for(AnnotationResponse ar: annotationsTag){
+            CodeAnnotations codeAnnotation = annotationsRepository.findById(ar.getAnnotationID()).get();
+            codeAnnotationsSet.add(codeAnnotation);
+        }
+        return codeAnnotationsSet;
+    }
+
+    public CodeAnnotations getCodeAnnotation(AnnotationResponse annotationResponse) {
+        CodeAnnotations codeAnnotation = annotationsRepository.findById(annotationResponse.getAnnotationID()).get();
+        return codeAnnotation;
+    }
+
+
 }

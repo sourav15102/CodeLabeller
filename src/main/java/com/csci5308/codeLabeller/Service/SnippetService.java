@@ -63,4 +63,12 @@ public class SnippetService {
         CodeSnippet codeSnippet = snippetRepository.findById(id).get();
         return this.makeSnippetResponse(codeSnippet);
     }
+
+    public CodeSnippet getCodeSnippet(Long snippetId){
+        return snippetRepository.findById(snippetId).get();
+    }
+
+    public void updateSnippet(CodeSnippet codeSnippet) {
+        snippetRepository.save(codeSnippet);
+    }
 }
