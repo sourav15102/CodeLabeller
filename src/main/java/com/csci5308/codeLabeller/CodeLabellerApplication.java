@@ -20,6 +20,9 @@ public class CodeLabellerApplication {
 			String url = "jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT";
 			String username = "CSCI5308_8_DEVINT_USER";
 			String password = "umee9keiNa";
+//			String url = "jdbc:mysql://localhost:3306/dev";
+//			String username = "root";
+//			String password = "1234";
 			Connection connection = DriverManager.getConnection(url, username, password);
 			Statement statement = connection.createStatement();
 			String sql1 = "create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);";

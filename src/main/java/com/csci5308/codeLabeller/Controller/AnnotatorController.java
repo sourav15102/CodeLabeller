@@ -33,7 +33,7 @@ public class AnnotatorController {
         //
     }
 
-    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/annotationstag")
+    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/annotationstag/")
     public void tagSnippetWithAnnotations(@PathVariable("annotator_username") String annotatorUsername,
                                                     @PathVariable("survey_id") Long surveyId,
                                                     @PathVariable("snippet_id") Long snippetId,
