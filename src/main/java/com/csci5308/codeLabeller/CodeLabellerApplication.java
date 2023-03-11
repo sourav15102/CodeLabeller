@@ -1,7 +1,10 @@
 package com.csci5308.codeLabeller;
 
+import org.hibernate.cfg.Environment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +13,7 @@ import java.sql.Statement;
 
 @SpringBootApplication
 public class CodeLabellerApplication {
+
 	public static void main(String[] args) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
