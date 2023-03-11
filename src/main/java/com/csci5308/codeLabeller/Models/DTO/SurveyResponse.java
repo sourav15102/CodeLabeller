@@ -10,6 +10,7 @@ public class SurveyResponse {
     private Long surveyID;
     private String surveyName;
     private String surveyLanguage;
+    private Long surveyThreshold;
     private Set<AnnotationResponse> annotationResponseSet;
     private Set<SnippetResponse> snippetResponseSet;
 }

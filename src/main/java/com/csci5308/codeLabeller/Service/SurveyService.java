@@ -30,6 +30,7 @@ public class SurveyService {
         survey.setUsername(asaDTO.getUsername());
         survey.setSurveyName(asaDTO.getSurveyName());
         survey.setSurveyLanguage(asaDTO.getSurveyLanguage());
+        survey.setSurveyThreshold(asaDTO.getSurveyThreshold());
 
         return surveyRepository.save(survey);
     }
@@ -66,6 +67,7 @@ public class SurveyService {
         surveyResponse.setSurveyID(cs.getSurveyID());
         surveyResponse.setSurveyName(cs.getSurveyName());
         surveyResponse.setSurveyLanguage(cs.getSurveyLanguage());
+        surveyResponse.setSurveyThreshold(cs.getSurveyThreshold());
         surveyResponse.setAnnotationResponseSet(annotationResponseSet);
         surveyResponse.setSnippetResponseSet(snippetResponseSet);
         return surveyResponse;
