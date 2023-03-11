@@ -20,6 +20,8 @@ public class CodeSurvey {
     private String surveyName;
     private String surveyLanguage;
 
+    private Long surveyThreshold;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "survey")
     private Set<CodeSnippet> snippetList;
