@@ -49,7 +49,7 @@ issues_job:
   image: python:3.10
   script:
     - pip install -r $CI_PROJECT_DIR/.gitlab/requirements.txt
-    - python $CI_PROJECT_DIR/.gitlab/issues.py $CI_COMMIT_SHA
+    - python $CI_PROJECT_DIR/.gitlab/Issues.py $CI_COMMIT_SHA
 
 
 build_job:
