@@ -32,7 +32,7 @@ smells_job:
   stage: smells
   image: openjdk:17
   script:
-    -echo "Start smells job"
+    - echo "Start smells job"
     - mkdir smells/
     - java -jar $CI_PROJECT_DIR/.gitlab/DesigniteJava.jar -i $CI_PROJECT_DIR -o smells/ -d
     - cd smells/
