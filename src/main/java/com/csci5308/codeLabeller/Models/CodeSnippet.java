@@ -16,6 +16,7 @@ public class CodeSnippet {
     @JoinColumn(name = "SurveyID")
     private CodeSurvey survey;
     @Lob
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] snippetText;
 
     @ToString.Exclude
