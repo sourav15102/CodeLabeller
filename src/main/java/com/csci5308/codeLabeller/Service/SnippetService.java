@@ -9,6 +9,9 @@ import com.csci5308.codeLabeller.Models.DTO.SnippetResponse;
 import com.csci5308.codeLabeller.Repsoitory.SnippetRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -70,5 +73,10 @@ public class SnippetService {
 
     public void updateSnippet(CodeSnippet codeSnippet) {
         snippetRepository.save(codeSnippet);
+    }
+
+    public Page<CodeSnippet> getSnippetPage(CodeSurvey codeSurvey, int page) {
+        Sort sort = Sort.by(Sort.Direction.ASC, "codeSnippetId");
+        return snippetRepository.findBySurvey(codeSurvey, PageRequest.of(page, 1), sort);
     }
 }
