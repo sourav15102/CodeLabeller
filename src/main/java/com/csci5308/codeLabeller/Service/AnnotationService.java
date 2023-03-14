@@ -42,6 +42,15 @@ public class AnnotationService {
         return annotationResponse;
     }
 
+    public List<AnnotationResponse> makeListAnnotationResponse(Set<CodeAnnotations> annotationSet){
+        List<AnnotationResponse> surveyAnnotationList = new ArrayList<>();
+        for(CodeAnnotations annotations: annotationSet){
+            surveyAnnotationList.add(makeAnnotationResponse(annotations));
+        }
+
+        return surveyAnnotationList;
+    }
+
     public List<AnnotationResponse> getAllAnnotations(String username, Long surveyId) {
         CodeSurvey codeSurvey =  surveyRepository.findById(surveyId).get();
         List<AnnotationResponse> annotationResponseList = new ArrayList<>();

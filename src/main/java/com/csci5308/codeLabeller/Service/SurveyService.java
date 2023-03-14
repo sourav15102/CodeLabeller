@@ -4,10 +4,9 @@ import com.csci5308.codeLabeller.Models.CodeAnnotations;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.DTO.*;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
-import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
-import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -73,9 +72,20 @@ public class SurveyService {
         return surveyResponse;
     }
 
+
     public SurveyResponse getSurvey(Long surveyID) {
-        CodeSurvey survey = surveyRepository.findById(surveyID).get();
+        CodeSurvey survey = getCodeSurvey(surveyID);
         return this.makeSurveyResponse(survey);
     }
 
+    public CodeSurvey getCodeSurvey(Long surveyID) {
+        return surveyRepository.findById(surveyID).get();
+    }
+
+    public Page<StartSurveyResponse> startSurvey(Long surveyID, int page){
+        CodeSurvey codeSurvey = surveyRepository.findById(surveyID).get();
+        Page<CodeSnippet> codeSnippetPage = snippetService.getSnippetPage(codeSurvey,page);
+        Page<StartSurveyResponse> startSurveyResponsePage = codeSnippetPage.map(codeSnippet -> new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),annotationService.makeListAnnotationResponse(codeSurvey.getAnnotationList())));
+        return startSurveyResponsePage;
+    }
 }
