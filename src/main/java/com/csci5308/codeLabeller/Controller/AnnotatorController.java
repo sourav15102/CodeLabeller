@@ -1,8 +1,10 @@
 package com.csci5308.codeLabeller.Controller;
 
 import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+import com.csci5308.codeLabeller.Models.DTO.StartSurveyResponse;
 import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Service.AnnotatorService;
+import com.csci5308.codeLabeller.Service.StartSurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Security;
 import java.util.List;
 
 @CrossOrigin
@@ -21,6 +24,9 @@ public class AnnotatorController {
     @Autowired
     AnnotatorService annotatorService;
 
+    @Autowired
+    StartSurveyService startSurveyService;
+
     @GetMapping("{annotator_username}/survey/all/")
     @PreAuthorize("hasAuthority('ANNOTATOR')")
     public List<SurveyResponse> getAllSurveys(@PathVariable("annotator_username") String username) {
@@ -28,9 +34,13 @@ public class AnnotatorController {
         return annotatorService.getAllSurveys();
     }
 
-    @PostMapping("{annotator_username}/survey/{survey_id}/approvalrequest/")
-    public void submitSurveyApprovalRequest(){
-        //
+    @GetMapping("{annotator_username}/survey/{survey_id}/start/")
+    @PreAuthorize("hasAuthority('ANNOTATOR')")
+    public StartSurveyResponse startSurvey(@PathVariable("annotator_username") String username,
+                                           @PathVariable("survey_id") Long surveyId){
+
+        username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return startSurveyService.startTheSurvey(surveyId);
     }
 
     @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/annotationstag/")

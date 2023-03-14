@@ -7,6 +7,7 @@ import com.csci5308.codeLabeller.Models.CodeSurvey;
 import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
 import jdk.jshell.Snippet;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,8 +75,12 @@ public class SurveyService {
     }
 
     public SurveyResponse getSurvey(Long surveyID) {
-        CodeSurvey survey = surveyRepository.findById(surveyID).get();
+        CodeSurvey survey = getCodeSurvey(surveyID);
         return this.makeSurveyResponse(survey);
+    }
+
+    public CodeSurvey getCodeSurvey(Long surveyID) {
+        return surveyRepository.findById(surveyID).get();
     }
 
 }
