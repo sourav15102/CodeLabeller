@@ -46,24 +46,29 @@ public class AnnotatorController {
 //        return startSurveyService.startTheSurvey(surveyId);
 //    }
 
-    @GetMapping("{annotator_username}/survey/{survey_id}/start/")
+    @PostMapping("{annotator_username}/survey/{survey_id}/start/")
     @PreAuthorize("hasAuthority('ANNOTATOR')")
     public Page<StartSurveyResponse> startSurvey(@PathVariable("annotator_username") String username,
                                          @PathVariable("survey_id") Long surveyId,
-                                         @RequestParam(defaultValue="0") int page){
+                                         @RequestParam(value = "page", defaultValue="0") int page,
+                                         @RequestParam(value = "snippetId", defaultValue = "0") Long snippetId,
+                                        @RequestBody(required = false) List<AnnotationResponse> annotationTags){
 
         username = SecurityContextHolder.getContext().getAuthentication().getName();
+        if(annotationTags!=null){
+            annotatorService.tagSnippetWithAnnotations(username,surveyId,snippetId,annotationTags);
+        }
         return startSurveyService.startTheSurvey(surveyId,page);
     }
 
-    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/annotationstag/")
-    public void tagSnippetWithAnnotations(@PathVariable("annotator_username") String annotatorUsername,
-                                                    @PathVariable("survey_id") Long surveyId,
-                                                    @PathVariable("snippet_id") Long snippetId,
-                                                    @RequestBody List<AnnotationResponse> annotationsTag){
-        annotatorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
-        annotatorService.tagSnippetWithAnnotations(annotatorUsername, surveyId, snippetId, annotationsTag);
-    }
+//    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/annotationstag/")
+//    public void tagSnippetWithAnnotations(@PathVariable("annotator_username") String annotatorUsername,
+//                                                    @PathVariable("survey_id") Long surveyId,
+//                                                    @PathVariable("snippet_id") Long snippetId,
+//                                                    @RequestBody List<AnnotationResponse> annotationsTag){
+//        annotatorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+//        annotatorService.tagSnippetWithAnnotations(annotatorUsername, surveyId, snippetId, annotationsTag);
+//    }
 
     @GetMapping("{annotator_username}/survey/approved/all/")
     @PreAuthorize("hasAuthority('ANNOTATOR')")
