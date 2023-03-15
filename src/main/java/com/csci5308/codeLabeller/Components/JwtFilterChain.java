@@ -1,6 +1,7 @@
 package com.csci5308.codeLabeller.Components;
 
 import com.csci5308.codeLabeller.Enums.JwtEnum;
+import com.csci5308.codeLabeller.Enums.JwtNumbers;
 import com.csci5308.codeLabeller.Service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,12 +32,13 @@ public class JwtFilterChain extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader(JwtEnum.AUTHORIZATION.toString());
-        String username,jwtToken;
+        String username;
+        String jwtToken;
         UserDetails userDetails = null;
         WebAuthenticationDetails webAuthenticationDetails = null;
 
         if(authHeader!=null && authHeader.startsWith(JwtEnum.Bearer.toString()+" ")){
-            jwtToken = authHeader.substring(7);
+            jwtToken = authHeader.substring(JwtNumbers.BearerMark.getValue());
             username = jwtService.getUsername(jwtToken);
             userDetails = userDetailsManager.loadUserByUsername(username);
             if(username!=null && SecurityContextHolder.getContext().getAuthentication() == null){

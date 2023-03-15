@@ -79,13 +79,12 @@ public class AdminController {
     @GetMapping("{admin_username}/survey/{id}/")
     @PreAuthorize("hasAuthority('ADMIN')")
     public SurveyResponse getSurvey(@PathVariable("admin_username") String username, @PathVariable("id") Long id){
-        username = SecurityContextHolder.getContext().getAuthentication().getName();
         return surveyService.getSurvey(id);
     }
 
     @PostMapping("{admin_username}/survey/")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> saveSurvey(@PathVariable("admin_username") String username, @RequestBody AdminSnippetsAnnotationsDTO asaDTO){
+    public ResponseEntity<Object> saveSurvey(@PathVariable("admin_username") String username, @RequestBody AdminSnippetsAnnotationsDTO asaDTO){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         asaDTO.setUsername(authentication.getName());
         CodeSurvey survey = surveyService.createSurvey(asaDTO);
