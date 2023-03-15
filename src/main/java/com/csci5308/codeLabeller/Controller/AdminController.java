@@ -84,7 +84,7 @@ public class AdminController {
 
     @PostMapping("{admin_username}/survey/")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Object> saveSurvey(@PathVariable("admin_username") String username, @RequestBody AdminSnippetsAnnotationsDTO asaDTO){
+    public ResponseEntity<?> saveSurvey(@PathVariable("admin_username") String username, @RequestBody AdminSnippetsAnnotationsDTO asaDTO){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         asaDTO.setUsername(authentication.getName());
         CodeSurvey survey = surveyService.createSurvey(asaDTO);
