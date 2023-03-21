@@ -1,0 +1,156 @@
+.snippets {
+  color: rgba(11, 6, 72, 0.927);
+  font-size: large;
+  width: 49%;
+  display: inline-block;
+  text-align: center;
+  background-color: rgb(159, 150, 255);
+  border-radius: 1rem;
+  border-color: rgba(11, 6, 72, 0.927);
+  border-style: solid;
+  border-width: 0.2rem;
+}
+
+.annotations {
+  color: rgba(11, 6, 72, 0.927);
+  font-size: large;
+  float: right;
+  width: 49%;
+  background-color: rgb(159, 150, 255);
+  display: flex;
+  align-items: center;
+  border-radius: 1rem;
+  border-color: rgba(11, 6, 72, 0.927);
+  border-style: solid;
+  border-width: 0.2rem;
+}
+.logout {
+  margin-left: auto;
+  border-radius: 0.4rem;
+  background-color: rgb(180, 235, 235);
+}
+
+.annotate_p {
+  margin-left: auto;
+}
+
+.lang {
+  margin-top: 2rem;
+  width: 49%;
+}
+
+.option {
+  margin-left: 0.5rem;
+  color: rgba(11, 6, 72, 0.927);
+  margin-right: 0.5rem;
+  border-color: rgba(11, 6, 72, 0.927);
+  border-style: solid;
+  border-width: 0.1rem;
+}
+.survey_input {
+  margin-right: 1rem;
+  color: rgba(11, 6, 72, 0.927);
+  border-color: rgba(11, 6, 72, 0.927);
+  border-style: solid;
+  border-width: 0.1rem;
+  margin-left: 0.5rem;
+}
+.file {
+  margin-left: 0.5rem;
+  color: rgba(11, 6, 72, 0.927);
+  border-color: rgba(11, 6, 72, 0.927);
+  border-style: solid;
+  border-width: 0.1rem;
+  background-color: rgb(197, 195, 250);
+  margin-bottom: 2rem;
+}
+.render_view {
+  font-size: large;
+  color: black;
+  margin-left: 0.5rem;
+  border-color: blue;
+  border-style: solid;
+  border-width: 0.2rem;
+  margin-right: 0.5rem;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+.label_s {
+  color: rgba(42, 31, 167, 0.927);
+}
+.uploaded_snippets {
+  width: 49%;
+  display: inline-block;
+  border-radius: 1rem;
+  background-color: rgb(197, 195, 250);
+  border-color: rgba(11, 6, 72, 0.927);
+  border-style: solid;
+  border-width: 0.2rem;
+}
+.uploaded_annotations {
+  float: right;
+  width: 49%;
+  text-align: center;
+  border-radius: 1rem;
+  border-color: rgb(92, 89, 179);
+  border-style: solid;
+  border-width: 0.2rem;
+  height: 2.2rem;
+}
+
+.add {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 100%;
+  border-radius: 1rem;
+  color: blue;
+  letter-spacing: 0.5rem;
+  font-size: 0.95;
+  border-color: rgb(92, 89, 179);
+}
+.add:hover {
+  color: rgba(11, 6, 72, 0.927);
+  background-color: rgb(197, 195, 250);
+}
+.add_portion {
+  padding-top: 1rem;
+}
+
+.annotate_input {
+  width: 93%;
+  border-color: rgb(92, 89, 179);
+  border-style: solid;
+  border-width: 0.2rem;
+  height: 2rem;
+  font-size: medium;
+  color: blue;
+}
+
+.delete_annotate {
+  height: 2.5rem;
+  border-color: rgb(92, 89, 179);
+  border-style: solid;
+  border-width: 0.2rem;
+  color: rgba(11, 6, 72, 0.927);
+  border-left: 0rem;
+}
+.delete_annotate:hover {
+  color: blue;
+  background-color: white;
+}
+
+.submit {
+  margin-top: 1.5rem;
+  width: 30%;
+  color: blue;
+  border-color: rgb(92, 89, 179);
+  border-style: solid;
+  border-width: 0.2rem;
+  border-radius: 0.5rem;
+  height: 2rem;
+}
+.submit:hover {
+  background-color: rgb(197, 195, 250);
+}

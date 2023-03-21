@@ -1,6 +1,7 @@
 package com.csci5308.codeLabeller.Controller;
 
 import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+import com.csci5308.codeLabeller.Models.DTO.HighlighterResponse;
 import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Service.AnnotatorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,16 @@ public class AnnotatorController {
         username  = SecurityContextHolder.getContext().getAuthentication().getName();
         return annotatorService.getAllPendingSurveys(username);
     }
+
+
+
+//    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/highlight/")
+//    public void highlightSnippetWithAnnotations(@PathVariable("annotator_username") String annotatorUsername,
+//                                          @PathVariable("survey_id") Long surveyId,
+//                                          @PathVariable("snippet_id") Long snippetId,
+//                                          @RequestBody List<HighlighterResponse> highlighterTags){
+//        annotatorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+//        annotatorService.tagSnippetWithAnnotations(annotatorUsername, surveyId, snippetId, annotationsTag);
+//    }
 
 }

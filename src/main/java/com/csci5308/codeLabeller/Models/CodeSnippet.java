@@ -20,6 +20,10 @@ public class CodeSnippet {
     private byte[] snippetText;
 
     @ToString.Exclude
+    @OneToMany(mappedBy = "codeSnippet")
+    private Set<CodeHighlights> highlightList;
+
+    @ToString.Exclude
     @ManyToMany
     private Set<CodeAnnotations> tags;
 }
