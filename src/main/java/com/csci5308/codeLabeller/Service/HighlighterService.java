@@ -1,11 +1,15 @@
 package com.csci5308.codeLabeller.Service;
 
 import com.csci5308.codeLabeller.Models.CodeAnnotations;
+import com.csci5308.codeLabeller.Models.CodeHighlights;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
+import com.csci5308.codeLabeller.Repsoitory.HighlighterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,15 +20,21 @@ public class HighlighterService {
     AnnotationService annotationService;
 
     @Autowired
-    SnippetService snippetService;
-    public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, List<AnnotationResponse> annotationsTag) {
-        Set<CodeAnnotations> codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotationsTag);
-        CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);
+    HighlighterRepository highlighterRepository;
 
-        Set<CodeAnnotations> snippetTags = codeSnippet.getTags();
-        for (CodeAnnotations codeAnnotations : codeAnnotationsSet) {
-            snippetTags.add(codeAnnotations);
+    public Set<CodeHighlights> getAllHighlights(String annotatorUsername, CodeSnippet codeSnippet, List<CodeHighlightResponse> codeHighlightResponseList){
+        Set<CodeHighlights> codeHighlightsSet = new HashSet<>();
+
+        for (CodeHighlightResponse chr: codeHighlightResponseList){
+            CodeHighlights codeHighlights = new CodeHighlights();
+            codeHighlights.setAnnotated_by(annotatorUsername);
+            codeHighlights.setCodeSnippet(codeSnippet);
+            codeHighlights.setSpan_start_id(chr.getSpan_start_id());
+            codeHighlights.setSpan_end_id(chr.getSpan_end_id());
+            codeHighlights.setAnnotation(annotationService.getCodeAnnotation(chr.getAnnotation()));
+            codeHighlights = highlighterRepository.save(codeHighlights);
+            codeHighlightsSet.add(codeHighlights);
         }
-        codeSnippet.setTags(snippetTags);
+        return codeHighlightsSet;
     }
 }
