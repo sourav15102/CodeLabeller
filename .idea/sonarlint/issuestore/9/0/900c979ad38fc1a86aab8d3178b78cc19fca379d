@@ -1,0 +1,4 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·àŒ¿üÿÿÿÿ
+o
+java:S3305"YInject this field value directly into "userDetailsManager", the only method that uses it.(²ð²Ý

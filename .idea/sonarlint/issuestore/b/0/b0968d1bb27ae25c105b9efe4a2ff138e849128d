@@ -1,0 +1,12 @@
+
+
+java:S1488"]Immediately return this expression instead of assigning it to the temporary variable "token".(þ½È’øÿÿÿÿ8±°â¯î0
+„
+java:S1488%"bImmediately return this expression instead of assigning it to the temporary variable "milisecond".(Û’Ÿßýÿÿÿÿ8²°â¯î0
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ü¨ñÜ8µ°â¯î0
+c
+java:S11264"AReplace this if-then-else statement by a single return statement.(€¥Ý·ûÿÿÿÿ8â°â¯î0
+c
+java:S1126;"AReplace this if-then-else statement by a single return statement.(ûÄù­üÿÿÿÿ8ä°â¯î0
+`
+java:S5659B"CThe JWT signature (JWS) should be verified before using this token.(ùôŸê8ç°â¯î0
