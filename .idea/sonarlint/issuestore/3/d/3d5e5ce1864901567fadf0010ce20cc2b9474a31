@@ -1,0 +1,16 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ì«•şÿÿÿÿ8ù‘Ëğ0
+b
+java:S1226!"EIntroduce a new variable instead of reusing the parameter "username".(şŠÒÉ8‚‘Ëğ0
+b
+java:S12266"EIntroduce a new variable instead of reusing the parameter "username".(şŠÒÉ8‘‚‘Ëğ0
+b
+java:S1226@"EIntroduce a new variable instead of reusing the parameter "username".(şŠÒÉ8’‚‘Ëğ0
+b
+java:S1226G"EIntroduce a new variable instead of reusing the parameter "username".(şŠÒÉ8’‚‘Ëğ0
+Y
+java:S1854!"<Remove this useless assignment to local variable "username".(şŠÒÉ8Ù„‘Ëğ0
+X	java:S125("<This block of commented-out lines of code should be removed.(¶¦ë8…‘Ëğ0
+X	java:S125Q"<This block of commented-out lines of code should be removed.(Ø¤„Œ8±…‘Ëğ0
+q
+java:S1128"TRemove this unused import 'com.csci5308.codeLabeller.Models.DTO.AnnotationResponse'.(»Ç°”8Ç…‘Ëğ0

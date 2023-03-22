@@ -22,7 +22,7 @@ public class CodeLabellerApplication {
 //			String password = "umee9keiNa";
 			String url = "jdbc:mysql://localhost:3306/dev?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false";
 			String username = "root";
-			String password = "rootroot";
+			String password = "1234";
 			Connection connection = DriverManager.getConnection(url, username, password);
 			Statement statement = connection.createStatement();
 			String sql1 = "create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);";
