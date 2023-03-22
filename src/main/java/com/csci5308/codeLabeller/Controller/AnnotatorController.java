@@ -34,14 +34,6 @@ public class AnnotatorController {
         return annotatorService.getAllSurveys();
     }
 
-//    @GetMapping("{annotator_username}/survey/{survey_id}/start/")
-//    @PreAuthorize("hasAuthority('ANNOTATOR')")
-//    public StartSurveyResponse startSurvey(@PathVariable("annotator_username") String username,
-//                                           @PathVariable("survey_id") Long surveyId){
-//
-//        username = SecurityContextHolder.getContext().getAuthentication().getName();
-//        return startSurveyService.startTheSurvey(surveyId);
-//    }
 
     @PostMapping("{annotator_username}/survey/{survey_id}/start/")
     @PreAuthorize("hasAuthority('ANNOTATOR')")
@@ -71,16 +63,5 @@ public class AnnotatorController {
         username  = SecurityContextHolder.getContext().getAuthentication().getName();
         return annotatorService.getAllPendingSurveys(username);
     }
-
-
-
-//    @PostMapping("{annotator_username}/survey/{survey_id}/snippet/{snippet_id}/highlight/")
-//    public void highlightSnippetWithAnnotations(@PathVariable("annotator_username") String annotatorUsername,
-//                                          @PathVariable("survey_id") Long surveyId,
-//                                          @PathVariable("snippet_id") Long snippetId,
-//                                          @RequestBody List<HighlighterResponse> highlighterTags){
-//        annotatorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
-//        annotatorService.tagSnippetWithAnnotations(annotatorUsername, surveyId, snippetId, annotationsTag);
-//    }
 
 }
