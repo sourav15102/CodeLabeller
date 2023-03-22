@@ -79,7 +79,6 @@ public class AdminController {
     @GetMapping("{admin_username}/survey/{id}/")
     @PreAuthorize("hasAuthority('ADMIN')")
     public SurveyResponse getSurvey(@PathVariable("admin_username") String username, @PathVariable("id") Long id){
-        username = SecurityContextHolder.getContext().getAuthentication().getName();
         return surveyService.getSurvey(id);
     }
 

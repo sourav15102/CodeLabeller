@@ -1,10 +1,8 @@
 package com.csci5308.codeLabeller.Service;
 
 import com.csci5308.codeLabeller.Enums.JwtEnum;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParserBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.csci5308.codeLabeller.Enums.JwtNumbers;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -30,13 +28,13 @@ public class JwtService {
                 .setClaims(claimsMap)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + hoursToMiliseconds(10)))
+                .setExpiration(new Date(System.currentTimeMillis() + hoursToMiliseconds(JwtNumbers.JwtTokenHours.getValue())))
                 .signWith(secretKey, SignatureAlgorithm.HS256).compact();
 
         return token;
     }
     private long hoursToMiliseconds(int hour) {
-        int milisecond = hour * 60 * 60 * 1000;
+        int milisecond = hour * JwtNumbers.Seconds.getValue() * JwtNumbers.Minutes.getValue() * JwtNumbers.Miliseconds.getValue();
         return milisecond;
     }
 
