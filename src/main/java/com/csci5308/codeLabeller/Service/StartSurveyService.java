@@ -18,13 +18,6 @@ public class StartSurveyService {
     @Autowired
     AnnotationService annotationService;
 
-//    public StartSurveyResponse startTheSurvey(Long surveyID){
-//        CodeSurvey survey = surveyService.getCodeSurvey(surveyID);
-//        CodeSnippet snippet = getIndexSnippet(survey.getSnippetList(),0);
-//        List<AnnotationResponse> surveyAnnotationList = annotationService.makeListAnnotationResponse(survey.getAnnotationList());
-//        StartSurveyResponse response = new StartSurveyResponse(snippet.getCodeSnippetId(), snippet.getSnippetText(), surveyAnnotationList);
-//        return response;
-//    }
     public Page<StartSurveyResponse> startTheSurvey(Long surveyID, int page){
         return surveyService.startSurvey(surveyID,page);
     }

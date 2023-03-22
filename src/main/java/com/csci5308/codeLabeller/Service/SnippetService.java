@@ -1,5 +1,6 @@
 package com.csci5308.codeLabeller.Service;
 
+import com.csci5308.codeLabeller.Enums.MiscEnums;
 import com.csci5308.codeLabeller.Models.CodeAnnotations;
 import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
@@ -77,6 +78,6 @@ public class SnippetService {
 
     public Page<CodeSnippet> getSnippetPage(CodeSurvey codeSurvey, int page) {
         Sort sort = Sort.by(Sort.Direction.ASC, "codeSnippetId");
-        return snippetRepository.findBySurvey(codeSurvey, PageRequest.of(page, 1), sort);
+        return snippetRepository.findBySurvey(codeSurvey, PageRequest.of(page, MiscEnums.NumberOfPages.getValue()), sort);
     }
 }
