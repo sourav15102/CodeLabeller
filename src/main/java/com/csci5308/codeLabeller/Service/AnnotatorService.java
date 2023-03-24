@@ -1,18 +1,13 @@
 package com.csci5308.codeLabeller.Service;
 
-import com.csci5308.codeLabeller.Models.Annotator;
-import com.csci5308.codeLabeller.Models.CodeAnnotations;
-import com.csci5308.codeLabeller.Models.CodeSnippet;
-import com.csci5308.codeLabeller.Models.CodeSurvey;
-import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+import com.csci5308.codeLabeller.Models.*;
+import com.csci5308.codeLabeller.Models.DTO.AnnotatorHighlightTagResponse;
 import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
-import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +22,9 @@ public class AnnotatorService {
     AnnotationService annotationService;
     @Autowired
     SnippetService snippetService;
+
+    @Autowired
+    HighlighterService highlighterService;
 
     public List<SurveyResponse> getAllSurveys() {
         return surveyService.getAllSurveys();// filter from aproved and pending.
@@ -49,8 +47,8 @@ public class AnnotatorService {
         return surveyResponseList;
     }
 
-    public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, List<AnnotationResponse> annotationsTag) {
-        Set<CodeAnnotations> codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotationsTag);
+    public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, AnnotatorHighlightTagResponse annotatorHighlightTagResponse) {
+        Set<CodeAnnotations> codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());
         CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);
 
         Set<CodeAnnotations> snippetTags = codeSnippet.getTags();
@@ -58,7 +56,9 @@ public class AnnotatorService {
             snippetTags.add(codeAnnotations);
         }
         codeSnippet.setTags(snippetTags);
-
+        Set<CodeHighlights> codeHighlightsSet =  codeSnippet.getHighlightList();
+        codeHighlightsSet.addAll(highlighterService.getAllHighlights(annotatorUsername,codeSnippet,annotatorHighlightTagResponse.getCodeHighlightResponseList()));
+        codeSnippet.setHighlightList(codeHighlightsSet);
         snippetService.updateSnippet(codeSnippet);
     }
 }

@@ -21,6 +21,10 @@ public class CodeAnnotations {
     private String name;
 
     @ToString.Exclude
+    @OneToMany(mappedBy = "annotation")
+    private Set<CodeHighlights> highlightList;
+
+    @ToString.Exclude
     @ManyToMany
     private Set<CodeSnippet> taggedSnippet;
 
