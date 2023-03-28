@@ -1,0 +1,7 @@
+
+{
+java:S1488#"_Immediately return this expression instead of assigning it to the temporary variable "snippet".(£º¿38¨–ÈŠð0
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ü¨ñÜ8ª–ÈŠð0
+X	java:S125"<This block of commented-out lines of code should be removed.(üÂ½‚8å–ÈŠð0
+V
+java:S1144 "4Remove this unused private "getIndexSnippet" method.(–ÄÕôùÿÿÿÿ8—ÈŠð0
