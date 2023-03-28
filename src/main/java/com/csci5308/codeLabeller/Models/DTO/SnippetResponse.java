@@ -9,4 +9,6 @@ public class SnippetResponse {
     private Long snippetID;
     private byte[] snippetText;
     private Set<AnnotationResponse> taggedAnnotations;
+
+    private Set<CodeHighlightResponse> highlightResponses;
 }

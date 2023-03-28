@@ -31,10 +31,30 @@ public class HighlighterService {
             codeHighlights.setCodeSnippet(codeSnippet);
             codeHighlights.setSpan_start_id(chr.getSpan_start_id());
             codeHighlights.setSpan_end_id(chr.getSpan_end_id());
-            codeHighlights.setAnnotation(annotationService.getCodeAnnotation(chr.getAnnotation()));
+            codeHighlights.setAnnotation(annotationService.getCodeAnnotation(chr.getAnnotationResponse()));
             codeHighlights = highlighterRepository.save(codeHighlights);
             codeHighlightsSet.add(codeHighlights);
         }
         return codeHighlightsSet;
     }
+
+    public CodeHighlightResponse makeHighlightResponse(CodeHighlights codeHighlights){
+        CodeHighlightResponse chr = new CodeHighlightResponse();
+        chr.setSpan_start_id(codeHighlights.getSpan_start_id());
+        chr.setSpan_end_id(codeHighlights.getSpan_end_id());
+        chr.setAnnotated_by(codeHighlights.getAnnotated_by());
+        chr.setAnnotationResponse(annotationService.makeAnnotationResponse(codeHighlights.getAnnotation()));
+        return chr;
+    }
+
+    public Set<CodeHighlightResponse> makeAllHighlightResponse(Set<CodeHighlights> codeHighlightsSet){
+        Set<CodeHighlightResponse> chrSet = new HashSet<>();
+        for(CodeHighlights codeHighlights: codeHighlightsSet){
+            chrSet.add(this.makeHighlightResponse(codeHighlights));
+        }
+
+        return chrSet;
+    }
+
+
 }

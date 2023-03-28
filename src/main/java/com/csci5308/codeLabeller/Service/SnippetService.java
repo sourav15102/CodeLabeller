@@ -2,10 +2,12 @@ package com.csci5308.codeLabeller.Service;
 
 import com.csci5308.codeLabeller.Enums.MiscEnums;
 import com.csci5308.codeLabeller.Models.CodeAnnotations;
+import com.csci5308.codeLabeller.Models.CodeHighlights;
 import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
 import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
 import com.csci5308.codeLabeller.Models.DTO.SnippetResponse;
 import com.csci5308.codeLabeller.Repsoitory.SnippetRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
@@ -30,6 +32,9 @@ public class SnippetService {
     @Autowired
     SurveyRepository surveyRepository;
 
+    @Autowired
+    HighlighterService highlighterService;
+
     public void createSnippets(AdminSnippetsAnnotationsDTO asaDTO, CodeSurvey survey) {
         List<byte[]> snippets = asaDTO.getSnippets();
         List<CodeSnippet> codeSnippetList = new ArrayList<>();
@@ -50,6 +55,8 @@ public class SnippetService {
             annotationResponseList.add(annotationService.makeAnnotationResponse(codeAnnotations));
         }
         snippetResponse.setTaggedAnnotations(annotationResponseList);
+        Set<CodeHighlightResponse> highlightResponseList = highlighterService.makeAllHighlightResponse(codeSnippet.getHighlightList());
+        snippetResponse.setHighlightResponses(highlightResponseList);
         return snippetResponse;
     }
 
