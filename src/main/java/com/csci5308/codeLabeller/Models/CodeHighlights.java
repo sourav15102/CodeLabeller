@@ -24,9 +24,12 @@ public class CodeHighlights {
     @NonNull
     private String annotated_by;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "codeSnippetId")
     private CodeSnippet codeSnippet;
+
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "annotationID")
     private CodeAnnotations annotation;
