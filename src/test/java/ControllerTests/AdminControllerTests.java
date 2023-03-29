@@ -1,3 +1,5 @@
+package ControllerTests;
+
 import com.csci5308.codeLabeller.Controller.AdminController;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
 import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
