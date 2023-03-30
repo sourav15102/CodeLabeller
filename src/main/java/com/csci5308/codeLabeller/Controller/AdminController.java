@@ -52,6 +52,15 @@ public class AdminController {
         return annotationService.getAnnotation(username,surveyId,id);
     }
 
+    @GetMapping("{admin_username}/survey/{survey_id}/snippet/{id}/taggedAnnotations/all/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<AnnotationResponse> getSnippetTaggedAnnotations(@PathVariable("admin_username") String username,
+                                      @PathVariable("survey_id") Long surveyId,
+                                      @PathVariable("id") Long id){
+        username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return snippetService.getSnippetTaggedAnnotations(username,surveyId,id);
+    }
+
     @GetMapping("{admin_username}/survey/{survey_id}/snippet/all/")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<SnippetResponse> getAllSnippets(@PathVariable("admin_username") String username,

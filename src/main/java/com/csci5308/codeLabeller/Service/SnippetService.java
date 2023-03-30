@@ -75,6 +75,11 @@ public class SnippetService {
         return this.makeSnippetResponse(codeSnippet);
     }
 
+    public List<AnnotationResponse> getSnippetTaggedAnnotations(String username, Long surveyId, Long id) {
+        CodeSnippet codeSnippet = snippetRepository.findById(id).get();
+        return this.annotationService.makeListAnnotationResponse(codeSnippet.getTags());
+    }
+
     public CodeSnippet getCodeSnippet(Long snippetId){
         return snippetRepository.findById(snippetId).get();
     }
