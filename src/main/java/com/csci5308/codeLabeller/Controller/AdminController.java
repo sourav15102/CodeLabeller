@@ -1,14 +1,13 @@
 package com.csci5308.codeLabeller.Controller;
 
-import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
+import com.csci5308.codeLabeller.Models.CodeHighlights;
+import com.csci5308.codeLabeller.Models.DTO.*;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
-import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
-import com.csci5308.codeLabeller.Models.DTO.SnippetResponse;
-import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Service.AnnotationService;
 import com.csci5308.codeLabeller.Service.SnippetService;
 import com.csci5308.codeLabeller.Service.SurveyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -18,6 +17,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -50,6 +50,16 @@ public class AdminController {
                                         @PathVariable("id") Long id){
         username = SecurityContextHolder.getContext().getAuthentication().getName();
         return annotationService.getAnnotation(username,surveyId,id);
+    }
+
+    @GetMapping("{admin_username}/survey/{survey_id}/snippet/{id}/highlightResponses/start/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Page<List<CodeHighlightResponse>> startSnippetHighlightResponses(@PathVariable("admin_username") String username,
+                                                               @PathVariable("survey_id") Long surveyId,
+                                                               @PathVariable("id") Long snippetId,
+                                                               @RequestParam(value = "page", defaultValue="0") int page){
+        username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return snippetService.startSnippetHighlightsPaginationByAnnotator(username,surveyId,snippetId,page);
     }
 
     @GetMapping("{admin_username}/survey/{survey_id}/snippet/{id}/taggedAnnotations/all/")
