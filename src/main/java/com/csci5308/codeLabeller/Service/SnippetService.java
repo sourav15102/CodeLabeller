@@ -3,12 +3,9 @@ package com.csci5308.codeLabeller.Service;
 import com.csci5308.codeLabeller.Enums.MiscEnums;
 import com.csci5308.codeLabeller.Models.CodeAnnotations;
 import com.csci5308.codeLabeller.Models.CodeHighlights;
-import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
+import com.csci5308.codeLabeller.Models.DTO.*;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
-import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
-import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
-import com.csci5308.codeLabeller.Models.DTO.SnippetResponse;
 import com.csci5308.codeLabeller.Repsoitory.SnippetRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +31,12 @@ public class SnippetService {
 
     @Autowired
     HighlighterService highlighterService;
+
+    public Page<List<CodeHighlightResponse>> startSnippetHighlightsPaginationByAnnotator(String username, Long surveyId, Long snippetId, int page){
+        CodeSnippet codeSnippet = snippetRepository.findById(snippetId).get();
+        return highlighterService.getHighlightsSetPage(codeSnippet,page);
+
+    }
 
     public void createSnippets(AdminSnippetsAnnotationsDTO asaDTO, CodeSurvey survey) {
         List<byte[]> snippets = asaDTO.getSnippets();
@@ -73,6 +76,11 @@ public class SnippetService {
     public SnippetResponse getSnippet(String username, Long surveyId, Long id) {
         CodeSnippet codeSnippet = snippetRepository.findById(id).get();
         return this.makeSnippetResponse(codeSnippet);
+    }
+
+    public List<AnnotationResponse> getSnippetTaggedAnnotations(String username, Long surveyId, Long id) {
+        CodeSnippet codeSnippet = snippetRepository.findById(id).get();
+        return this.annotationService.makeListAnnotationResponse(codeSnippet.getTags());
     }
 
     public CodeSnippet getCodeSnippet(Long snippetId){
