@@ -3,10 +3,7 @@ package ServiceTests;
 import com.csci5308.codeLabeller.Models.CodeAnnotations;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
-import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
-import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
-import com.csci5308.codeLabeller.Models.DTO.SnippetResponse;
-import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
+import com.csci5308.codeLabeller.Models.DTO.*;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
 import com.csci5308.codeLabeller.Service.AnnotationService;
 import com.csci5308.codeLabeller.Service.SnippetService;
@@ -24,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
@@ -31,6 +29,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 public class SurveyServiceTests {
@@ -171,5 +170,32 @@ public class SurveyServiceTests {
         SurveyResponse surveyResponse = surveyService.makeSurveyResponse(survey);
 
         Assertions.assertTrue(survey.getSurveyName().equals(surveyResponse.getSurveyName()));
+    }
+
+    @Test
+    public void getCodeSurveyTest(){
+        long surveyId = 1;
+        CodeSurvey survey = Mockito.mock(CodeSurvey.class);
+        Mockito.when(surveyRepository.findById(surveyId).get()).thenReturn(survey);
+        CodeSurvey codeSurvey = surveyService.getCodeSurvey(surveyId);
+        Assertions.assertTrue(survey.equals(codeSurvey));
+
+    }
+
+    @Test
+    public void startSurveyTest(){
+        long surveyId = 1;
+        int page = 0;
+        CodeSurvey survey = Mockito.mock(CodeSurvey.class);
+        Page<CodeSnippet> codeSnippetPage = Mockito.mock(Page.class);
+        Page<StartSurveyResponse> startSurveyResponsePage = Mockito.mock(Page.class);
+
+        Mockito.when(surveyRepository.findById(surveyId).get()).thenReturn(survey);
+        Mockito.when(snippetService.getSnippetPage(survey,page)).thenReturn(codeSnippetPage);
+
+        Page<StartSurveyResponse> startSurveyResponses = surveyService.startSurvey(surveyId,page);
+
+        Assertions.assertTrue(startSurveyResponsePage.equals(startSurveyResponses));
+
     }
 }
