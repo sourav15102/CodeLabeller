@@ -16,11 +16,13 @@ import org.aspectj.apache.bcel.classfile.Code;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.stubbing.answers.DoesNothing;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.*;
 
 import java.util.*;
@@ -29,6 +31,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 
+@ExtendWith(MockitoExtension.class)
 public class SnippetServiceTests {
 
     @Mock
@@ -61,7 +64,7 @@ public class SnippetServiceTests {
         Set<AnnotationResponse> annotationResponseList = Mockito.mock(Set.class);
         Mockito.when(annotationService.makeAnnotationResponse(codeAnnotations))
                 .thenReturn(annotationResponse);
-        Mockito.doNothing().when(snippetResponse).setTaggedAnnotations(annotationResponseList);
+        Mockito.lenient().doNothing().when(snippetResponse).setTaggedAnnotations(annotationResponseList);
 
 
         SnippetResponse makeSnippetResponse = snippetService.makeSnippetResponse(codeSnippet);
