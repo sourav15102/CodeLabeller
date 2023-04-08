@@ -10,6 +10,6 @@ import java.util.Set;
 @Service
 public interface StartSurveyServiceInt {
 
-    public Page<StartSurveyResponse> startTheSurvey(Long surveyID, int page);
+    Page<StartSurveyResponse> startTheSurvey(Long surveyID, int page);
 
 }

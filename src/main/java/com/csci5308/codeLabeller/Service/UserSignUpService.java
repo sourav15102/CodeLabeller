@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class UserSignUpService {
+public class UserSignUpService implements UserSignUpServiceInt {
 
     @Autowired
     UserSignUpRepository userSignUpRepository;
@@ -39,6 +39,7 @@ public class UserSignUpService {
     @Autowired
     JwtService jwtService;
 
+    @Override
     public AuthResponse registerUser(UserSignUpDetails user){
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -56,6 +57,7 @@ public class UserSignUpService {
         return authResponse;
     }
 
+    @Override
     public AuthResponse authenticate(UserLoginDetails userLoginDetails){
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
