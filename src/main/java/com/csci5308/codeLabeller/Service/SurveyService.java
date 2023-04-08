@@ -85,7 +85,10 @@ public class SurveyService {
     public Page<StartSurveyResponse> startSurvey(Long surveyID, int page){
         CodeSurvey codeSurvey = surveyRepository.findById(surveyID).get();
         Page<CodeSnippet> codeSnippetPage = snippetService.getSnippetPage(codeSurvey,page);
-        Page<StartSurveyResponse> startSurveyResponsePage = codeSnippetPage.map(codeSnippet -> new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),annotationService.makeListAnnotationResponse(codeSurvey.getAnnotationList())));
+        Page<StartSurveyResponse> startSurveyResponsePage;
+        Set<CodeAnnotations> setCA = codeSurvey.getAnnotationList();
+        List<AnnotationResponse> listAnnRes = annotationService.makeListAnnotationResponse(setCA);
+        startSurveyResponsePage = codeSnippetPage.map(codeSnippet -> new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),listAnnRes));
         return startSurveyResponsePage;
     }
 }

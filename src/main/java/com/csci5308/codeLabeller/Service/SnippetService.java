@@ -55,7 +55,9 @@ public class SnippetService {
             annotationResponseList.add(annotationService.makeAnnotationResponse(codeAnnotations));
         }
         snippetResponse.setTaggedAnnotations(annotationResponseList);
-        Set<CodeHighlightResponse> highlightResponseList = highlighterService.makeAllHighlightResponse(codeSnippet.getHighlightList());
+        Set<CodeHighlights> setCh = codeSnippet.getHighlightList();
+        Set<CodeHighlightResponse> highlightResponseList;
+        highlightResponseList = highlighterService.makeAllHighlightResponse(setCh);
         snippetResponse.setHighlightResponses(highlightResponseList);
         return snippetResponse;
     }
