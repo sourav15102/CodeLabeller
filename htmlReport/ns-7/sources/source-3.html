@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SnippetRepository</title>
+  <title>Coverage Report > AnnotationsRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.csci5308.codeLabeller.Repsoitory</a>
 </div>
 
-<h1>Coverage Summary for Class: SnippetRepository (com.csci5308.codeLabeller.Repsoitory)</h1>
+<h1>Coverage Summary for Class: AnnotationsRepository (com.csci5308.codeLabeller.Repsoitory)</h1>
 
 <table class="coverageStats">
 
@@ -29,13 +29,13 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">SnippetRepository$MockitoMock$cwYi32kj</td>
+    <td class="name">AnnotationsRepository$MockitoMock$imXNl9K6</td>
   </tr>
   <tr>
-    <td class="name">SnippetRepository$MockitoMock$cwYi32kj$auxiliary$L9ReXedm</td>
+    <td class="name">AnnotationsRepository$MockitoMock$imXNl9K6$auxiliary$08J6bUxi</td>
   </tr>
   <tr>
-    <td class="name">SnippetRepository$MockitoMock$cwYi32kj$auxiliary$SJmjM9fj</td>
+    <td class="name">AnnotationsRepository$MockitoMock$imXNl9K6$auxiliary$cLh7SVBN</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -49,18 +49,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Repsoitory;
 &nbsp;
-&nbsp;import com.csci5308.codeLabeller.Models.CodeSnippet;
-&nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
-&nbsp;import org.springframework.data.domain.Page;
-&nbsp;import org.springframework.data.domain.PageRequest;
-&nbsp;import org.springframework.data.domain.Sort;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
 &nbsp;import org.springframework.data.repository.CrudRepository;
 &nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
 &nbsp;@Repository
-&nbsp;public interface SnippetRepository extends CrudRepository&lt;CodeSnippet, Long&gt; {
+&nbsp;public interface AnnotationsRepository extends CrudRepository&lt;CodeAnnotations, Long&gt; {
 &nbsp;
-&nbsp;    Page&lt;CodeSnippet&gt; findBySurvey(CodeSurvey codeSurvey, PageRequest pageRequest, Sort sort);
 &nbsp;}
 </code>
 </pre>
@@ -85,7 +81,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-07 22:24</div>
+    <div style="float:right;">generated on 2023-04-07 22:47</div>
 </div>
 </body>
 </html>

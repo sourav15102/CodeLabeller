@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > AnnotationsRepository</title>
+  <title>Coverage Report > AnnotatorRepository</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.csci5308.codeLabeller.Repsoitory</a>
 </div>
 
-<h1>Coverage Summary for Class: AnnotationsRepository (com.csci5308.codeLabeller.Repsoitory)</h1>
+<h1>Coverage Summary for Class: AnnotatorRepository (com.csci5308.codeLabeller.Repsoitory)</h1>
 
 <table class="coverageStats">
 
@@ -29,13 +29,13 @@ Current scope:     <a href="../../index.html">all classes</a>
   <th class="name">Class</th>
 </tr>
   <tr>
-    <td class="name">AnnotationsRepository$MockitoMock$PVkQqXah</td>
+    <td class="name">AnnotatorRepository$MockitoMock$BZow1Is9</td>
   </tr>
   <tr>
-    <td class="name">AnnotationsRepository$MockitoMock$PVkQqXah$auxiliary$F7HlNVvE</td>
+    <td class="name">AnnotatorRepository$MockitoMock$BZow1Is9$auxiliary$VqWt7W2r</td>
   </tr>
   <tr>
-    <td class="name">AnnotationsRepository$MockitoMock$PVkQqXah$auxiliary$RvR8glIQ</td>
+    <td class="name">AnnotatorRepository$MockitoMock$BZow1Is9$auxiliary$WosbEowy</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -49,14 +49,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Repsoitory;
 &nbsp;
-&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
-&nbsp;import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+&nbsp;import com.csci5308.codeLabeller.Models.Annotator;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
 &nbsp;import org.springframework.data.repository.CrudRepository;
 &nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
-&nbsp;@Repository
-&nbsp;public interface AnnotationsRepository extends CrudRepository&lt;CodeAnnotations, Long&gt; {
+&nbsp;import java.util.List;
 &nbsp;
+&nbsp;@Repository
+&nbsp;public interface AnnotatorRepository extends CrudRepository&lt;Annotator, String&gt; {
 &nbsp;}
 </code>
 </pre>
@@ -81,7 +82,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-07 22:24</div>
+    <div style="float:right;">generated on 2023-04-07 22:47</div>
 </div>
 </body>
 </html>
