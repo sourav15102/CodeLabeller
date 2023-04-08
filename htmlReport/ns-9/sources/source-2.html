@@ -40,58 +40,58 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">AnnotatorService</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/5)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/25)
+    (25/25)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U$auxiliary$3DYREv7M</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI$auxiliary$2EngQV1a</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U$auxiliary$Dib0fMfs</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI$auxiliary$ESalMUHg</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U$auxiliary$DopqfRN9</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI$auxiliary$Jf55yzta</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U$auxiliary$ouf3KlLz</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI$auxiliary$jOIoYwSW</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U$auxiliary$rmkvvkVq</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI$auxiliary$swQItQdR</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$Eqb6xr6U$auxiliary$zNguHUSh</td>
+    <td class="name">AnnotatorService$MockitoMock$5fRznSeI$auxiliary$UemQY8TG</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/5)
+    (5/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/25)
+    (25/25)
   </span>
 </td>
 </tr>
@@ -116,7 +116,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.Set;
 &nbsp;
 &nbsp;@Service
-<b class="nc">&nbsp;public class AnnotatorService {</b>
+<b class="fc">&nbsp;public class AnnotatorService {</b>
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    AnnotatorRepository annotatorRepository;
@@ -131,39 +131,39 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    HighlighterService highlighterService;
 &nbsp;
 &nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys() {
-<b class="nc">&nbsp;        return surveyService.getAllSurveys();// filter from aproved and pending.</b>
+<b class="fc">&nbsp;        return surveyService.getAllSurveys();// filter from aproved and pending.</b>
 &nbsp;    }
 &nbsp;    public List&lt;SurveyResponse&gt; getAllApprovedSurveys(String username){
-<b class="nc">&nbsp;        Annotator annotator = annotatorRepository.findById(username).get();</b>
-<b class="nc">&nbsp;        List&lt;SurveyResponse&gt; surveyResponseList = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        for(CodeSurvey cs: annotator.getApprovedCodeSurvey()){</b>
-<b class="nc">&nbsp;            surveyResponseList.add(surveyService.makeSurveyResponse(cs));</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return surveyResponseList;</b>
+<b class="fc">&nbsp;        Annotator annotator = annotatorRepository.findById(username).get();</b>
+<b class="fc">&nbsp;        List&lt;SurveyResponse&gt; surveyResponseList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeSurvey cs: annotator.getApprovedCodeSurvey()){</b>
+<b class="fc">&nbsp;            surveyResponseList.add(surveyService.makeSurveyResponse(cs));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return surveyResponseList;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public List&lt;SurveyResponse&gt; getAllPendingSurveys(String username) {
-<b class="nc">&nbsp;        Annotator annotator = annotatorRepository.findById(username).get();</b>
-<b class="nc">&nbsp;        List&lt;SurveyResponse&gt; surveyResponseList = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        for(CodeSurvey cs: annotator.getPendingApprovalsSurveys()){</b>
-<b class="nc">&nbsp;            surveyResponseList.add(surveyService.makeSurveyResponse(cs));</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        return surveyResponseList;</b>
+<b class="fc">&nbsp;        Annotator annotator = annotatorRepository.findById(username).get();</b>
+<b class="fc">&nbsp;        List&lt;SurveyResponse&gt; surveyResponseList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeSurvey cs: annotator.getPendingApprovalsSurveys()){</b>
+<b class="fc">&nbsp;            surveyResponseList.add(surveyService.makeSurveyResponse(cs));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return surveyResponseList;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, AnnotatorHighlightTagResponse annotatorHighlightTagResponse) {
-<b class="nc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());</b>
-<b class="nc">&nbsp;        CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);</b>
+<b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());</b>
+<b class="fc">&nbsp;        CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);</b>
 &nbsp;
-<b class="nc">&nbsp;        Set&lt;CodeAnnotations&gt; snippetTags = codeSnippet.getTags();</b>
-<b class="nc">&nbsp;        for(CodeAnnotations codeAnnotations: codeAnnotationsSet){</b>
-<b class="nc">&nbsp;            snippetTags.add(codeAnnotations);</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        codeSnippet.setTags(snippetTags);</b>
-<b class="nc">&nbsp;        Set&lt;CodeHighlights&gt; codeHighlightsSet =  codeSnippet.getHighlightList();</b>
-<b class="nc">&nbsp;        codeHighlightsSet.addAll(highlighterService.getAllHighlights(annotatorUsername,codeSnippet,annotatorHighlightTagResponse.getCodeHighlightResponseList()));</b>
-<b class="nc">&nbsp;        codeSnippet.setHighlightList(codeHighlightsSet);</b>
-<b class="nc">&nbsp;        snippetService.updateSnippet(codeSnippet);</b>
+<b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; snippetTags = codeSnippet.getTags();</b>
+<b class="fc">&nbsp;        for(CodeAnnotations codeAnnotations: codeAnnotationsSet){</b>
+<b class="fc">&nbsp;            snippetTags.add(codeAnnotations);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        codeSnippet.setTags(snippetTags);</b>
+<b class="fc">&nbsp;        Set&lt;CodeHighlights&gt; codeHighlightsSet =  codeSnippet.getHighlightList();</b>
+<b class="fc">&nbsp;        codeHighlightsSet.addAll(highlighterService.getAllHighlights(annotatorUsername,codeSnippet,annotatorHighlightTagResponse.getCodeHighlightResponseList()));</b>
+<b class="fc">&nbsp;        codeSnippet.setHighlightList(codeHighlightsSet);</b>
+<b class="fc">&nbsp;        snippetService.updateSnippet(codeSnippet);</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -189,7 +189,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-07 22:47</div>
+    <div style="float:right;">generated on 2023-04-08 03:44</div>
 </div>
 </body>
 </html>
