@@ -40,67 +40,67 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">AnnotationService</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    25%
   </span>
   <span class="absValue">
-    (0/8)
+    (2/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    26.5%
   </span>
   <span class="absValue">
-    (0/34)
+    (9/34)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$cmHYhi48</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$4z0BtIPK</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$jdUYAhMX</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$7fbtyZWh</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$NP9j6myO</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$AWdDPQuI</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$nSpCf938</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$gdwU5u1C</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$oJAy5u6x</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$gXo4Tmsk</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$Qy96metq</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$IrM23v4p</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$UOsNmYv9</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$pvubr6In</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$VnahNZm8</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$vpYPlD3q</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$JqT78vEU$auxiliary$x5uWegzQ</td>
+    <td class="name">AnnotationService$MockitoMock$pJMIvBGG$auxiliary$xMZFh7dz</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    25%
   </span>
   <span class="absValue">
-    (0/8)
+    (2/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    26.5%
   </span>
   <span class="absValue">
-    (0/34)
+    (9/34)
   </span>
 </td>
 </tr>
@@ -130,7 +130,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.Set;
 &nbsp;
 &nbsp;@Service
-<b class="nc">&nbsp;public class AnnotationService {</b>
+<b class="fc">&nbsp;public class AnnotationService {</b>
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    AnnotationsRepository annotationsRepository;
@@ -138,14 +138,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    SurveyRepository surveyRepository;
 &nbsp;
 &nbsp;    public void createAnnotations(AdminSnippetsAnnotationsDTO asaDTO, CodeSurvey survey) {
-<b class="nc">&nbsp;        List&lt;CodeAnnotations&gt; annotationsList = new ArrayList&lt;&gt;();</b>
-<b class="nc">&nbsp;        for(String name: asaDTO.getAnnotations()){</b>
-<b class="nc">&nbsp;            CodeAnnotations codeAnnotation = new CodeAnnotations();</b>
-<b class="nc">&nbsp;            codeAnnotation.setName(name);</b>
-<b class="nc">&nbsp;            codeAnnotation.setSurvey(survey);</b>
-<b class="nc">&nbsp;            annotationsList.add(codeAnnotation);</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        annotationsRepository.saveAll(annotationsList);</b>
+<b class="fc">&nbsp;        List&lt;CodeAnnotations&gt; annotationsList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(String name: asaDTO.getAnnotations()){</b>
+<b class="fc">&nbsp;            CodeAnnotations codeAnnotation = new CodeAnnotations();</b>
+<b class="fc">&nbsp;            codeAnnotation.setName(name);</b>
+<b class="fc">&nbsp;            codeAnnotation.setSurvey(survey);</b>
+<b class="fc">&nbsp;            annotationsList.add(codeAnnotation);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        annotationsRepository.saveAll(annotationsList);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public AnnotationResponse makeAnnotationResponse(CodeAnnotations ca) {
@@ -218,7 +218,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-07 18:49</div>
+    <div style="float:right;">generated on 2023-04-07 22:24</div>
 </div>
 </body>
 </html>
