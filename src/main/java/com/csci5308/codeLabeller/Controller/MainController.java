@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MainController {
 
+    /**
+     * This url returns string with name of annotator
+     * It expects preauthorize and allow only two authorization [ADMIN, ANNOTATOR]
+     * @return username
+     */
     @GetMapping("/annotator")
     @PreAuthorize("hasAuthority('ANNOTATOR')")
     public String getLabeller(){
