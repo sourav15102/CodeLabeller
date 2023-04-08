@@ -12,20 +12,36 @@ import org.springframework.security.provisioning.UserDetailsManager;
 
 import javax.sql.DataSource;
 
+/**
+ * password encoder and authentication provider configuration.
+ */
 @Configuration
 public class UserSecurityConfiguration {
     @Autowired
     DataSource dataSource;
 
+    /**
+     * bean for password encoder.
+     * @return: password encoder object.
+     */
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+    /**
+     * bean for user details manager.
+     * @return: user details manager.
+     */
     @Bean
     public UserDetailsManager userDetailsManager(){
         return new JdbcUserDetailsManager(dataSource);
     }
 
+    /**
+     * authentication provider.
+     * @return: authentication provider.
+     */
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();
