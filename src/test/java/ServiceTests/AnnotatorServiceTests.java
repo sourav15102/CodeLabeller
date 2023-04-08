@@ -66,6 +66,9 @@ public class AnnotatorServiceTests {
         Annotator annotator = new Annotator();
         annotator.setApprovedCodeSurvey(list);
 
+        SurveyApprovalRequest surveyApprovalRequest = new SurveyApprovalRequest();
+        surveyApprovalRequest.setAnnotatorUsername(username);
+
         Mockito.when(annotatorRepository.findById(username)).thenReturn(Optional.of(annotator));
         Mockito.when(surveyService.makeSurveyResponse(codeSurvey)).thenReturn(surveyResponse);
 

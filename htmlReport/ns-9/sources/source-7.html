@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SurveyApprovalRequestService</title>
+  <title>Coverage Report > SurveyService</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,15 +21,12 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.csci5308.codeLabeller.Service</a>
 </div>
 
-<h1>Coverage Summary for Class: SurveyApprovalRequestService (com.csci5308.codeLabeller.Service)</h1>
+<h1>Coverage Summary for Class: SurveyService (com.csci5308.codeLabeller.Service)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -40,33 +37,73 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SurveyApprovalRequestService</td>
+  <td class="name">SurveyService</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    87.5%
   </span>
   <span class="absValue">
-    (0/1)
+    (7/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    90.9%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (40/44)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$1uirpkm6</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$9TlKvFlK</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$C1RicAgS</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$CIXNoYlT</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$kN1HQkV1</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$Ko9y2sZe</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$LdYUjhdW</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$PYnmdSs0</td>
+  </tr>
+  <tr>
+    <td class="name">SurveyService$MockitoMock$98oki1xI$auxiliary$YxojUU7L</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (40/44)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -76,10 +113,94 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
 &nbsp;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSnippet;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.*;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.data.domain.Page;
 &nbsp;import org.springframework.stereotype.Service;
 &nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
 &nbsp;@Service
-<b class="nc">&nbsp;public class SurveyApprovalRequestService {</b>
+<b class="fc">&nbsp;public class SurveyService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    SurveyRepository surveyRepository;
+&nbsp;    @Autowired
+&nbsp;    AnnotationService annotationService;
+&nbsp;    @Autowired
+&nbsp;    SnippetService snippetService;
+&nbsp;
+&nbsp;    public CodeSurvey createSurvey(AdminSnippetsAnnotationsDTO asaDTO){
+<b class="fc">&nbsp;        CodeSurvey survey = new CodeSurvey();</b>
+<b class="fc">&nbsp;        survey.setUsername(asaDTO.getUsername());</b>
+<b class="fc">&nbsp;        survey.setSurveyName(asaDTO.getSurveyName());</b>
+<b class="fc">&nbsp;        survey.setSurveyLanguage(asaDTO.getSurveyLanguage());</b>
+<b class="fc">&nbsp;        survey.setSurveyThreshold(asaDTO.getSurveyThreshold());</b>
+&nbsp;
+<b class="fc">&nbsp;        return surveyRepository.save(survey);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys() {
+<b class="fc">&nbsp;        List&lt;CodeSurvey&gt; listCodeSurveys = (List&lt;CodeSurvey&gt;) surveyRepository.findAll();</b>
+<b class="fc">&nbsp;        List&lt;SurveyResponse&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeSurvey cs: listCodeSurveys){</b>
+<b class="fc">&nbsp;            list.add(this.makeSurveyResponse(cs));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys(String username) {
+<b class="fc">&nbsp;        List&lt;CodeSurvey&gt; listCodeSurveys = surveyRepository.findAllByUsername(username);</b>
+<b class="fc">&nbsp;        List&lt;SurveyResponse&gt; list = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeSurvey cs: listCodeSurveys){</b>
+<b class="fc">&nbsp;            list.add(this.makeSurveyResponse(cs));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return list;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SurveyResponse makeSurveyResponse(CodeSurvey cs) {
+<b class="fc">&nbsp;        Set&lt;AnnotationResponse&gt; annotationResponseSet = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeAnnotations ca: cs.getAnnotationList()){</b>
+<b class="fc">&nbsp;            AnnotationResponse ar = annotationService.makeAnnotationResponse(ca);</b>
+<b class="fc">&nbsp;            annotationResponseSet.add(ar);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        Set&lt;SnippetResponse&gt; snippetResponseSet = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeSnippet codeSnippet: cs.getSnippetList()){</b>
+<b class="fc">&nbsp;            SnippetResponse snippetResponse = snippetService.makeSnippetResponse(codeSnippet);</b>
+<b class="fc">&nbsp;            snippetResponseSet.add(snippetResponse);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        SurveyResponse surveyResponse = new SurveyResponse();</b>
+<b class="fc">&nbsp;        surveyResponse.setSurveyID(cs.getSurveyID());</b>
+<b class="fc">&nbsp;        surveyResponse.setSurveyName(cs.getSurveyName());</b>
+<b class="fc">&nbsp;        surveyResponse.setSurveyLanguage(cs.getSurveyLanguage());</b>
+<b class="fc">&nbsp;        surveyResponse.setSurveyThreshold(cs.getSurveyThreshold());</b>
+<b class="fc">&nbsp;        surveyResponse.setAnnotationResponseSet(annotationResponseSet);</b>
+<b class="fc">&nbsp;        surveyResponse.setSnippetResponseSet(snippetResponseSet);</b>
+<b class="fc">&nbsp;        return surveyResponse;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public SurveyResponse getSurvey(Long surveyID) {
+<b class="fc">&nbsp;        CodeSurvey survey = getCodeSurvey(surveyID);</b>
+<b class="fc">&nbsp;        return this.makeSurveyResponse(survey);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public CodeSurvey getCodeSurvey(Long surveyID) {
+<b class="fc">&nbsp;        return surveyRepository.findById(surveyID).get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Page&lt;StartSurveyResponse&gt; startSurvey(Long surveyID, int page){
+<b class="nc">&nbsp;        CodeSurvey codeSurvey = surveyRepository.findById(surveyID).get();</b>
+<b class="nc">&nbsp;        Page&lt;CodeSnippet&gt; codeSnippetPage = snippetService.getSnippetPage(codeSurvey,page);</b>
+<b class="nc">&nbsp;        Page&lt;StartSurveyResponse&gt; startSurveyResponsePage = codeSnippetPage.map(codeSnippet -&gt; new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),annotationService.makeListAnnotationResponse(codeSurvey.getAnnotationList())));</b>
+<b class="nc">&nbsp;        return startSurveyResponsePage;</b>
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -104,7 +225,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 03:44</div>
+    <div style="float:right;">generated on 2023-04-08 15:14</div>
 </div>
 </body>
 </html>

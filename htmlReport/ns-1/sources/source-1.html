@@ -62,7 +62,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/17)
+    (0/19)
   </span>
 </td>
 </tr>
@@ -93,21 +93,21 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;	public static void main(String[] args) {
 &nbsp;		try {
 <b class="nc">&nbsp;			Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</b>
-&nbsp;//			String url = &quot;jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;
-&nbsp;//			String username = &quot;CSCI5308_8_DEVINT_USER&quot;;
-&nbsp;//			String password = &quot;umee9keiNa&quot;;
-<b class="nc">&nbsp;			String url = &quot;jdbc:mysql://localhost:3306/dev?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;</b>
-<b class="nc">&nbsp;			String username = &quot;root&quot;;</b>
-<b class="nc">&nbsp;			String password = &quot;rootadmin&quot;;</b>
+<b class="nc">&nbsp;			String url = &quot;jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;</b>
+<b class="nc">&nbsp;			String username = &quot;CSCI5308_8_DEVINT_USER&quot;;</b>
+<b class="nc">&nbsp;			String password = &quot;umee9keiNa&quot;;</b>
+&nbsp;//			String url = &quot;jdbc:mysql://localhost:3306/dev?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;
+&nbsp;//			String username = &quot;root&quot;;
+&nbsp;//			String password = &quot;rootadmin&quot;;
 <b class="nc">&nbsp;			Connection connection = DriverManager.getConnection(url, username, password);</b>
 <b class="nc">&nbsp;			Statement statement = connection.createStatement();</b>
 <b class="nc">&nbsp;			String sql1 = &quot;create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);&quot;;</b>
 <b class="nc">&nbsp;			String sql2 = &quot;create table if not exists authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));&quot;;</b>
-&nbsp;			// String sql3 = &quot;create unique index if not exists ix_auth_username on authorities (username,authority);&quot;;
+<b class="nc">&nbsp;			String sql3 = &quot;create unique index if not exists ix_auth_username on authorities (username,authority);&quot;;</b>
 &nbsp;
 <b class="nc">&nbsp;			statement.execute(sql1);</b>
 <b class="nc">&nbsp;			statement.execute(sql2);</b>
-&nbsp;			// statement.execute(sql3);
+<b class="nc">&nbsp;			statement.execute(sql3);</b>
 <b class="nc">&nbsp;		} catch (ClassNotFoundException e) {</b>
 <b class="nc">&nbsp;			throw new RuntimeException(e);</b>
 <b class="nc">&nbsp;		} catch (SQLException e) {</b>
@@ -141,7 +141,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 03:44</div>
+    <div style="float:right;">generated on 2023-04-08 15:14</div>
 </div>
 </body>
 </html>

@@ -24,12 +24,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <h1>Coverage Summary for Class: UserSecurityConfiguration (com.csci5308.codeLabeller.Security)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -43,30 +40,58 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">UserSecurityConfiguration</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (4/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/7)
+    (7/7)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">UserSecurityConfiguration$MockitoMock$iBHlpRi9</td>
+  </tr>
+  <tr>
+    <td class="name">UserSecurityConfiguration$MockitoMock$iBHlpRi9$auxiliary$39quz8SW</td>
+  </tr>
+  <tr>
+    <td class="name">UserSecurityConfiguration$MockitoMock$iBHlpRi9$auxiliary$gqAKpcUn</td>
+  </tr>
+  <tr>
+    <td class="name">UserSecurityConfiguration$MockitoMock$iBHlpRi9$auxiliary$jncrVRPc</td>
+  </tr>
+  <tr>
+    <td class="name">UserSecurityConfiguration$MockitoMock$iBHlpRi9$auxiliary$NehHYc0R</td>
+  </tr>
+  <tr>
+    <td class="name">UserSecurityConfiguration$MockitoMock$iBHlpRi9$auxiliary$rOiUHTdB</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -89,25 +114,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import javax.sql.DataSource;
 &nbsp;
 &nbsp;@Configuration
-<b class="nc">&nbsp;public class UserSecurityConfiguration {</b>
+<b class="fc">&nbsp;public class UserSecurityConfiguration {</b>
 &nbsp;    @Autowired
 &nbsp;    DataSource dataSource;
 &nbsp;
 &nbsp;    @Bean
 &nbsp;    public PasswordEncoder passwordEncoder(){
-<b class="nc">&nbsp;        return new BCryptPasswordEncoder();</b>
+<b class="fc">&nbsp;        return new BCryptPasswordEncoder();</b>
 &nbsp;    }
 &nbsp;    @Bean
 &nbsp;    public UserDetailsManager userDetailsManager(){
-<b class="nc">&nbsp;        return new JdbcUserDetailsManager(dataSource);</b>
+<b class="fc">&nbsp;        return new JdbcUserDetailsManager(dataSource);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Bean
 &nbsp;    public AuthenticationProvider authenticationProvider(){
-<b class="nc">&nbsp;        DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();</b>
-<b class="nc">&nbsp;        daoAuth.setUserDetailsService(userDetailsManager());</b>
-<b class="nc">&nbsp;        daoAuth.setPasswordEncoder(passwordEncoder());</b>
-<b class="nc">&nbsp;        return daoAuth;</b>
+<b class="fc">&nbsp;        DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();</b>
+<b class="fc">&nbsp;        daoAuth.setUserDetailsService(userDetailsManager());</b>
+<b class="fc">&nbsp;        daoAuth.setPasswordEncoder(passwordEncoder());</b>
+<b class="fc">&nbsp;        return daoAuth;</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -133,7 +158,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 03:44</div>
+    <div style="float:right;">generated on 2023-04-08 15:14</div>
 </div>
 </body>
 </html>

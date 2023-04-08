@@ -23,7 +23,7 @@ public class JwtService {
         claimsMap.put(JwtEnum.Authority.toString(), userDetails.getAuthorities());
         return encodeTheUserWithClaims(userDetails, claimsMap);
     }
-    private String encodeTheUserWithClaims(UserDetails userDetails, Map<String, Object> claimsMap) {
+    public String encodeTheUserWithClaims(UserDetails userDetails, Map<String, Object> claimsMap) {
         String token = Jwts.builder()
                 .setClaims(claimsMap)
                 .setSubject(userDetails.getUsername())
@@ -33,7 +33,7 @@ public class JwtService {
 
         return token;
     }
-    private long hoursToMiliseconds(int hour) {
+    public long hoursToMiliseconds(int hour) {
         int milisecond = hour * JwtNumbers.Seconds.getValue() * JwtNumbers.Minutes.getValue() * JwtNumbers.Miliseconds.getValue();
         return milisecond;
     }
@@ -55,14 +55,14 @@ public class JwtService {
         return false;
     }
 
-    private boolean isExpired(String jwtToken) {
+    public boolean isExpired(String jwtToken) {
         if(getEpirationDate(jwtToken).before(new Date())){
             return true;
         }
         return false;
     }
 
-    private Claims getAllClaims(String jwtToken){
+    public Claims getAllClaims(String jwtToken){
          return (Claims)Jwts.parserBuilder().setSigningKey(secretKey).build().parse(jwtToken).getBody();
     }
 }

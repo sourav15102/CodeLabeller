@@ -40,58 +40,70 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">JwtService</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    44.4%
   </span>
   <span class="absValue">
-    (0/9)
+    (4/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    57.7%
   </span>
   <span class="absValue">
-    (0/26)
+    (15/26)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk</td>
   </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl$auxiliary$CsJuJSqW</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$CyFStoNa</td>
   </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl$auxiliary$LSzx8qEn</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$DaSVUiVJ</td>
   </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl$auxiliary$m5LGMTCF</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$excx8H9b</td>
   </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl$auxiliary$nVTD0lZa</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$f0EhjD11</td>
   </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl$auxiliary$tidfsBw2</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$LJ1VNc1D</td>
   </tr>
   <tr>
-    <td class="name">JwtService$MockitoMock$oit0aLnl$auxiliary$XNyaG6rU</td>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$OSICsHAY</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$S6b9tNCW</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$uDT3KXt9</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$VZduzmfu</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$jpYjxPVk$auxiliary$zv9fzZcw</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    44.4%
   </span>
   <span class="absValue">
-    (0/9)
+    (4/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    57.7%
   </span>
   <span class="absValue">
-    (0/26)
+    (15/26)
   </span>
 </td>
 </tr>
@@ -119,27 +131,27 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.Map;
 &nbsp;
 &nbsp;@Service
-<b class="nc">&nbsp;public class JwtService {</b>
-<b class="nc">&nbsp;    private String secretStringKey = &quot;2A472D4B6150645367566B58703273357638792F423F4528482B4D6251655468&quot;;</b>
-<b class="nc">&nbsp;    private Key secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretStringKey));</b>
+<b class="fc">&nbsp;public class JwtService {</b>
+<b class="fc">&nbsp;    private String secretStringKey = &quot;2A472D4B6150645367566B58703273357638792F423F4528482B4D6251655468&quot;;</b>
+<b class="fc">&nbsp;    private Key secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretStringKey));</b>
 &nbsp;    public String generateToken(UserDetails userDetails){
-<b class="nc">&nbsp;        Map&lt;String, Object&gt; claimsMap = new HashMap&lt;&gt;();</b>
-<b class="nc">&nbsp;        claimsMap.put(JwtEnum.Authority.toString(), userDetails.getAuthorities());</b>
-<b class="nc">&nbsp;        return encodeTheUserWithClaims(userDetails, claimsMap);</b>
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; claimsMap = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        claimsMap.put(JwtEnum.Authority.toString(), userDetails.getAuthorities());</b>
+<b class="fc">&nbsp;        return encodeTheUserWithClaims(userDetails, claimsMap);</b>
 &nbsp;    }
-&nbsp;    private String encodeTheUserWithClaims(UserDetails userDetails, Map&lt;String, Object&gt; claimsMap) {
-<b class="nc">&nbsp;        String token = Jwts.builder()</b>
-<b class="nc">&nbsp;                .setClaims(claimsMap)</b>
-<b class="nc">&nbsp;                .setSubject(userDetails.getUsername())</b>
-<b class="nc">&nbsp;                .setIssuedAt(new Date(System.currentTimeMillis()))</b>
-<b class="nc">&nbsp;                .setExpiration(new Date(System.currentTimeMillis() + hoursToMiliseconds(JwtNumbers.JwtTokenHours.getValue())))</b>
-<b class="nc">&nbsp;                .signWith(secretKey, SignatureAlgorithm.HS256).compact();</b>
+&nbsp;    public String encodeTheUserWithClaims(UserDetails userDetails, Map&lt;String, Object&gt; claimsMap) {
+<b class="fc">&nbsp;        String token = Jwts.builder()</b>
+<b class="fc">&nbsp;                .setClaims(claimsMap)</b>
+<b class="fc">&nbsp;                .setSubject(userDetails.getUsername())</b>
+<b class="fc">&nbsp;                .setIssuedAt(new Date(System.currentTimeMillis()))</b>
+<b class="fc">&nbsp;                .setExpiration(new Date(System.currentTimeMillis() + hoursToMiliseconds(JwtNumbers.JwtTokenHours.getValue())))</b>
+<b class="fc">&nbsp;                .signWith(secretKey, SignatureAlgorithm.HS256).compact();</b>
 &nbsp;
-<b class="nc">&nbsp;        return token;</b>
+<b class="fc">&nbsp;        return token;</b>
 &nbsp;    }
-&nbsp;    private long hoursToMiliseconds(int hour) {
-<b class="nc">&nbsp;        int milisecond = hour * JwtNumbers.Seconds.getValue() * JwtNumbers.Minutes.getValue() * JwtNumbers.Miliseconds.getValue();</b>
-<b class="nc">&nbsp;        return milisecond;</b>
+&nbsp;    public long hoursToMiliseconds(int hour) {
+<b class="fc">&nbsp;        int milisecond = hour * JwtNumbers.Seconds.getValue() * JwtNumbers.Minutes.getValue() * JwtNumbers.Miliseconds.getValue();</b>
+<b class="fc">&nbsp;        return milisecond;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public String getUsername(String jwtToken) {
@@ -159,14 +171,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        return false;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    private boolean isExpired(String jwtToken) {
+&nbsp;    public boolean isExpired(String jwtToken) {
 <b class="nc">&nbsp;        if(getEpirationDate(jwtToken).before(new Date())){</b>
 <b class="nc">&nbsp;            return true;</b>
 &nbsp;        }
 <b class="nc">&nbsp;        return false;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    private Claims getAllClaims(String jwtToken){
+&nbsp;    public Claims getAllClaims(String jwtToken){
 <b class="nc">&nbsp;         return (Claims)Jwts.parserBuilder().setSigningKey(secretKey).build().parse(jwtToken).getBody();</b>
 &nbsp;    }
 &nbsp;}
@@ -193,7 +205,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 03:44</div>
+    <div style="float:right;">generated on 2023-04-08 15:14</div>
 </div>
 </body>
 </html>

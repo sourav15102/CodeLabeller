@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > SurveyService</title>
+  <title>Coverage Report > UserSignUpService</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,7 +21,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">com.csci5308.codeLabeller.Service</a>
 </div>
 
-<h1>Coverage Summary for Class: SurveyService (com.csci5308.codeLabeller.Service)</h1>
+<h1>Coverage Summary for Class: UserSignUpService (com.csci5308.codeLabeller.Service)</h1>
 
 <table class="coverageStats">
 
@@ -37,70 +37,55 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">SurveyService</td>
+  <td class="name">UserSignUpService</td>
 <td class="coverageStat">
   <span class="percent">
-    87.5%
+    100%
   </span>
   <span class="absValue">
-    (7/8)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    100%
   </span>
   <span class="absValue">
-    (40/44)
+    (22/22)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ</td>
+    <td class="name">UserSignUpService$MockitoMock$6BtDjGNJ</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$9euMej61</td>
+    <td class="name">UserSignUpService$MockitoMock$6BtDjGNJ$auxiliary$5VcED20h</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$evYkQCpq</td>
+    <td class="name">UserSignUpService$MockitoMock$6BtDjGNJ$auxiliary$6y1NVqtb</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$JP4P92cl</td>
+    <td class="name">UserSignUpService$MockitoMock$6BtDjGNJ$auxiliary$8qUIv78Q</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$JUI35y8I</td>
-  </tr>
-  <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$muLNBOCY</td>
-  </tr>
-  <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$OeCSA79N</td>
-  </tr>
-  <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$W4Z0zwlA</td>
-  </tr>
-  <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$XL5Y48Zq</td>
-  </tr>
-  <tr>
-    <td class="name">SurveyService$MockitoMock$bDYrGXMZ$auxiliary$ZcCRFO3h</td>
+    <td class="name">UserSignUpService$MockitoMock$6BtDjGNJ$auxiliary$uTyiCKNb</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    87.5%
+    100%
   </span>
   <span class="absValue">
-    (7/8)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    100%
   </span>
   <span class="absValue">
-    (40/44)
+    (22/22)
   </span>
 </td>
 </tr>
@@ -113,93 +98,74 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
 &nbsp;
-&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
-&nbsp;import com.csci5308.codeLabeller.Models.CodeSnippet;
-&nbsp;import com.csci5308.codeLabeller.Models.DTO.*;
+&nbsp;import com.csci5308.codeLabeller.Enums.UserAuthority;
+&nbsp;import com.csci5308.codeLabeller.Models.Annotator;
 &nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
-&nbsp;import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AuthResponse;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.UserLoginDetails;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.UserSignUpDetails;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.UserSignUpRepository;
+&nbsp;import com.csci5308.codeLabeller.Security.SecurityConfiguration;
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
-&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.security.authentication.AuthenticationManager;
+&nbsp;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
+&nbsp;import org.springframework.security.core.authority.SimpleGrantedAuthority;
+&nbsp;import org.springframework.security.core.context.SecurityContextHolder;
+&nbsp;import org.springframework.security.core.userdetails.User;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
 &nbsp;import org.springframework.stereotype.Service;
 &nbsp;
 &nbsp;import java.util.ArrayList;
 &nbsp;import java.util.HashSet;
-&nbsp;import java.util.List;
 &nbsp;import java.util.Set;
 &nbsp;
 &nbsp;@Service
-<b class="fc">&nbsp;public class SurveyService {</b>
+<b class="fc">&nbsp;public class UserSignUpService {</b>
 &nbsp;
 &nbsp;    @Autowired
-&nbsp;    SurveyRepository surveyRepository;
+&nbsp;    UserSignUpRepository userSignUpRepository;
 &nbsp;    @Autowired
-&nbsp;    AnnotationService annotationService;
+&nbsp;    AnnotatorRepository annotatorRepository;
 &nbsp;    @Autowired
-&nbsp;    SnippetService snippetService;
+&nbsp;    PasswordEncoder passwordEncoder;
+&nbsp;    @Autowired
+&nbsp;    AuthenticationManager authManager;
+&nbsp;    @Autowired
+&nbsp;    JwtService jwtService;
 &nbsp;
-&nbsp;    public CodeSurvey createSurvey(AdminSnippetsAnnotationsDTO asaDTO){
-<b class="fc">&nbsp;        CodeSurvey survey = new CodeSurvey();</b>
-<b class="fc">&nbsp;        survey.setUsername(asaDTO.getUsername());</b>
-<b class="fc">&nbsp;        survey.setSurveyName(asaDTO.getSurveyName());</b>
-<b class="fc">&nbsp;        survey.setSurveyLanguage(asaDTO.getSurveyLanguage());</b>
-<b class="fc">&nbsp;        survey.setSurveyThreshold(asaDTO.getSurveyThreshold());</b>
-&nbsp;
-<b class="fc">&nbsp;        return surveyRepository.save(survey);</b>
+&nbsp;    public AuthResponse registerUser(UserSignUpDetails user){
+<b class="fc">&nbsp;        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());</b>
+<b class="fc">&nbsp;        Set&lt;GrantedAuthority&gt; authorities = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        authorities.add(grantedAuthority);</b>
+<b class="fc">&nbsp;        UserDetails userDetails = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities);</b>
+<b class="fc">&nbsp;        userSignUpRepository.registerTheUser(userDetails);</b>
+<b class="fc">&nbsp;        if(user.getAuthority().equals(UserAuthority.ANNOTATOR.toString())){</b>
+<b class="fc">&nbsp;            Annotator annotator = new Annotator();</b>
+<b class="fc">&nbsp;            annotator.setUsername(user.getUsername());</b>
+<b class="fc">&nbsp;            annotatorRepository.save(annotator);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String jwtToken = jwtService.generateToken(userDetails);</b>
+<b class="fc">&nbsp;        AuthResponse authResponse = new AuthResponse();</b>
+<b class="fc">&nbsp;        authResponse.setJwtToken(jwtToken);</b>
+<b class="fc">&nbsp;        return authResponse;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys() {
-<b class="fc">&nbsp;        List&lt;CodeSurvey&gt; listCodeSurveys = (List&lt;CodeSurvey&gt;) surveyRepository.findAll();</b>
-<b class="fc">&nbsp;        List&lt;SurveyResponse&gt; list = new ArrayList&lt;&gt;();</b>
-<b class="fc">&nbsp;        for(CodeSurvey cs: listCodeSurveys){</b>
-<b class="fc">&nbsp;            list.add(this.makeSurveyResponse(cs));</b>
-<b class="fc">&nbsp;        }</b>
-<b class="fc">&nbsp;        return list;</b>
-&nbsp;    }
-&nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys(String username) {
-<b class="fc">&nbsp;        List&lt;CodeSurvey&gt; listCodeSurveys = surveyRepository.findAllByUsername(username);</b>
-<b class="fc">&nbsp;        List&lt;SurveyResponse&gt; list = new ArrayList&lt;&gt;();</b>
-<b class="fc">&nbsp;        for(CodeSurvey cs: listCodeSurveys){</b>
-<b class="fc">&nbsp;            list.add(this.makeSurveyResponse(cs));</b>
-<b class="fc">&nbsp;        }</b>
-<b class="fc">&nbsp;        return list;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    public SurveyResponse makeSurveyResponse(CodeSurvey cs) {
-<b class="fc">&nbsp;        Set&lt;AnnotationResponse&gt; annotationResponseSet = new HashSet&lt;&gt;();</b>
-<b class="fc">&nbsp;        for(CodeAnnotations ca: cs.getAnnotationList()){</b>
-<b class="fc">&nbsp;            AnnotationResponse ar = annotationService.makeAnnotationResponse(ca);</b>
-<b class="fc">&nbsp;            annotationResponseSet.add(ar);</b>
-<b class="fc">&nbsp;        }</b>
-<b class="fc">&nbsp;        Set&lt;SnippetResponse&gt; snippetResponseSet = new HashSet&lt;&gt;();</b>
-<b class="fc">&nbsp;        for(CodeSnippet codeSnippet: cs.getSnippetList()){</b>
-<b class="fc">&nbsp;            SnippetResponse snippetResponse = snippetService.makeSnippetResponse(codeSnippet);</b>
-<b class="fc">&nbsp;            snippetResponseSet.add(snippetResponse);</b>
-<b class="fc">&nbsp;        }</b>
-<b class="fc">&nbsp;        SurveyResponse surveyResponse = new SurveyResponse();</b>
-<b class="fc">&nbsp;        surveyResponse.setSurveyID(cs.getSurveyID());</b>
-<b class="fc">&nbsp;        surveyResponse.setSurveyName(cs.getSurveyName());</b>
-<b class="fc">&nbsp;        surveyResponse.setSurveyLanguage(cs.getSurveyLanguage());</b>
-<b class="fc">&nbsp;        surveyResponse.setSurveyThreshold(cs.getSurveyThreshold());</b>
-<b class="fc">&nbsp;        surveyResponse.setAnnotationResponseSet(annotationResponseSet);</b>
-<b class="fc">&nbsp;        surveyResponse.setSnippetResponseSet(snippetResponseSet);</b>
-<b class="fc">&nbsp;        return surveyResponse;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;
-&nbsp;    public SurveyResponse getSurvey(Long surveyID) {
-<b class="fc">&nbsp;        CodeSurvey survey = getCodeSurvey(surveyID);</b>
-<b class="fc">&nbsp;        return this.makeSurveyResponse(survey);</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    public CodeSurvey getCodeSurvey(Long surveyID) {
-<b class="fc">&nbsp;        return surveyRepository.findById(surveyID).get();</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    public Page&lt;StartSurveyResponse&gt; startSurvey(Long surveyID, int page){
-<b class="nc">&nbsp;        CodeSurvey codeSurvey = surveyRepository.findById(surveyID).get();</b>
-<b class="nc">&nbsp;        Page&lt;CodeSnippet&gt; codeSnippetPage = snippetService.getSnippetPage(codeSurvey,page);</b>
-<b class="nc">&nbsp;        Page&lt;StartSurveyResponse&gt; startSurveyResponsePage = codeSnippetPage.map(codeSnippet -&gt; new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),annotationService.makeListAnnotationResponse(codeSurvey.getAnnotationList())));</b>
-<b class="nc">&nbsp;        return startSurveyResponsePage;</b>
+&nbsp;    public AuthResponse authenticate(UserLoginDetails userLoginDetails){
+<b class="fc">&nbsp;        authManager.authenticate(</b>
+&nbsp;                new UsernamePasswordAuthenticationToken(
+<b class="fc">&nbsp;                        userLoginDetails.getUsername(),</b>
+<b class="fc">&nbsp;                        userLoginDetails.getPassword()</b>
+&nbsp;                )
+&nbsp;        );
+<b class="fc">&nbsp;        UserDetails user = userSignUpRepository.findByUsername(userLoginDetails.getUsername());</b>
+<b class="fc">&nbsp;        String jwtToken = jwtService.generateToken(user);</b>
+<b class="fc">&nbsp;        AuthResponse authResponse = new AuthResponse();</b>
+<b class="fc">&nbsp;        authResponse.setJwtToken(jwtToken);</b>
+<b class="fc">&nbsp;        return authResponse;</b>
 &nbsp;    }
 &nbsp;}
 </code>
@@ -225,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 03:44</div>
+    <div style="float:right;">generated on 2023-04-08 15:14</div>
 </div>
 </body>
 </html>
