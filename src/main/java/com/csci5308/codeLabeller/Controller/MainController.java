@@ -17,10 +17,4 @@ public class MainController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName()+" is Annotator";
     }
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasAnyAuthority('ADMIN')")
-//    public String getAdmin() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        return authentication.getName() + " is admin";
-//    }
 }
