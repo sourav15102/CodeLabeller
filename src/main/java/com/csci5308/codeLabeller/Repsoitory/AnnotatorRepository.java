@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * repository for annotator.
+ */
 @Repository
 public interface AnnotatorRepository extends CrudRepository<Annotator, String> {
 }
