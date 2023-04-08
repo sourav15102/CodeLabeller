@@ -25,6 +25,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * this service helps:
+ * register the user
+ * authenticate the user.
+ */
 @Service
 public class UserSignUpService {
 
@@ -39,6 +44,11 @@ public class UserSignUpService {
     @Autowired
     JwtService jwtService;
 
+    /**
+     * this register the user in dbg.
+     * @param user: user information.
+     * @return: this response contians jwt token.
+     */
     public AuthResponse registerUser(UserSignUpDetails user){
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -56,6 +66,11 @@ public class UserSignUpService {
         return authResponse;
     }
 
+    /**
+     * this helps in authneticating the user.
+     * @param userLoginDetails: DTO for user login details.
+     * @return: this response contians jwt token.
+     */
     public AuthResponse authenticate(UserLoginDetails userLoginDetails){
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
