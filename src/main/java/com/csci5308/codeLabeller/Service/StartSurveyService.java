@@ -11,13 +11,14 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class StartSurveyService {
+public class StartSurveyService implements StartSurveyServiceInt {
 
     @Autowired
     SurveyService surveyService;
     @Autowired
     AnnotationService annotationService;
 
+    @Override
     public Page<StartSurveyResponse> startTheSurvey(Long surveyID, int page){
         return surveyService.startSurvey(surveyID,page);
     }
