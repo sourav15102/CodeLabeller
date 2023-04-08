@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This service helps:
+ * get all surveys, be it approved or not approved
+ * help tag snippet with annotations
+ */
 @Service
 public class AnnotatorService {
 
@@ -26,9 +31,19 @@ public class AnnotatorService {
     @Autowired
     HighlighterService highlighterService;
 
+    /**
+     * This method fetches all surveys.
+     * @return: collection of survey DTO.
+     */
     public List<SurveyResponse> getAllSurveys() {
         return surveyService.getAllSurveys();// filter from aproved and pending.
     }
+
+    /**
+     * This method fetches all approved surveys.
+     * @param username:  username
+     * @return: collection of survey responses
+     */
     public List<SurveyResponse> getAllApprovedSurveys(String username){
         Annotator annotator = annotatorRepository.findById(username).get();
         List<SurveyResponse> surveyResponseList = new ArrayList<>();
@@ -38,6 +53,11 @@ public class AnnotatorService {
         return surveyResponseList;
     }
 
+    /**
+     * This method fetches all pending surveys
+     * @param username:  username
+     * @return: collection of survey responses
+     */
     public List<SurveyResponse> getAllPendingSurveys(String username) {
         Annotator annotator = annotatorRepository.findById(username).get();
         List<SurveyResponse> surveyResponseList = new ArrayList<>();
@@ -47,6 +67,13 @@ public class AnnotatorService {
         return surveyResponseList;
     }
 
+    /**
+     * This method helps tagging snippet with annotations.
+     * @param annotatorUsername: annotator username.
+     * @param surveyId: survey id
+     * @param snippetId: snippet id
+     * @param annotatorHighlightTagResponse: annotator highlighted information DTO.
+     */
     public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, AnnotatorHighlightTagResponse annotatorHighlightTagResponse) {
         Set<CodeAnnotations> codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());
         CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);
