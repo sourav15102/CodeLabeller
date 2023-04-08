@@ -16,6 +16,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Annotation service helps:
+ * create annotations
+ * fetch annotations by ID or all
+ * convert annotion model to DTO and vice-versa
+ */
 @Service
 public class AnnotationService {
 
