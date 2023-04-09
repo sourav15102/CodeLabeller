@@ -1,0 +1,4 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(·àŒ¿üÿÿÿÿ
+q
+java:S3305"[Inject this field value directly into "authenticationFilter", the only method that uses it.(±öéĞ

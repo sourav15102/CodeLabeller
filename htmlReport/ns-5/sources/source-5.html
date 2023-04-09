@@ -1,0 +1,194 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CodeSurvey</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: CodeSurvey (com.csci5308.codeLabeller.Models)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CodeSurvey</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$0C8t70aP</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$0y78rM1P</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$2SiX87aY</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$4brt1xc0</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$anj6D4h1</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$BKnPcLck</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$eKjowsea</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$gFObYD37</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$INHJuEX9</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$IZ0x9zQy</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$JkweJMK6</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$P4DSMEhN</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$PLLuRbg9</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$RCT6N4cy</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$swy8nHV5</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSurvey$MockitoMock$qXhqQVps$auxiliary$YxfdKvPl</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Models;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;import org.springframework.security.core.userdetails.User;
+&nbsp;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;@Entity
+<b class="fc">&nbsp;@Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString</b>
+&nbsp;public class CodeSurvey {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @NonNull
+<b class="nc">&nbsp;    private Long surveyID;</b>
+&nbsp;
+&nbsp;    @NonNull
+<b class="fc">&nbsp;    private String username;</b>
+<b class="fc">&nbsp;    private String surveyName;</b>
+<b class="nc">&nbsp;    private String surveyLanguage;</b>
+&nbsp;
+<b class="nc">&nbsp;    private Long surveyThreshold;</b>
+&nbsp;
+&nbsp;    @ToString.Exclude
+&nbsp;    @OneToMany(mappedBy = &quot;survey&quot;)
+<b class="nc">&nbsp;    private Set&lt;CodeSnippet&gt; snippetList;</b>
+&nbsp;
+&nbsp;    @ToString.Exclude
+&nbsp;    @OneToMany(mappedBy = &quot;survey&quot;)
+<b class="fc">&nbsp;    private Set&lt;CodeAnnotations&gt; annotationList;</b>
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

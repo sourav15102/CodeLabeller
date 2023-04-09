@@ -11,16 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MainController {
 
+    /**
+     * This url returns string with name of annotator
+     * It expects preauthorize and allow only two authorization [ADMIN, ANNOTATOR]
+     * @return username
+     */
     @GetMapping("/annotator")
     @PreAuthorize("hasAuthority('ANNOTATOR')")
     public String getLabeller(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName()+" is Annotator";
     }
-//    @GetMapping("/admin")
-//    @PreAuthorize("hasAnyAuthority('ADMIN')")
-//    public String getAdmin() {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        return authentication.getName() + " is admin";
-//    }
 }

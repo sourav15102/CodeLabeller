@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > JwtService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: JwtService (com.csci5308.codeLabeller.Service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JwtService</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (3/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.8%
+  </span>
+  <span class="absValue">
+    (8/26)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$01Bruace</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$9J9SyUEg</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$AdcfoaJ6</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$ayZA3hsA</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$bzuV4O6h</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$PldyaXaL</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$RHlv62LW</td>
+  </tr>
+  <tr>
+    <td class="name">JwtService$MockitoMock$GNLOia5T$auxiliary$UE87ieqY</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (3/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    30.8%
+  </span>
+  <span class="absValue">
+    (8/26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
+&nbsp;
+&nbsp;import com.csci5308.codeLabeller.Enums.JwtEnum;
+&nbsp;import com.csci5308.codeLabeller.Enums.JwtNumbers;
+&nbsp;import io.jsonwebtoken.*;
+&nbsp;import io.jsonwebtoken.io.Decoders;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import io.jsonwebtoken.security.Keys;
+&nbsp;
+&nbsp;import java.security.Key;
+&nbsp;import java.util.Base64;
+&nbsp;import java.util.Date;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;/**
+&nbsp; * This service handles all methods related to JWT token:
+&nbsp; * validating it.
+&nbsp; * creating it.
+&nbsp; * setting its expiration.
+&nbsp; */
+&nbsp;@Service
+<b class="fc">&nbsp;public class JwtService {</b>
+<b class="fc">&nbsp;    private String secretStringKey = &quot;2A472D4B6150645367566B58703273357638792F423F4528482B4D6251655468&quot;;</b>
+<b class="fc">&nbsp;    private Key secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretStringKey));</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * generates JWT token.
+&nbsp;     * @param userDetails: user trying to login.
+&nbsp;     * @return: jwt token string.
+&nbsp;     */
+&nbsp;    public String generateToken(UserDetails userDetails){
+<b class="fc">&nbsp;        Map&lt;String, Object&gt; claimsMap = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        claimsMap.put(JwtEnum.Authority.toString(), userDetails.getAuthorities());</b>
+<b class="fc">&nbsp;        return encodeTheUserWithClaims(userDetails, claimsMap);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * encode the token with additional claims added.
+&nbsp;     * @param userDetails: user
+&nbsp;     * @param claimsMap: claims added.
+&nbsp;     * @return: modified token.
+&nbsp;     */
+&nbsp;    public String encodeTheUserWithClaims(UserDetails userDetails, Map&lt;String, Object&gt; claimsMap) {
+<b class="nc">&nbsp;        String token = Jwts.builder()</b>
+<b class="nc">&nbsp;                .setClaims(claimsMap)</b>
+<b class="nc">&nbsp;                .setSubject(userDetails.getUsername())</b>
+<b class="nc">&nbsp;                .setIssuedAt(new Date(System.currentTimeMillis()))</b>
+<b class="nc">&nbsp;                .setExpiration(new Date(System.currentTimeMillis() + hoursToMiliseconds(JwtNumbers.JwtTokenHours.getValue())))</b>
+<b class="nc">&nbsp;                .signWith(secretKey, SignatureAlgorithm.HS256).compact();</b>
+&nbsp;
+<b class="nc">&nbsp;        return token;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * helper function to convert hour to milisecond.
+&nbsp;     * @param hour: hour
+&nbsp;     * @return: time in miliseconds.
+&nbsp;     */
+&nbsp;    public long hoursToMiliseconds(int hour) {
+<b class="fc">&nbsp;        int milisecond = hour * JwtNumbers.Seconds.getValue() * JwtNumbers.Minutes.getValue() * JwtNumbers.Miliseconds.getValue();</b>
+<b class="fc">&nbsp;        return milisecond;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetches username
+&nbsp;     * @param jwtToken: jwtToken
+&nbsp;     * @return: username contained in token.
+&nbsp;     */
+&nbsp;    public String getUsername(String jwtToken) {
+<b class="nc">&nbsp;        Claims claims = getAllClaims(jwtToken);</b>
+<b class="nc">&nbsp;        return claims.getSubject();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetches expiration date.
+&nbsp;     * @param jwtToken: jwt token
+&nbsp;     * @return: date of expiration.
+&nbsp;     */
+&nbsp;    public Date getEpirationDate(String jwtToken) {
+<b class="nc">&nbsp;        return getAllClaims(jwtToken).getExpiration();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * checks of token is valid.
+&nbsp;     * @param jwtToken: jwt token
+&nbsp;     * @param userDetails: user.
+&nbsp;     * @return: boolean if toke is valid or not.
+&nbsp;     */
+&nbsp;    public boolean isValid(String jwtToken, UserDetails userDetails) {
+<b class="nc">&nbsp;        String username = getUsername(jwtToken);</b>
+<b class="nc">&nbsp;        if(!isExpired(jwtToken) &amp;&amp; userDetails.getUsername().equals(username)) {</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * checks if token is expired.
+&nbsp;     * @param jwtToken: jwt token.
+&nbsp;     * @return: boolean if token is expired or not.
+&nbsp;     */
+&nbsp;    private boolean isExpired(String jwtToken) {
+<b class="nc">&nbsp;        if(getEpirationDate(jwtToken).before(new Date())){</b>
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetches all claims contained by token.
+&nbsp;     * @param jwtToken: jwt token
+&nbsp;     * @return: claims added.
+&nbsp;     */
+&nbsp;    private Claims getAllClaims(String jwtToken){
+<b class="nc">&nbsp;         return (Claims)Jwts.parserBuilder().setSigningKey(secretKey).build().parse(jwtToken).getBody();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

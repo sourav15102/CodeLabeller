@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AnnotationService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationService (com.csci5308.codeLabeller.Service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotationService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (32/34)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$2NESTlCE</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$CGmg5hA1</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$DakOLIk9</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$ekcRNkzX</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$iMgQSIzt</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$j7syn7ZQ</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$NgIY1Rdo</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$tNhXTv6u</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationService$MockitoMock$3BmAKQkU$auxiliary$tsdWuto4</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    94.1%
+  </span>
+  <span class="absValue">
+    (32/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
+&nbsp;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
+&nbsp;import org.aspectj.apache.bcel.classfile.Code;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * Annotation service helps:
+&nbsp; * create annotations
+&nbsp; * fetch annotations by ID or all
+&nbsp; * convert annotion model to DTO and vice-versa
+&nbsp; */
+&nbsp;@Service
+<b class="fc">&nbsp;public class AnnotationService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    AnnotationsRepository annotationsRepository;
+&nbsp;    @Autowired
+&nbsp;    SurveyRepository surveyRepository;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps create annotations and save it against survey
+&nbsp;     * @param asaDTO: snippet + annotations info DTO
+&nbsp;     * @param survey: survey requested here
+&nbsp;     */
+&nbsp;    public void createAnnotations(AdminSnippetsAnnotationsDTO asaDTO, CodeSurvey survey) {
+<b class="fc">&nbsp;        List&lt;CodeAnnotations&gt; annotationsList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(String name: asaDTO.getAnnotations()){</b>
+<b class="fc">&nbsp;            CodeAnnotations codeAnnotation = new CodeAnnotations();</b>
+<b class="fc">&nbsp;            codeAnnotation.setName(name);</b>
+<b class="fc">&nbsp;            codeAnnotation.setSurvey(survey);</b>
+<b class="fc">&nbsp;            annotationsList.add(codeAnnotation);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        annotationsRepository.saveAll(annotationsList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method converts code annotation to annotation response DTO.
+&nbsp;     * @param ca  is an CodeAnnotations object
+&nbsp;     * @return DTO of code annotations
+&nbsp;     */
+&nbsp;    public AnnotationResponse makeAnnotationResponse(CodeAnnotations ca) {
+<b class="fc">&nbsp;        AnnotationResponse annotationResponse = new AnnotationResponse();</b>
+<b class="fc">&nbsp;        annotationResponse.setAnnotationID(ca.getAnnotationID());</b>
+<b class="fc">&nbsp;        annotationResponse.setName(ca.getName());</b>
+<b class="fc">&nbsp;        return annotationResponse;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method converts collection of annotations to collection of annotation response.
+&nbsp;     * @param annotationSet: set of annotations
+&nbsp;     * @return: returns the collection of DTO of annotations
+&nbsp;     */
+&nbsp;    public List&lt;AnnotationResponse&gt; makeListAnnotationResponse(Set&lt;CodeAnnotations&gt; annotationSet){
+<b class="fc">&nbsp;        List&lt;AnnotationResponse&gt; surveyAnnotationList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeAnnotations annotations: annotationSet){</b>
+<b class="fc">&nbsp;            surveyAnnotationList.add(makeAnnotationResponse(annotations));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return surveyAnnotationList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method fetches collection of annotation DTO.
+&nbsp;     * @param username: username fetched
+&nbsp;     * @param surveyId: surveyId fetched
+&nbsp;     * @return: list of annotations DTO.
+&nbsp;     */
+&nbsp;    public List&lt;AnnotationResponse&gt; getAllAnnotations(String username, Long surveyId) {
+<b class="fc">&nbsp;        CodeSurvey codeSurvey =  surveyRepository.findById(surveyId).get();</b>
+<b class="fc">&nbsp;        List&lt;AnnotationResponse&gt; annotationResponseList = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for(CodeAnnotations ca: codeSurvey.getAnnotationList()){</b>
+<b class="nc">&nbsp;            annotationResponseList.add(this.makeAnnotationResponse(ca));</b>
+<b class="nc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return annotationResponseList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps fetch the annotation DTO.
+&nbsp;     * @param username: username fetched.
+&nbsp;     * @param surveyId: survey ID fetched.
+&nbsp;     * @param id: annotation ID .
+&nbsp;     * @return: annotation DTO.
+&nbsp;     */
+&nbsp;    public AnnotationResponse getAnnotation(String username, Long surveyId, Long id) {
+<b class="fc">&nbsp;        CodeAnnotations codeAnnotation = annotationsRepository.findById(id).get();</b>
+<b class="fc">&nbsp;        return this.makeAnnotationResponse(codeAnnotation);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps convert collection of annotation DTO to collection of annotation.
+&nbsp;     * @param annotationsTag: collection of annotation DTO.
+&nbsp;     * @return: collection of annotation.
+&nbsp;     */
+&nbsp;    public Set&lt;CodeAnnotations&gt; getAllCodeAnnotations(List&lt;AnnotationResponse&gt; annotationsTag){
+<b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(AnnotationResponse ar: annotationsTag){</b>
+<b class="fc">&nbsp;            CodeAnnotations codeAnnotation = annotationsRepository.findById(ar.getAnnotationID()).get();</b>
+<b class="fc">&nbsp;            codeAnnotationsSet.add(codeAnnotation);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return codeAnnotationsSet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps convert annotation DTO to annotation.
+&nbsp;     * @param annotationResponse: annotation DTO
+&nbsp;     * @return: annotation object.
+&nbsp;     */
+&nbsp;    public CodeAnnotations getCodeAnnotation(AnnotationResponse annotationResponse) {
+<b class="fc">&nbsp;        CodeAnnotations codeAnnotation = annotationsRepository.findById(annotationResponse.getAnnotationID()).get();</b>
+<b class="fc">&nbsp;        return codeAnnotation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserSignUpService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: UserSignUpService (com.csci5308.codeLabeller.Service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserSignUpService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">UserSignUpService$MockitoMock$ymjKOf4r</td>
+  </tr>
+  <tr>
+    <td class="name">UserSignUpService$MockitoMock$ymjKOf4r$auxiliary$33iq8w8c</td>
+  </tr>
+  <tr>
+    <td class="name">UserSignUpService$MockitoMock$ymjKOf4r$auxiliary$MGudU4Ww</td>
+  </tr>
+  <tr>
+    <td class="name">UserSignUpService$MockitoMock$ymjKOf4r$auxiliary$tuDAG3iE</td>
+  </tr>
+  <tr>
+    <td class="name">UserSignUpService$MockitoMock$ymjKOf4r$auxiliary$wl84G8gV</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
+&nbsp;
+&nbsp;import com.csci5308.codeLabeller.Enums.UserAuthority;
+&nbsp;import com.csci5308.codeLabeller.Models.Annotator;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AuthResponse;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.UserLoginDetails;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.UserSignUpDetails;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.AnnotationsRepository;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.UserSignUpRepository;
+&nbsp;import com.csci5308.codeLabeller.Security.SecurityConfiguration;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.security.authentication.AuthenticationManager;
+&nbsp;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
+&nbsp;import org.springframework.security.core.authority.SimpleGrantedAuthority;
+&nbsp;import org.springframework.security.core.context.SecurityContextHolder;
+&nbsp;import org.springframework.security.core.userdetails.User;
+&nbsp;import org.springframework.security.core.userdetails.UserDetails;
+&nbsp;import org.springframework.security.crypto.password.PasswordEncoder;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * this service helps:
+&nbsp; * register the user
+&nbsp; * authenticate the user.
+&nbsp; */
+&nbsp;@Service
+<b class="fc">&nbsp;public class UserSignUpService implements UserSignUpServiceInt {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    UserSignUpRepository userSignUpRepository;
+&nbsp;    @Autowired
+&nbsp;    AnnotatorRepository annotatorRepository;
+&nbsp;    @Autowired
+&nbsp;    PasswordEncoder passwordEncoder;
+&nbsp;    @Autowired
+&nbsp;    AuthenticationManager authManager;
+&nbsp;    @Autowired
+&nbsp;    JwtService jwtService;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * this register the user in dbg.
+&nbsp;     * @param user: user information.
+&nbsp;     * @return: this response contians jwt token.
+&nbsp;     */
+&nbsp;    public AuthResponse registerUser(UserSignUpDetails user){
+<b class="fc">&nbsp;        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());</b>
+<b class="fc">&nbsp;        Set&lt;GrantedAuthority&gt; authorities = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        authorities.add(grantedAuthority);</b>
+<b class="fc">&nbsp;        UserDetails userDetails = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities);</b>
+<b class="fc">&nbsp;        userSignUpRepository.registerTheUser(userDetails);</b>
+<b class="fc">&nbsp;        if(user.getAuthority().equals(UserAuthority.ANNOTATOR.toString())){</b>
+<b class="fc">&nbsp;            Annotator annotator = new Annotator();</b>
+<b class="fc">&nbsp;            annotator.setUsername(user.getUsername());</b>
+<b class="fc">&nbsp;            annotatorRepository.save(annotator);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        String jwtToken = jwtService.generateToken(userDetails);</b>
+<b class="fc">&nbsp;        AuthResponse authResponse = new AuthResponse();</b>
+<b class="fc">&nbsp;        authResponse.setJwtToken(jwtToken);</b>
+<b class="fc">&nbsp;        return authResponse;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * this helps in authneticating the user.
+&nbsp;     * @param userLoginDetails: DTO for user login details.
+&nbsp;     * @return: this response contians jwt token.
+&nbsp;     */
+&nbsp;    public AuthResponse authenticate(UserLoginDetails userLoginDetails){
+<b class="fc">&nbsp;        authManager.authenticate(</b>
+&nbsp;                new UsernamePasswordAuthenticationToken(
+<b class="fc">&nbsp;                        userLoginDetails.getUsername(),</b>
+<b class="fc">&nbsp;                        userLoginDetails.getPassword()</b>
+&nbsp;                )
+&nbsp;        );
+<b class="fc">&nbsp;        UserDetails user = userSignUpRepository.findByUsername(userLoginDetails.getUsername());</b>
+<b class="fc">&nbsp;        String jwtToken = jwtService.generateToken(user);</b>
+<b class="fc">&nbsp;        AuthResponse authResponse = new AuthResponse();</b>
+<b class="fc">&nbsp;        authResponse.setJwtToken(jwtToken);</b>
+<b class="fc">&nbsp;        return authResponse;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

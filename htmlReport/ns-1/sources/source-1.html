@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CodeLabellerApplication</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller</a>
+</div>
+
+<h1>Coverage Summary for Class: CodeLabellerApplication (com.csci5308.codeLabeller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CodeLabellerApplication</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller;
+&nbsp;
+&nbsp;import org.hibernate.cfg.Environment;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.boot.SpringApplication;
+&nbsp;import org.springframework.boot.autoconfigure.SpringBootApplication;
+&nbsp;import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
+&nbsp;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.sql.DriverManager;
+&nbsp;import java.sql.SQLException;
+&nbsp;import java.sql.Statement;
+&nbsp;
+&nbsp;@SpringBootApplication
+<b class="nc">&nbsp;public class CodeLabellerApplication {</b>
+&nbsp;
+&nbsp;	public static void main(String[] args) {
+&nbsp;		try {
+<b class="nc">&nbsp;			Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</b>
+<b class="nc">&nbsp;			String url = &quot;jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;</b>
+<b class="nc">&nbsp;			String username = &quot;CSCI5308_8_DEVINT_USER&quot;;</b>
+<b class="nc">&nbsp;			String password = &quot;umee9keiNa&quot;;</b>
+&nbsp;//			String url = &quot;jdbc:mysql://localhost:3306/dev?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;
+&nbsp;//			String username = &quot;root&quot;;
+&nbsp;//			String password = &quot;rootadmin&quot;;
+<b class="nc">&nbsp;			Connection connection = DriverManager.getConnection(url, username, password);</b>
+<b class="nc">&nbsp;			Statement statement = connection.createStatement();</b>
+<b class="nc">&nbsp;			String sql1 = &quot;create table if not exists users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);&quot;;</b>
+<b class="nc">&nbsp;			String sql2 = &quot;create table if not exists authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));&quot;;</b>
+<b class="nc">&nbsp;			String sql3 = &quot;create unique index if not exists ix_auth_username on authorities (username,authority);&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;			statement.execute(sql1);</b>
+<b class="nc">&nbsp;			statement.execute(sql2);</b>
+<b class="nc">&nbsp;			statement.execute(sql3);</b>
+<b class="nc">&nbsp;		} catch (ClassNotFoundException e) {</b>
+<b class="nc">&nbsp;			throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;		} catch (SQLException e) {</b>
+<b class="nc">&nbsp;			throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;		}</b>
+&nbsp;
+<b class="nc">&nbsp;		SpringApplication.run(CodeLabellerApplication.class, args);</b>
+&nbsp;	}
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

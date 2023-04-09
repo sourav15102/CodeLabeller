@@ -1,0 +1,307 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > SnippetService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: SnippetService (com.csci5308.codeLabeller.Service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SnippetService</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (5/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.9%
+  </span>
+  <span class="absValue">
+    (22/38)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$A5p14kuH</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$EXM3py9r</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$gGvjnZHp</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$h0XKkw9m</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$icXDCEXV</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$k47PU4Su</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$MDzopd1B</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$oNWgTkHO</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$QAlDtVrF</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$vUljrwT7</td>
+  </tr>
+  <tr>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$WYHfhwhf</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (5/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    57.9%
+  </span>
+  <span class="absValue">
+    (22/38)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
+&nbsp;
+&nbsp;import com.csci5308.codeLabeller.Enums.MiscEnums;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeHighlights;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.*;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSnippet;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSurvey;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.SnippetRepository;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.PageRequest;
+&nbsp;import org.springframework.data.domain.Sort;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * This service helps to:
+&nbsp; * lets annotator starts the pagination for snippets.
+&nbsp; * create snippets.
+&nbsp; * fetch snippet
+&nbsp; * convert all snippet to snippet DTO.
+&nbsp; */
+&nbsp;@Service
+<b class="fc">&nbsp;public class SnippetService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    SnippetRepository snippetRepository;
+&nbsp;    @Autowired
+&nbsp;    AnnotationService annotationService;
+&nbsp;    @Autowired
+&nbsp;    SurveyRepository surveyRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    HighlighterService highlighterService;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * helps annotator start the pagination for snippet for the requested survey.
+&nbsp;     * @param username: username
+&nbsp;     * @param surveyId: survey id.
+&nbsp;     * @param snippetId: snippet id.
+&nbsp;     * @param page: page number
+&nbsp;     * @return: page of collection of highlight response.
+&nbsp;     */
+&nbsp;    public Page&lt;List&lt;CodeHighlightResponse&gt;&gt; startSnippetHighlightsPaginationByAnnotator(String username, Long surveyId, Long snippetId, int page){
+<b class="nc">&nbsp;        CodeSnippet codeSnippet = snippetRepository.findById(snippetId).get();</b>
+<b class="nc">&nbsp;        return highlighterService.getHighlightsSetPage(codeSnippet,page);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * helps create snippet.
+&nbsp;     * @param asaDTO: snippet + annotation DTO.
+&nbsp;     * @param survey: survey for which data is being saved.
+&nbsp;     */
+&nbsp;    public void createSnippets(AdminSnippetsAnnotationsDTO asaDTO, CodeSurvey survey) {
+<b class="nc">&nbsp;        List&lt;byte[]&gt; snippets = asaDTO.getSnippets();</b>
+<b class="nc">&nbsp;        List&lt;CodeSnippet&gt; codeSnippetList = new ArrayList&lt;&gt;();</b>
+<b class="nc">&nbsp;        for(byte[] data: snippets){</b>
+<b class="nc">&nbsp;            CodeSnippet codeSnippet = new CodeSnippet();</b>
+<b class="nc">&nbsp;            codeSnippet.setSnippetText(data);</b>
+<b class="nc">&nbsp;            codeSnippet.setSurvey(survey);</b>
+<b class="nc">&nbsp;            codeSnippetList.add(codeSnippet);</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        snippetRepository.saveAll(codeSnippetList);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * convert snippet to its DTO
+&nbsp;     * @param codeSnippet: snippet object
+&nbsp;     * @return: snippet DTO.
+&nbsp;     */
+&nbsp;    public SnippetResponse makeSnippetResponse(CodeSnippet codeSnippet) {
+<b class="fc">&nbsp;        SnippetResponse snippetResponse = new SnippetResponse();</b>
+<b class="fc">&nbsp;        snippetResponse.setSnippetID(codeSnippet.getCodeSnippetId());</b>
+<b class="fc">&nbsp;        snippetResponse.setSnippetText(codeSnippet.getSnippetText());</b>
+<b class="fc">&nbsp;        Set&lt;AnnotationResponse&gt; annotationResponseList = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeAnnotations codeAnnotations: codeSnippet.getTags()){</b>
+<b class="fc">&nbsp;            annotationResponseList.add(annotationService.makeAnnotationResponse(codeAnnotations));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        snippetResponse.setTaggedAnnotations(annotationResponseList);</b>
+<b class="fc">&nbsp;        Set&lt;CodeHighlights&gt; setCh = codeSnippet.getHighlightList();</b>
+&nbsp;        Set&lt;CodeHighlightResponse&gt; highlightResponseList;
+<b class="fc">&nbsp;        highlightResponseList = highlighterService.makeAllHighlightResponse(setCh);</b>
+<b class="fc">&nbsp;        snippetResponse.setHighlightResponses(highlightResponseList);</b>
+<b class="fc">&nbsp;        return snippetResponse;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetches all snippet for username and a particular survey.
+&nbsp;     * @param username: username
+&nbsp;     * @param surveyId: survey id.
+&nbsp;     * @return: collection of snippet dto.
+&nbsp;     */
+&nbsp;    public List&lt;SnippetResponse&gt; getAllSnippets(String username, Long surveyId) {
+<b class="fc">&nbsp;        CodeSurvey codeSurvey =  surveyRepository.findById(surveyId).get();</b>
+<b class="fc">&nbsp;        List&lt;SnippetResponse&gt; snippetResponseList = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for(CodeSnippet cs: codeSurvey.getSnippetList()){</b>
+<b class="fc">&nbsp;            snippetResponseList.add(this.makeSnippetResponse(cs));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return snippetResponseList;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetch a snippet.
+&nbsp;     * @param username: username
+&nbsp;     * @param surveyId: survey id
+&nbsp;     * @param id: snippet Id.
+&nbsp;     * @return: snippet DTO.
+&nbsp;     */
+&nbsp;    public SnippetResponse getSnippet(String username, Long surveyId, Long id) {
+<b class="fc">&nbsp;        CodeSnippet codeSnippet = snippetRepository.findById(id).get();</b>
+<b class="fc">&nbsp;        return this.makeSnippetResponse(codeSnippet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * ftech tagged annotations for snippet.
+&nbsp;     * @param username:
+&nbsp;     * @param surveyId
+&nbsp;     * @param id
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public List&lt;AnnotationResponse&gt; getSnippetTaggedAnnotations(String username, Long surveyId, Long id) {
+<b class="nc">&nbsp;        CodeSnippet codeSnippet = snippetRepository.findById(id).get();</b>
+<b class="nc">&nbsp;        return this.annotationService.makeListAnnotationResponse(codeSnippet.getTags());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * get code snippet
+&nbsp;     * @param snippetId: sniippet id
+&nbsp;     * @return: snippet object.
+&nbsp;     */
+&nbsp;    public CodeSnippet getCodeSnippet(Long snippetId){
+<b class="fc">&nbsp;        return snippetRepository.findById(snippetId).get();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * update snippet based on id.
+&nbsp;     * @param codeSnippet: snippet object.
+&nbsp;     */
+&nbsp;    public void updateSnippet(CodeSnippet codeSnippet) {
+<b class="nc">&nbsp;        snippetRepository.save(codeSnippet);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetches page for snippet object.
+&nbsp;     * @param codeSurvey: survey object
+&nbsp;     * @param page: page number
+&nbsp;     * @return: page of snippet object.
+&nbsp;     */
+&nbsp;    public Page&lt;CodeSnippet&gt; getSnippetPage(CodeSurvey codeSurvey, int page) {
+<b class="nc">&nbsp;        Sort sort = Sort.by(Sort.Direction.ASC, &quot;codeSnippetId&quot;);</b>
+<b class="nc">&nbsp;        return snippetRepository.findBySurvey(codeSurvey, PageRequest.of(page, MiscEnums.NumberOfPages.getValue()), sort);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

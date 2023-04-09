@@ -1,5 +1,8 @@
 package com.csci5308.codeLabeller.Enums;
 
+/**
+ * enum for jwt number, trying to resolve the magic numbers.
+ */
 public enum JwtNumbers {
     BearerMark (7),
     JwtTokenHours (10),

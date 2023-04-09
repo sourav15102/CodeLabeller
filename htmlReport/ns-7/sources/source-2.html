@@ -1,0 +1,114 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HighlighterRepository</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Repsoitory</a>
+</div>
+
+<h1>Coverage Summary for Class: HighlighterRepository (com.csci5308.codeLabeller.Repsoitory)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">HighlighterRepository$MockitoMock$lach8NmG</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterRepository$MockitoMock$lach8NmG$auxiliary$3E72uwrO</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterRepository$MockitoMock$lach8NmG$auxiliary$xPzqp6lq</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Repsoitory;
+&nbsp;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeHighlights;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSnippet;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.PageRequest;
+&nbsp;import org.springframework.data.domain.Sort;
+&nbsp;import org.springframework.data.jpa.repository.Query;
+&nbsp;import org.springframework.data.repository.CrudRepository;
+&nbsp;import org.springframework.data.repository.query.Param;
+&nbsp;import org.springframework.stereotype.Repository;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;/**
+&nbsp; * repository for highliter object.
+&nbsp; */
+&nbsp;@Repository
+&nbsp;public interface HighlighterRepository extends CrudRepository&lt;CodeHighlights, Long&gt; {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * this query helps get the distinct count for highlights
+&nbsp;     * @param codeSnippet: snippet object
+&nbsp;     * @return: distinct count.
+&nbsp;     */
+&nbsp;    @Query(&quot;SELECT COUNT(DISTINCT ch.annotated_by) FROM CodeHighlights ch WHERE ch.codeSnippet=:cs&quot;)
+&nbsp;    Long findByCodeSnippetCount(@Param(&quot;cs&quot;) CodeSnippet codeSnippet);
+&nbsp;
+&nbsp;    /**
+&nbsp;     * code highlights according to snippets.
+&nbsp;     * @param codeSnippet: snippet object
+&nbsp;     * @param pageRequest: page request object
+&nbsp;     * @return: highlight objects.
+&nbsp;     */
+&nbsp;    @Query(&quot;SELECT GROUP_CONCAT(ch) FROM CodeHighlights ch WHERE ch.codeSnippet=:cs GROUP BY ch.annotated_by&quot;)
+&nbsp;    String findByCodeSnippet(@Param(&quot;cs&quot;) CodeSnippet codeSnippet, PageRequest pageRequest);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CodeSnippet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Models</a>
+</div>
+
+<h1>Coverage Summary for Class: CodeSnippet (com.csci5308.codeLabeller.Models)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CodeSnippet</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$cKJxR7DZ</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$DDldT8da</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$DueZJAMr</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$fOxcJERW</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$fSmSzyIi</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$lMSrozCW</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$o6r627Ea</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$oxwy8fEp</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$PZhIhMi5</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$rdnmKGoA</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$rMVkTNjs</td>
+  </tr>
+  <tr>
+    <td class="name">CodeSnippet$MockitoMock$f8biuxph$auxiliary$VsmJgxvQ</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Models;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.*;
+&nbsp;
+&nbsp;import java.util.Set;
+&nbsp;
+&nbsp;@Entity
+<b class="fc">&nbsp;@Getter @Setter @NoArgsConstructor @ToString @AllArgsConstructor</b>
+&nbsp;public class CodeSnippet {
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    @NonNull
+<b class="fc">&nbsp;    private Long codeSnippetId;</b>
+&nbsp;    @ManyToOne
+&nbsp;    @JoinColumn(name = &quot;SurveyID&quot;)
+<b class="nc">&nbsp;    private CodeSurvey survey;</b>
+&nbsp;    @Lob
+&nbsp;    @Column(columnDefinition = &quot;LONGBLOB&quot;)
+<b class="fc">&nbsp;    private byte[] snippetText;</b>
+&nbsp;
+&nbsp;    @ToString.Exclude
+&nbsp;    @OneToMany(mappedBy = &quot;codeSnippet&quot;)
+<b class="fc">&nbsp;    private Set&lt;CodeHighlights&gt; highlightList;</b>
+&nbsp;
+&nbsp;    @ToString.Exclude
+&nbsp;    @ManyToMany
+<b class="fc">&nbsp;    private Set&lt;CodeAnnotations&gt; tags;</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>

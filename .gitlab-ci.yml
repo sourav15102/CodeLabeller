@@ -8,6 +8,8 @@ default:
     - development
 
 stages:
+  - smells
+  - issues
   - build
   - test
   - package
@@ -25,6 +27,33 @@ cache:
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+smells_job:
+  stage: smells
+  image: openjdk:17
+  script:
+    - echo "Start smells job"
+    - mkdir smells/
+    - java -jar $CI_PROJECT_DIR/.gitlab/DesigniteJava.jar -i $CI_PROJECT_DIR -o smells/ -d
+  #    - cd smells/
+  #    - ls -a
+  artifacts:
+    paths:
+      - smells/
+      - $CI_PROJECT_DIR
+  only:
+    - main
+
+issues_job:
+  stage: issues
+  dependencies:
+    - smells_job
+  image: python:3.10
+  script:
+    - pip install -r $CI_PROJECT_DIR/.gitlab/requirements.txt
+    - python $CI_PROJECT_DIR/.gitlab/Issues.py $CI_COMMIT_SHA
+  only:
+    - main
 
 
 build_job:

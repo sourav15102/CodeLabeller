@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > HighlighterService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.csci5308.codeLabeller.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: HighlighterService (com.csci5308.codeLabeller.Service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HighlighterService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE$auxiliary$4JdFSZ5G</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE$auxiliary$9drP8ncH</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE$auxiliary$ICNAR7Ud</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE$auxiliary$IFugiE5e</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE$auxiliary$U7gvERiT</td>
+  </tr>
+  <tr>
+    <td class="name">HighlighterService$MockitoMock$DLARkulE$auxiliary$Z3M94t4l</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
+&nbsp;
+&nbsp;import com.csci5308.codeLabeller.Enums.MiscEnums;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeAnnotations;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeHighlights;
+&nbsp;import com.csci5308.codeLabeller.Models.CodeSnippet;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
+&nbsp;import com.csci5308.codeLabeller.Repsoitory.HighlighterRepository;
+&nbsp;import com.fasterxml.jackson.core.JsonProcessingException;
+&nbsp;import com.fasterxml.jackson.databind.ObjectMapper;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.data.domain.Page;
+&nbsp;import org.springframework.data.domain.PageImpl;
+&nbsp;import org.springframework.data.domain.PageRequest;
+&nbsp;import org.springframework.data.domain.Sort;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;/**
+&nbsp; * This service helps:
+&nbsp; * fetch all highlights.
+&nbsp; * convert highlihts to DTO and vica-versa.
+&nbsp; * fetches a set of highlights.
+&nbsp; */
+&nbsp;@Service
+<b class="fc">&nbsp;public class HighlighterService {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    AnnotationService annotationService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    HighlighterRepository highlighterRepository;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method fetches all highlights.
+&nbsp;     * @param annotatorUsername: annotator username
+&nbsp;     * @param codeSnippet: code snippet object.
+&nbsp;     * @param codeHighlightResponseList: highlight DTO.
+&nbsp;     * @return: collection of highlight.
+&nbsp;     */
+&nbsp;    public Set&lt;CodeHighlights&gt; getAllHighlights(String annotatorUsername, CodeSnippet codeSnippet, List&lt;CodeHighlightResponse&gt; codeHighlightResponseList){
+<b class="fc">&nbsp;        Set&lt;CodeHighlights&gt; codeHighlightsSet = new HashSet&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (CodeHighlightResponse chr: codeHighlightResponseList){</b>
+<b class="fc">&nbsp;            CodeHighlights codeHighlights = new CodeHighlights();</b>
+<b class="fc">&nbsp;            codeHighlights.setAnnotated_by(annotatorUsername);</b>
+<b class="fc">&nbsp;            codeHighlights.setCodeSnippet(codeSnippet);</b>
+<b class="fc">&nbsp;            codeHighlights.setSpan_start_id(chr.getSpan_start_id());</b>
+<b class="fc">&nbsp;            codeHighlights.setSpan_end_id(chr.getSpan_end_id());</b>
+<b class="fc">&nbsp;            codeHighlights.setAnnotation(annotationService.getCodeAnnotation(chr.getAnnotationResponse()));</b>
+<b class="fc">&nbsp;            codeHighlights = highlighterRepository.save(codeHighlights);</b>
+<b class="fc">&nbsp;            codeHighlightsSet.add(codeHighlights);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return codeHighlightsSet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method converts highlight to DTO.
+&nbsp;     * @param codeHighlights: highlight object.
+&nbsp;     * @return: highlight DTO.
+&nbsp;     */
+&nbsp;    public CodeHighlightResponse makeHighlightResponse(CodeHighlights codeHighlights){
+<b class="fc">&nbsp;        CodeHighlightResponse chr = new CodeHighlightResponse();</b>
+<b class="fc">&nbsp;        chr.setSpan_start_id(codeHighlights.getSpan_start_id());</b>
+<b class="fc">&nbsp;        chr.setSpan_end_id(codeHighlights.getSpan_end_id());</b>
+<b class="fc">&nbsp;        chr.setAnnotated_by(codeHighlights.getAnnotated_by());</b>
+<b class="fc">&nbsp;        chr.setAnnotationResponse(annotationService.makeAnnotationResponse(codeHighlights.getAnnotation()));</b>
+<b class="fc">&nbsp;        return chr;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * convert collection of highlihts to their DTO.
+&nbsp;     * @param codeHighlightsSet: collection of highlights.
+&nbsp;     * @return: collection of highlight response.
+&nbsp;     */
+&nbsp;    public Set&lt;CodeHighlightResponse&gt; makeAllHighlightResponse(Set&lt;CodeHighlights&gt; codeHighlightsSet){
+<b class="fc">&nbsp;        Set&lt;CodeHighlightResponse&gt; chrSet = new HashSet&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(CodeHighlights codeHighlights: codeHighlightsSet){</b>
+<b class="fc">&nbsp;            chrSet.add(this.makeHighlightResponse(codeHighlights));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return chrSet;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetches collection of highlight page of size 1.
+&nbsp;     * @param codeSnippet: snippet object.
+&nbsp;     * @param page: page number requested.
+&nbsp;     * @return: page of collection of highlight response.
+&nbsp;     */
+&nbsp;    public Page&lt;List&lt;CodeHighlightResponse&gt;&gt; getHighlightsSetPage(CodeSnippet codeSnippet, int page) {
+<b class="fc">&nbsp;        PageRequest pageRequest = PageRequest.of(page, MiscEnums.NumberOfPages.getValue());</b>
+<b class="fc">&nbsp;        Long count = highlighterRepository.findByCodeSnippetCount(codeSnippet);</b>
+<b class="fc">&nbsp;        String highlightsString = highlighterRepository.findByCodeSnippet(codeSnippet, pageRequest);</b>
+<b class="fc">&nbsp;        String[] highlightIdArray = new String[]{};</b>
+<b class="fc">&nbsp;        if(highlightsString!=null){</b>
+<b class="fc">&nbsp;            highlightIdArray = highlightsString.split(&quot;,&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;CodeHighlightResponse&gt; codeHighlightResponseList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for(String codeHighlightsId: highlightIdArray){</b>
+<b class="fc">&nbsp;            Long id = Long.valueOf(codeHighlightsId);</b>
+<b class="fc">&nbsp;            CodeHighlights codeHighlights = highlighterRepository.findById(id).get();</b>
+<b class="fc">&nbsp;            CodeHighlightResponse codeHighlightResponse = this.makeHighlightResponse(codeHighlights);</b>
+<b class="fc">&nbsp;            codeHighlightResponseList.add(codeHighlightResponse);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;List&lt;CodeHighlightResponse&gt;&gt; codeHighlightResponseListList = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        codeHighlightResponseListList.add(codeHighlightResponseList);</b>
+<b class="fc">&nbsp;        Page&lt;List&lt;CodeHighlightResponse&gt;&gt; codeHighlightResponseListPage = new PageImpl&lt;&gt;(codeHighlightResponseListList, pageRequest, count);</b>
+<b class="fc">&nbsp;        return codeHighlightResponseListPage;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
+</div>
+</body>
+</html>
