@@ -19,6 +19,12 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * This service helps:
+ * fetch all highlights.
+ * convert highlihts to DTO and vica-versa.
+ * fetches a set of highlights.
+ */
 @Service
 public class HighlighterService {
 
@@ -28,6 +34,13 @@ public class HighlighterService {
     @Autowired
     HighlighterRepository highlighterRepository;
 
+    /**
+     * This method fetches all highlights.
+     * @param annotatorUsername: annotator username
+     * @param codeSnippet: code snippet object.
+     * @param codeHighlightResponseList: highlight DTO.
+     * @return: collection of highlight.
+     */
     public Set<CodeHighlights> getAllHighlights(String annotatorUsername, CodeSnippet codeSnippet, List<CodeHighlightResponse> codeHighlightResponseList){
         Set<CodeHighlights> codeHighlightsSet = new HashSet<>();
 
@@ -44,6 +57,11 @@ public class HighlighterService {
         return codeHighlightsSet;
     }
 
+    /**
+     * This method converts highlight to DTO.
+     * @param codeHighlights: highlight object.
+     * @return: highlight DTO.
+     */
     public CodeHighlightResponse makeHighlightResponse(CodeHighlights codeHighlights){
         CodeHighlightResponse chr = new CodeHighlightResponse();
         chr.setSpan_start_id(codeHighlights.getSpan_start_id());
@@ -53,6 +71,11 @@ public class HighlighterService {
         return chr;
     }
 
+    /**
+     * convert collection of highlihts to their DTO.
+     * @param codeHighlightsSet: collection of highlights.
+     * @return: collection of highlight response.
+     */
     public Set<CodeHighlightResponse> makeAllHighlightResponse(Set<CodeHighlights> codeHighlightsSet){
         Set<CodeHighlightResponse> chrSet = new HashSet<>();
         for(CodeHighlights codeHighlights: codeHighlightsSet){
@@ -62,7 +85,12 @@ public class HighlighterService {
         return chrSet;
     }
 
-
+    /**
+     * fetches collection of highlight page of size 1.
+     * @param codeSnippet: snippet object.
+     * @param page: page number requested.
+     * @return: page of collection of highlight response.
+     */
     public Page<List<CodeHighlightResponse>> getHighlightsSetPage(CodeSnippet codeSnippet, int page) {
         PageRequest pageRequest = PageRequest.of(page, MiscEnums.NumberOfPages.getValue());
         Long count = highlighterRepository.findByCodeSnippetCount(codeSnippet);
