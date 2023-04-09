@@ -56,19 +56,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">UserSignUpService$MockitoMock$9zcZCISy</td>
+    <td class="name">UserSignUpService$MockitoMock$adgvr8ej</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpService$MockitoMock$9zcZCISy$auxiliary$iPUTro4G</td>
+    <td class="name">UserSignUpService$MockitoMock$adgvr8ej$auxiliary$11icddZy</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpService$MockitoMock$9zcZCISy$auxiliary$rIhcHCMK</td>
+    <td class="name">UserSignUpService$MockitoMock$adgvr8ej$auxiliary$RAAjoIQX</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpService$MockitoMock$9zcZCISy$auxiliary$vVdZQWyo</td>
+    <td class="name">UserSignUpService$MockitoMock$adgvr8ej$auxiliary$uEOJxWDX</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpService$MockitoMock$9zcZCISy$auxiliary$xNBKcJUS</td>
+    <td class="name">UserSignUpService$MockitoMock$adgvr8ej$auxiliary$UYMCBHla</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -123,6 +123,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.HashSet;
 &nbsp;import java.util.Set;
 &nbsp;
+&nbsp;/**
+&nbsp; * this service helps:
+&nbsp; * register the user
+&nbsp; * authenticate the user.
+&nbsp; */
 &nbsp;@Service
 <b class="fc">&nbsp;public class UserSignUpService {</b>
 &nbsp;
@@ -137,6 +142,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Autowired
 &nbsp;    JwtService jwtService;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * this register the user in dbg.
+&nbsp;     * @param user: user information.
+&nbsp;     * @return: this response contians jwt token.
+&nbsp;     */
 &nbsp;    public AuthResponse registerUser(UserSignUpDetails user){
 <b class="fc">&nbsp;        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());</b>
 <b class="fc">&nbsp;        Set&lt;GrantedAuthority&gt; authorities = new HashSet&lt;&gt;();</b>
@@ -154,6 +164,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return authResponse;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * this helps in authneticating the user.
+&nbsp;     * @param userLoginDetails: DTO for user login details.
+&nbsp;     * @return: this response contians jwt token.
+&nbsp;     */
 &nbsp;    public AuthResponse authenticate(UserLoginDetails userLoginDetails){
 <b class="fc">&nbsp;        authManager.authenticate(</b>
 &nbsp;                new UsernamePasswordAuthenticationToken(
@@ -191,7 +206,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

@@ -94,6 +94,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    UserSignUpService userSignUpService;
+&nbsp;    /**
+&nbsp;     * This url returns list of pending surveys
+&nbsp;     * It expects annotator&#39;s username as payload for call
+&nbsp;     * @param user This is object of UserLoginDetails class
+&nbsp;     * @return AuthResponse this returns jwtToken
+&nbsp;     */
 &nbsp;    @PostMapping(&quot;/login&quot;)
 &nbsp;    public ResponseEntity&lt;AuthResponse&gt; login(@RequestBody UserLoginDetails user){
 <b class="fc">&nbsp;        return ResponseEntity.ok(userSignUpService.authenticate(user));</b>
@@ -122,7 +128,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

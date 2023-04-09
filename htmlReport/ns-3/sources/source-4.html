@@ -87,6 +87,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;@RestController
 <b class="fc">&nbsp;public class MainController {</b>
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This url returns string with name of annotator
+&nbsp;     * It expects preauthorize and allow only two authorization [ADMIN, ANNOTATOR]
+&nbsp;     * @return username
+&nbsp;     */
 &nbsp;    @GetMapping(&quot;/annotator&quot;)
 &nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ANNOTATOR&#39;)&quot;)
 &nbsp;    public String getLabeller(){
@@ -117,7 +122,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

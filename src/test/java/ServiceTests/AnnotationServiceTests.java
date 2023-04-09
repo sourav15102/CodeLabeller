@@ -108,8 +108,9 @@ public class AnnotationServiceTests {
 
         AnnotationService annotationService1 = Mockito.spy(annotationService);
 
-        Mockito.when(annotationService1.makeAnnotationResponse(codeAnnotations))
-                .thenReturn(annotationResponse);
+        Mockito.doReturn(annotationResponse).
+                when(annotationService1)
+                .makeAnnotationResponse(codeAnnotations);
 
         AnnotationResponse annotationResponse1 = annotationService1.getAnnotation(username,surveyId,id);
 

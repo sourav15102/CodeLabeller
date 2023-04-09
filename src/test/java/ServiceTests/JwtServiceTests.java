@@ -51,8 +51,9 @@ public class JwtServiceTests {
 
         JwtService jwtServiceSpy = Mockito.spy(jwtService);
 
-        Mockito.when(jwtServiceSpy.encodeTheUserWithClaims(userDetails,claimsMap))
-                .thenReturn(token);
+        Mockito.doReturn(token)
+                .when(jwtServiceSpy)
+                .encodeTheUserWithClaims(userDetails,claimsMap);
 
         String response = jwtServiceSpy.generateToken(userDetails);
 

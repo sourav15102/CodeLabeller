@@ -20,6 +20,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * jet filter chain to handle jwt token in header.
+ */
 @Component
 public class JwtFilterChain extends OncePerRequestFilter {
 
@@ -29,6 +32,15 @@ public class JwtFilterChain extends OncePerRequestFilter {
     @Autowired
     UserDetailsManager userDetailsManager;
 
+    /**
+     * internal filter to extract jwt token, extract all information from it
+     * and setting the context holder.
+     * @param request: http request
+     * @param response: http response
+     * @param filterChain: filter chain object
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader(JwtEnum.AUTHORIZATION.toString());

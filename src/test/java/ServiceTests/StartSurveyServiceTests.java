@@ -4,6 +4,7 @@ import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.DTO.StartSurveyResponse;
 import com.csci5308.codeLabeller.Service.StartSurveyService;
 import com.csci5308.codeLabeller.Service.SurveyService;
+import org.aspectj.apache.bcel.classfile.Code;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,6 +53,17 @@ public class StartSurveyServiceTests {
                 .thenReturn(startSurveyResponsePage);
 
         Assertions.assertTrue(startSurveyResponsePage.getContent().size()==1);
+    }
+
+    @Test
+    public void getIndexSnippetTest(){
+        Set<CodeSnippet> snippetSet = new HashSet<>();
+        CodeSnippet codeSnippet1 = new CodeSnippet();
+        snippetSet.add(codeSnippet1);
+        int index = 0;
+
+        CodeSnippet codeSnippet = startSurveyService.getIndexSnippet(snippetSet, index);
+        Assertions.assertTrue(codeSnippet instanceof CodeSnippet);
     }
 
 }

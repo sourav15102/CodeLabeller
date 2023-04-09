@@ -102,7 +102,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    StartSurveyService startSurveyService;
-&nbsp;
+&nbsp;    /**
+&nbsp;     * This url returns all surveys
+&nbsp;     * It expects annotator&#39;s username as payload for call
+&nbsp;     * @param username
+&nbsp;     * @return List of SurveyReaponse
+&nbsp;     */
 &nbsp;    @GetMapping(&quot;{annotator_username}/survey/all/&quot;)
 &nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ANNOTATOR&#39;)&quot;)
 &nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys(@PathVariable(&quot;annotator_username&quot;) String username) {
@@ -111,6 +116,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This url returns a page of StartSurveyResponse
+&nbsp;     * It expects annotator&#39;s username as payload for call
+&nbsp;     * @param username annotator username
+&nbsp;     * @param surveyId
+&nbsp;     * @param page
+&nbsp;     * @param snippetId
+&nbsp;     * @param annotatorHighlightTagResponse Method expect this object in body.
+&nbsp;     * @return Page of StartSurveyResponse
+&nbsp;     */
 &nbsp;    @PostMapping(&quot;{annotator_username}/survey/{survey_id}/start/&quot;)
 &nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ANNOTATOR&#39;)&quot;)
 &nbsp;    public Page&lt;StartSurveyResponse&gt; startSurvey(@PathVariable(&quot;annotator_username&quot;) String username,
@@ -126,6 +141,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return startSurveyService.startTheSurvey(surveyId,page);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This url returns list of SurveyResponse
+&nbsp;     * It expects annotator&#39;s username as path variable for call
+&nbsp;     * @param username
+&nbsp;     * @return List of SurveyResponse
+&nbsp;     */
 &nbsp;    @GetMapping(&quot;{annotator_username}/survey/approved/all/&quot;)
 &nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ANNOTATOR&#39;)&quot;)
 &nbsp;    public List&lt;SurveyResponse&gt; getAllApprovedSurveys(@PathVariable(&quot;annotator_username&quot;) String username){
@@ -133,6 +154,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return annotatorService.getAllApprovedSurveys(username);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This url returns list of pending surveys
+&nbsp;     * It expects annotator&#39;s username as payload for call
+&nbsp;     * @param username
+&nbsp;     * @return List of SurveyResponse
+&nbsp;     */
 &nbsp;    @GetMapping(&quot;{annotator_username}/survey/pending/all/&quot;)
 &nbsp;    @PreAuthorize(&quot;hasAuthority(&#39;ANNOTATOR&#39;)&quot;)
 &nbsp;    public List&lt;SurveyResponse&gt; getAllPendingSurveys(@PathVariable(&quot;annotator_username&quot;) String username){
@@ -164,7 +191,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

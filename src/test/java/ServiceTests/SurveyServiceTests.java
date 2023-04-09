@@ -110,7 +110,9 @@ public class SurveyServiceTests {
 
         SurveyService surveyServiceSpy = Mockito.spy(surveyService);
         Mockito.when(surveyRepository.findAll()).thenReturn(listCodeSurveys);
-        Mockito.doReturn(surveyResponse).when(surveyServiceSpy).makeSurveyResponse(any(CodeSurvey.class));
+        Mockito.doReturn(surveyResponse)
+                .when(surveyServiceSpy)
+                .makeSurveyResponse(any(CodeSurvey.class));
 
         List<SurveyResponse> listCodeSurveysResponse = surveyServiceSpy.getAllSurveys();
 

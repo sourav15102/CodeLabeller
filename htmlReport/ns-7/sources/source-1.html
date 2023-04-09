@@ -56,19 +56,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">UserSignUpRepository$MockitoMock$LOrsU2BG</td>
+    <td class="name">UserSignUpRepository$MockitoMock$bP7ly7az</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpRepository$MockitoMock$LOrsU2BG$auxiliary$l8PI3hYF</td>
+    <td class="name">UserSignUpRepository$MockitoMock$bP7ly7az$auxiliary$15LDdmxV</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpRepository$MockitoMock$LOrsU2BG$auxiliary$Q4vaW3JX</td>
+    <td class="name">UserSignUpRepository$MockitoMock$bP7ly7az$auxiliary$7MXJ2LGv</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpRepository$MockitoMock$LOrsU2BG$auxiliary$SFunuMei</td>
+    <td class="name">UserSignUpRepository$MockitoMock$bP7ly7az$auxiliary$gaANHt4K</td>
   </tr>
   <tr>
-    <td class="name">UserSignUpRepository$MockitoMock$LOrsU2BG$auxiliary$Wdgr6I3c</td>
+    <td class="name">UserSignUpRepository$MockitoMock$bP7ly7az$auxiliary$YSSYstgD</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -104,16 +104,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import org.springframework.security.provisioning.UserDetailsManager;
 &nbsp;import org.springframework.stereotype.Repository;
 &nbsp;
+&nbsp;/**
+&nbsp; * user sign up repository
+&nbsp; */
 &nbsp;@Repository
 <b class="fc">&nbsp;public class UserSignUpRepository {</b>
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    UserDetailsManager jdbcUserDetailsManager;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * calling jdbc manager to register the user.
+&nbsp;     * @param user: user details object.
+&nbsp;     */
 &nbsp;    public void registerTheUser(UserDetails user){
 <b class="fc">&nbsp;        jdbcUserDetailsManager.createUser(user);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * find username based on username
+&nbsp;     * @param username: username
+&nbsp;     * @return: user details object.
+&nbsp;     */
 &nbsp;    public UserDetails findByUsername(String username){
 <b class="fc">&nbsp;        return jdbcUserDetailsManager.loadUserByUsername(username);</b>
 &nbsp;    }
@@ -142,7 +154,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

@@ -96,6 +96,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;import java.io.IOException;
 &nbsp;
+&nbsp;/**
+&nbsp; * jet filter chain to handle jwt token in header.
+&nbsp; */
 &nbsp;@Component
 <b class="nc">&nbsp;public class JwtFilterChain extends OncePerRequestFilter {</b>
 &nbsp;
@@ -105,6 +108,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Autowired
 &nbsp;    UserDetailsManager userDetailsManager;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * internal filter to extract jwt token, extract all information from it
+&nbsp;     * and setting the context holder.
+&nbsp;     * @param request: http request
+&nbsp;     * @param response: http response
+&nbsp;     * @param filterChain: filter chain object
+&nbsp;     * @throws ServletException
+&nbsp;     * @throws IOException
+&nbsp;     */
 &nbsp;    @Override
 &nbsp;    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 <b class="nc">&nbsp;        String authHeader = request.getHeader(JwtEnum.AUTHORIZATION.toString());</b>
@@ -152,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

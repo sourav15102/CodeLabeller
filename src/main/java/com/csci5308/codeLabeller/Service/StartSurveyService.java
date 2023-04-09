@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * start the survey pagination
+ */
 @Service
 public class StartSurveyService {
 
@@ -18,11 +21,23 @@ public class StartSurveyService {
     @Autowired
     AnnotationService annotationService;
 
+    /**
+     * start the survey pagination.
+     * @param surveyID: survey id.
+     * @param page: page number
+     * @return: page of start survey DTO.
+     */
     public Page<StartSurveyResponse> startTheSurvey(Long surveyID, int page){
         return surveyService.startSurvey(surveyID,page);
     }
 
-    private CodeSnippet getIndexSnippet(Set<CodeSnippet> snippetSet, int index){
+    /**
+     * get the snippet by index for the page.
+     * @param snippetSet: snippet collection.
+     * @param index: index
+     * @return: snippet object.
+     */
+    public CodeSnippet getIndexSnippet(Set<CodeSnippet> snippetSet, int index){
         List<CodeSnippet> list = new ArrayList<>(snippetSet);
         Collections.sort(list, Comparator.comparingLong(CodeSnippet::getCodeSnippetId));
         CodeSnippet snippet = list.get(index);

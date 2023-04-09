@@ -23,19 +23,33 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import javax.sql.DataSource;
 
+/**
+ * configuration helps with creating helper beans for jwt token.
+ */
 @Configuration
 public class SecurityConfiguration {
 
     @Autowired
     JwtFilterChain jwtFilterChain;
 
-    //first run script from user.ddl
 
+    /**
+     * creates bean for authmanager provided by spring.
+     * @param authConfig: auth configuration object.
+     * @return: auth manager object.
+     * @throws Exception
+     */
     @Bean
     public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
+    /**
+     * authentication filter for spring security
+     * @param httpSecurity: security object
+     * @return: filter chain for spring security.
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain authenticationFilter(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()

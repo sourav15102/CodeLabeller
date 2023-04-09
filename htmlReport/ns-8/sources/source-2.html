@@ -56,22 +56,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">UserSecurityConfiguration$MockitoMock$I3eSQUUY</td>
+    <td class="name">UserSecurityConfiguration$MockitoMock$MJoAficq</td>
   </tr>
   <tr>
-    <td class="name">UserSecurityConfiguration$MockitoMock$I3eSQUUY$auxiliary$c9oJW37O</td>
+    <td class="name">UserSecurityConfiguration$MockitoMock$MJoAficq$auxiliary$ba2Ru0I0</td>
   </tr>
   <tr>
-    <td class="name">UserSecurityConfiguration$MockitoMock$I3eSQUUY$auxiliary$cyuHNpsh</td>
+    <td class="name">UserSecurityConfiguration$MockitoMock$MJoAficq$auxiliary$r1tLaZ6u</td>
   </tr>
   <tr>
-    <td class="name">UserSecurityConfiguration$MockitoMock$I3eSQUUY$auxiliary$gZBGPjgH</td>
+    <td class="name">UserSecurityConfiguration$MockitoMock$MJoAficq$auxiliary$UhomgKpG</td>
   </tr>
   <tr>
-    <td class="name">UserSecurityConfiguration$MockitoMock$I3eSQUUY$auxiliary$QodPnyZ3</td>
+    <td class="name">UserSecurityConfiguration$MockitoMock$MJoAficq$auxiliary$XaBOsTWy</td>
   </tr>
   <tr>
-    <td class="name">UserSecurityConfiguration$MockitoMock$I3eSQUUY$auxiliary$SZfrZz8o</td>
+    <td class="name">UserSecurityConfiguration$MockitoMock$MJoAficq$auxiliary$zXXQMJ5U</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -113,20 +113,36 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;import javax.sql.DataSource;
 &nbsp;
+&nbsp;/**
+&nbsp; * password encoder and authentication provider configuration.
+&nbsp; */
 &nbsp;@Configuration
 <b class="fc">&nbsp;public class UserSecurityConfiguration {</b>
 &nbsp;    @Autowired
 &nbsp;    DataSource dataSource;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * bean for password encoder.
+&nbsp;     * @return: password encoder object.
+&nbsp;     */
 &nbsp;    @Bean
 &nbsp;    public PasswordEncoder passwordEncoder(){
 <b class="fc">&nbsp;        return new BCryptPasswordEncoder();</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * bean for user details manager.
+&nbsp;     * @return: user details manager.
+&nbsp;     */
 &nbsp;    @Bean
 &nbsp;    public UserDetailsManager userDetailsManager(){
 <b class="fc">&nbsp;        return new JdbcUserDetailsManager(dataSource);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * authentication provider.
+&nbsp;     * @return: authentication provider.
+&nbsp;     */
 &nbsp;    @Bean
 &nbsp;    public AuthenticationProvider authenticationProvider(){
 <b class="fc">&nbsp;        DaoAuthenticationProvider daoAuth = new DaoAuthenticationProvider();</b>
@@ -158,7 +174,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

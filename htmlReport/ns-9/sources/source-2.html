@@ -56,25 +56,25 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v$auxiliary$EPpEnW5S</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$8npJHFvO</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v$auxiliary$H97xSACF</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$bIxbvj7m</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v$auxiliary$IPoEbHpD</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$CWgMy1ii</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v$auxiliary$Kf1mibFe</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$QxXZdXrJ</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v$auxiliary$NCvNQovE</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$tUPQrJYm</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$V7aMZ54v$auxiliary$pRBvEgXM</td>
+    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$xzvzbLzq</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -115,6 +115,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.List;
 &nbsp;import java.util.Set;
 &nbsp;
+&nbsp;/**
+&nbsp; * This service helps:
+&nbsp; * get all surveys, be it approved or not approved
+&nbsp; * help tag snippet with annotations
+&nbsp; */
 &nbsp;@Service
 <b class="fc">&nbsp;public class AnnotatorService {</b>
 &nbsp;
@@ -130,9 +135,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Autowired
 &nbsp;    HighlighterService highlighterService;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method fetches all surveys.
+&nbsp;     * @return: collection of survey DTO.
+&nbsp;     */
 &nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys() {
 <b class="fc">&nbsp;        return surveyService.getAllSurveys();// filter from aproved and pending.</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method fetches all approved surveys.
+&nbsp;     * @param username:  username
+&nbsp;     * @return: collection of survey responses
+&nbsp;     */
 &nbsp;    public List&lt;SurveyResponse&gt; getAllApprovedSurveys(String username){
 <b class="fc">&nbsp;        Annotator annotator = annotatorRepository.findById(username).get();</b>
 <b class="fc">&nbsp;        List&lt;SurveyResponse&gt; surveyResponseList = new ArrayList&lt;&gt;();</b>
@@ -142,6 +157,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return surveyResponseList;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method fetches all pending surveys
+&nbsp;     * @param username:  username
+&nbsp;     * @return: collection of survey responses
+&nbsp;     */
 &nbsp;    public List&lt;SurveyResponse&gt; getAllPendingSurveys(String username) {
 <b class="fc">&nbsp;        Annotator annotator = annotatorRepository.findById(username).get();</b>
 <b class="fc">&nbsp;        List&lt;SurveyResponse&gt; surveyResponseList = new ArrayList&lt;&gt;();</b>
@@ -151,6 +171,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return surveyResponseList;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps tagging snippet with annotations.
+&nbsp;     * @param annotatorUsername: annotator username.
+&nbsp;     * @param surveyId: survey id
+&nbsp;     * @param snippetId: snippet id
+&nbsp;     * @param annotatorHighlightTagResponse: annotator highlighted information DTO.
+&nbsp;     */
 &nbsp;    public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, AnnotatorHighlightTagResponse annotatorHighlightTagResponse) {
 <b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());</b>
 <b class="fc">&nbsp;        CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);</b>
@@ -189,7 +216,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

@@ -56,34 +56,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$9WCsHfw7</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$8p7kk3lg</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$C9XJoE9Q</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$dECQLak5</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$kieXuHH1</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$DjWjEarQ</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$LzultzRY</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$dkL2YifS</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$o4WNSagL</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$e1t3TvkH</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$oUQBFjIH</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$hoj0F7VF</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$QHFdfU4W</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$MFpDZI95</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$yVpXLzrq</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$o393g4qP</td>
   </tr>
   <tr>
-    <td class="name">AnnotationService$MockitoMock$TlCVKHr7$auxiliary$Yy4jMWno</td>
+    <td class="name">AnnotationService$MockitoMock$uLqPMuLU$auxiliary$z0vXoSQI</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -129,6 +129,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.List;
 &nbsp;import java.util.Set;
 &nbsp;
+&nbsp;/**
+&nbsp; * Annotation service helps:
+&nbsp; * create annotations
+&nbsp; * fetch annotations by ID or all
+&nbsp; * convert annotion model to DTO and vice-versa
+&nbsp; */
 &nbsp;@Service
 <b class="fc">&nbsp;public class AnnotationService {</b>
 &nbsp;
@@ -137,6 +143,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Autowired
 &nbsp;    SurveyRepository surveyRepository;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps create annotations and save it against survey
+&nbsp;     * @param asaDTO: snippet + annotations info DTO
+&nbsp;     * @param survey: survey requested here
+&nbsp;     */
 &nbsp;    public void createAnnotations(AdminSnippetsAnnotationsDTO asaDTO, CodeSurvey survey) {
 <b class="fc">&nbsp;        List&lt;CodeAnnotations&gt; annotationsList = new ArrayList&lt;&gt;();</b>
 <b class="fc">&nbsp;        for(String name: asaDTO.getAnnotations()){</b>
@@ -148,6 +159,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        annotationsRepository.saveAll(annotationsList);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method converts code annotation to annotation response DTO.
+&nbsp;     * @param ca  is an CodeAnnotations object
+&nbsp;     * @return DTO of code annotations
+&nbsp;     */
 &nbsp;    public AnnotationResponse makeAnnotationResponse(CodeAnnotations ca) {
 <b class="fc">&nbsp;        AnnotationResponse annotationResponse = new AnnotationResponse();</b>
 <b class="fc">&nbsp;        annotationResponse.setAnnotationID(ca.getAnnotationID());</b>
@@ -155,6 +171,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return annotationResponse;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method converts collection of annotations to collection of annotation response.
+&nbsp;     * @param annotationSet: set of annotations
+&nbsp;     * @return: returns the collection of DTO of annotations
+&nbsp;     */
 &nbsp;    public List&lt;AnnotationResponse&gt; makeListAnnotationResponse(Set&lt;CodeAnnotations&gt; annotationSet){
 <b class="fc">&nbsp;        List&lt;AnnotationResponse&gt; surveyAnnotationList = new ArrayList&lt;&gt;();</b>
 <b class="fc">&nbsp;        for(CodeAnnotations annotations: annotationSet){</b>
@@ -164,6 +185,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return surveyAnnotationList;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method fetches collection of annotation DTO.
+&nbsp;     * @param username: username fetched
+&nbsp;     * @param surveyId: surveyId fetched
+&nbsp;     * @return: list of annotations DTO.
+&nbsp;     */
 &nbsp;    public List&lt;AnnotationResponse&gt; getAllAnnotations(String username, Long surveyId) {
 <b class="fc">&nbsp;        CodeSurvey codeSurvey =  surveyRepository.findById(surveyId).get();</b>
 <b class="fc">&nbsp;        List&lt;AnnotationResponse&gt; annotationResponseList = new ArrayList&lt;&gt;();</b>
@@ -174,11 +201,23 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return annotationResponseList;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps fetch the annotation DTO.
+&nbsp;     * @param username: username fetched.
+&nbsp;     * @param surveyId: survey ID fetched.
+&nbsp;     * @param id: annotation ID .
+&nbsp;     * @return: annotation DTO.
+&nbsp;     */
 &nbsp;    public AnnotationResponse getAnnotation(String username, Long surveyId, Long id) {
 <b class="fc">&nbsp;        CodeAnnotations codeAnnotation = annotationsRepository.findById(id).get();</b>
 <b class="fc">&nbsp;        return this.makeAnnotationResponse(codeAnnotation);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps convert collection of annotation DTO to collection of annotation.
+&nbsp;     * @param annotationsTag: collection of annotation DTO.
+&nbsp;     * @return: collection of annotation.
+&nbsp;     */
 &nbsp;    public Set&lt;CodeAnnotations&gt; getAllCodeAnnotations(List&lt;AnnotationResponse&gt; annotationsTag){
 <b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = new HashSet&lt;&gt;();</b>
 <b class="fc">&nbsp;        for(AnnotationResponse ar: annotationsTag){</b>
@@ -188,6 +227,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return codeAnnotationsSet;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * This method helps convert annotation DTO to annotation.
+&nbsp;     * @param annotationResponse: annotation DTO
+&nbsp;     * @return: annotation object.
+&nbsp;     */
 &nbsp;    public CodeAnnotations getCodeAnnotation(AnnotationResponse annotationResponse) {
 <b class="fc">&nbsp;        CodeAnnotations codeAnnotation = annotationsRepository.findById(annotationResponse.getAnnotationID()).get();</b>
 <b class="fc">&nbsp;        return codeAnnotation;</b>
@@ -218,7 +262,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

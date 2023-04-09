@@ -99,19 +99,33 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;import javax.sql.DataSource;
 &nbsp;
+&nbsp;/**
+&nbsp; * configuration helps with creating helper beans for jwt token.
+&nbsp; */
 &nbsp;@Configuration
 <b class="fc">&nbsp;public class SecurityConfiguration {</b>
 &nbsp;
 &nbsp;    @Autowired
 &nbsp;    JwtFilterChain jwtFilterChain;
 &nbsp;
-&nbsp;    //first run script from user.ddl
 &nbsp;
+&nbsp;    /**
+&nbsp;     * creates bean for authmanager provided by spring.
+&nbsp;     * @param authConfig: auth configuration object.
+&nbsp;     * @return: auth manager object.
+&nbsp;     * @throws Exception
+&nbsp;     */
 &nbsp;    @Bean
 &nbsp;    public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
 <b class="fc">&nbsp;        return authConfig.getAuthenticationManager();</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * authentication filter for spring security
+&nbsp;     * @param httpSecurity: security object
+&nbsp;     * @return: filter chain for spring security.
+&nbsp;     * @throws Exception
+&nbsp;     */
 &nbsp;    @Bean
 &nbsp;    public SecurityFilterChain authenticationFilter(HttpSecurity httpSecurity) throws Exception {
 <b class="nc">&nbsp;        httpSecurity.csrf().disable()</b>
@@ -154,7 +168,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

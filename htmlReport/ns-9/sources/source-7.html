@@ -56,34 +56,34 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$8nchNKXx</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$1BOrEFzG</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$ChvVMEKo</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$5NybMx2w</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$FA8Z9a0j</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$7lnyPJXq</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$hWSCuRb7</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$fRv0V8fl</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$jj8BrMqJ</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$INrH5JGW</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$PXHgi19L</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$jdrFYZYO</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$WFEDuygx</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$jqCGCEjq</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$wh8vGt0V</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$P3hjZOuG</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$oMOH3hDZ$auxiliary$YKWJKsCh</td>
+    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$tOKnpbCI</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -127,6 +127,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import java.util.List;
 &nbsp;import java.util.Set;
 &nbsp;
+&nbsp;/**
+&nbsp; * this service helps:
+&nbsp; * create surveys
+&nbsp; * fetch all surveys
+&nbsp; * convert surveys to survey DTO and vice-versa.
+&nbsp; * start survey pagination.
+&nbsp; */
 &nbsp;@Service
 <b class="fc">&nbsp;public class SurveyService {</b>
 &nbsp;
@@ -137,6 +144,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @Autowired
 &nbsp;    SnippetService snippetService;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * create surveys
+&nbsp;     * @param asaDTO: snippet+annotation DTO
+&nbsp;     * @return: survey object.
+&nbsp;     */
 &nbsp;    public CodeSurvey createSurvey(AdminSnippetsAnnotationsDTO asaDTO){
 <b class="fc">&nbsp;        CodeSurvey survey = new CodeSurvey();</b>
 <b class="fc">&nbsp;        survey.setUsername(asaDTO.getUsername());</b>
@@ -147,6 +159,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return surveyRepository.save(survey);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * fetch all surveys
+&nbsp;     * @return: collection of survey DTO.
+&nbsp;     */
 &nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys() {
 <b class="fc">&nbsp;        List&lt;CodeSurvey&gt; listCodeSurveys = (List&lt;CodeSurvey&gt;) surveyRepository.findAll();</b>
 <b class="fc">&nbsp;        List&lt;SurveyResponse&gt; list = new ArrayList&lt;&gt;();</b>
@@ -155,6 +171,12 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        return list;</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * fetch all survey based on username
+&nbsp;     * @param username: username
+&nbsp;     * @return: collection of survey DTO.
+&nbsp;     */
 &nbsp;    public List&lt;SurveyResponse&gt; getAllSurveys(String username) {
 <b class="fc">&nbsp;        List&lt;CodeSurvey&gt; listCodeSurveys = surveyRepository.findAllByUsername(username);</b>
 <b class="fc">&nbsp;        List&lt;SurveyResponse&gt; list = new ArrayList&lt;&gt;();</b>
@@ -164,6 +186,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        return list;</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * convert survey to survey DTO.
+&nbsp;     * @param cs: survey object.
+&nbsp;     * @return: survey DTO
+&nbsp;     */
 &nbsp;    public SurveyResponse makeSurveyResponse(CodeSurvey cs) {
 <b class="fc">&nbsp;        Set&lt;AnnotationResponse&gt; annotationResponseSet = new HashSet&lt;&gt;();</b>
 <b class="fc">&nbsp;        for(CodeAnnotations ca: cs.getAnnotationList()){</b>
@@ -186,15 +213,31 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    }
 &nbsp;
 &nbsp;
+&nbsp;    /**
+&nbsp;     * fetch survey based on survey id.
+&nbsp;     * @param surveyID: survey id
+&nbsp;     * @return: survey DTO.
+&nbsp;     */
 &nbsp;    public SurveyResponse getSurvey(Long surveyID) {
 <b class="fc">&nbsp;        CodeSurvey survey = getCodeSurvey(surveyID);</b>
 <b class="fc">&nbsp;        return this.makeSurveyResponse(survey);</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * fetch survey based on survey id.
+&nbsp;     * @param surveyID: survey id
+&nbsp;     * @return: survey object
+&nbsp;     */
 &nbsp;    public CodeSurvey getCodeSurvey(Long surveyID) {
 <b class="fc">&nbsp;        return surveyRepository.findById(surveyID).get();</b>
 &nbsp;    }
 &nbsp;
+&nbsp;    /**
+&nbsp;     * start survey pagination
+&nbsp;     * @param surveyID: survey id
+&nbsp;     * @param page: page number
+&nbsp;     * @return: page for survey DTO.
+&nbsp;     */
 &nbsp;    public Page&lt;StartSurveyResponse&gt; startSurvey(Long surveyID, int page){
 <b class="nc">&nbsp;        CodeSurvey codeSurvey = surveyRepository.findById(surveyID).get();</b>
 <b class="nc">&nbsp;        Page&lt;CodeSnippet&gt; codeSnippetPage = snippetService.getSnippetPage(codeSurvey,page);</b>
@@ -225,7 +268,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-08 19:26</div>
+    <div style="float:right;">generated on 2023-04-09 03:01</div>
 </div>
 </body>
 </html>

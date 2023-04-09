@@ -2,14 +2,17 @@ package ServiceTests;
 
 import com.csci5308.codeLabeller.Enums.MiscEnums;
 import com.csci5308.codeLabeller.Models.CodeAnnotations;
+import com.csci5308.codeLabeller.Models.CodeHighlights;
 import com.csci5308.codeLabeller.Models.CodeSnippet;
 import com.csci5308.codeLabeller.Models.CodeSurvey;
 import com.csci5308.codeLabeller.Models.DTO.AdminSnippetsAnnotationsDTO;
 import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
+import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
 import com.csci5308.codeLabeller.Models.DTO.SnippetResponse;
 import com.csci5308.codeLabeller.Repsoitory.SnippetRepository;
 import com.csci5308.codeLabeller.Repsoitory.SurveyRepository;
 import com.csci5308.codeLabeller.Service.AnnotationService;
+import com.csci5308.codeLabeller.Service.HighlighterService;
 import com.csci5308.codeLabeller.Service.SnippetService;
 import com.csci5308.codeLabeller.Service.SurveyService;
 import org.aspectj.apache.bcel.classfile.Code;
@@ -36,6 +39,8 @@ public class SnippetServiceTests {
 
     @Mock
     SnippetRepository snippetRepository;
+    @Mock
+    HighlighterService highlighterService;
 
     @Mock
     AnnotationService annotationService;
@@ -60,12 +65,22 @@ public class SnippetServiceTests {
         codeSnippet.setTags(new HashSet<>(){{
             add(codeAnnotations);
         }});
+        CodeHighlights codeHighlights = new CodeHighlights();
+        codeSnippet.setHighlightList(new HashSet<>(){{
+            add(codeHighlights);
+        }});
+        CodeHighlightResponse chr = new CodeHighlightResponse();
+        Set<CodeHighlightResponse> highlightResponseList = new HashSet<>(){{
+            add(chr);
+        }};
+
+        Mockito.when(highlighterService.makeAllHighlightResponse(codeSnippet.getHighlightList()))
+                .thenReturn(highlightResponseList);
 
         Set<AnnotationResponse> annotationResponseList = Mockito.mock(Set.class);
         Mockito.when(annotationService.makeAnnotationResponse(codeAnnotations))
                 .thenReturn(annotationResponse);
         Mockito.lenient().doNothing().when(snippetResponse).setTaggedAnnotations(annotationResponseList);
-
 
         SnippetResponse makeSnippetResponse = snippetService.makeSnippetResponse(codeSnippet);
 
@@ -87,8 +102,8 @@ public class SnippetServiceTests {
 
         SnippetService snippetServiceSpy = Mockito.spy(snippetService);
 
-        Mockito.when(snippetServiceSpy.makeSnippetResponse(codeSnippet))
-                .thenReturn(snippetResponse);
+        Mockito.doReturn(snippetResponse).when(snippetServiceSpy)
+                .makeSnippetResponse(codeSnippet);
 
         Assertions.assertTrue(snippetServiceSpy.getAllSnippets(username,surveyId).size()==1);
     }
@@ -104,7 +119,9 @@ public class SnippetServiceTests {
         Mockito.when(snippetRepository.findById(surveyId)).thenReturn(Optional.of(codeSnippet));
         SnippetService snippetService1 = Mockito.spy(snippetService);
 
-        Mockito.when(snippetService1.makeSnippetResponse(codeSnippet)).thenReturn(snippetResponse);
+        Mockito.doReturn(snippetResponse)
+                .when(snippetService1)
+                .makeSnippetResponse(codeSnippet);
 
         SnippetResponse snippetResponse1 = snippetService1.getSnippet(username,surveyId,id);
 
