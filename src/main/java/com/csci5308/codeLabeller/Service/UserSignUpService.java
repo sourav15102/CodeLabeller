@@ -31,7 +31,7 @@ import java.util.Set;
  * authenticate the user.
  */
 @Service
-public class UserSignUpService {
+public class UserSignUpService implements UserSignUpServiceInt {
 
     @Autowired
     UserSignUpRepository userSignUpRepository;
