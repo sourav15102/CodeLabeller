@@ -1,7 +1,9 @@
 package com.csci5308.codeLabeller.Service;
 
 import com.csci5308.codeLabeller.Models.*;
+import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
 import com.csci5308.codeLabeller.Models.DTO.AnnotatorHighlightTagResponse;
+import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
 import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +77,8 @@ public class AnnotatorService {
      * @param annotatorHighlightTagResponse: annotator highlighted information DTO.
      */
     public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, AnnotatorHighlightTagResponse annotatorHighlightTagResponse) {
-        Set<CodeAnnotations> codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());
+        List<AnnotationResponse> annotationResponseList = annotatorHighlightTagResponse.getAnnotationResponseList();
+        Set<CodeAnnotations> codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotationResponseList);
         CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);
 
         Set<CodeAnnotations> snippetTags = codeSnippet.getTags();
@@ -84,7 +87,9 @@ public class AnnotatorService {
         }
         codeSnippet.setTags(snippetTags);
         Set<CodeHighlights> codeHighlightsSet =  codeSnippet.getHighlightList();
-        codeHighlightsSet.addAll(highlighterService.getAllHighlights(annotatorUsername,codeSnippet,annotatorHighlightTagResponse.getCodeHighlightResponseList()));
+        List<CodeHighlightResponse> chrl = annotatorHighlightTagResponse.getCodeHighlightResponseList();
+        Set<CodeHighlights> sch = highlighterService.getAllHighlights(annotatorUsername,codeSnippet, chrl);
+        codeHighlightsSet.addAll(sch);
         codeSnippet.setHighlightList(codeHighlightsSet);
         snippetService.updateSnippet(codeSnippet);
     }

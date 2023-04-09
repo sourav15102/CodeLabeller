@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  * jet filter chain to handle jwt token in header.
@@ -55,7 +57,11 @@ public class JwtFilterChain extends OncePerRequestFilter {
             userDetails = userDetailsManager.loadUserByUsername(username);
             if(username!=null && SecurityContextHolder.getContext().getAuthentication() == null){
                 if(jwtService.isValid(jwtToken, userDetails)){
-                    UsernamePasswordAuthenticationToken unpa = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
+                    UsernamePasswordAuthenticationToken unpa;
+                    String usrDetName = userDetails.getUsername();
+                    String usrDetPass = userDetails.getPassword();
+                    Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+                    unpa = new UsernamePasswordAuthenticationToken(usrDetName, usrDetPass, authorities);
                     webAuthenticationDetails =  new WebAuthenticationDetailsSource().buildDetails(request);
                     unpa.setDetails(webAuthenticationDetails);
                     SecurityContextHolder.getContext().setAuthentication(unpa);

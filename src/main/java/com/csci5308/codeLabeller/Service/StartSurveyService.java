@@ -14,7 +14,7 @@ import java.util.*;
  * start the survey pagination
  */
 @Service
-public class StartSurveyService {
+public class StartSurveyService implements StartSurveyServiceInt {
 
     @Autowired
     SurveyService surveyService;
