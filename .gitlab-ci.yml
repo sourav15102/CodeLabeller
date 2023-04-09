@@ -41,6 +41,8 @@ smells_job:
     paths:
       - smells/
       - $CI_PROJECT_DIR
+  only:
+    - main
 
 issues_job:
   stage: issues
@@ -50,6 +52,8 @@ issues_job:
   script:
     - pip install -r $CI_PROJECT_DIR/.gitlab/requirements.txt
     - python $CI_PROJECT_DIR/.gitlab/Issues.py $CI_COMMIT_SHA
+  only:
+    - main
 
 
 build_job:
