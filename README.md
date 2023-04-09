@@ -49,7 +49,7 @@ Create a pull request.
 ```
 
 ### Authors:
-Margin Patel mr353045@dal.ca 
-Aanandi Pankhania an936894@dal.ca
-Sourav sr734546@dal.ca
+Margin Patel mr353045@dal.ca \
+Aanandi Pankhania an936894@dal.ca \
+Sourav sr734546@dal.ca \
 Harjot Singh hr744527@dal.ca

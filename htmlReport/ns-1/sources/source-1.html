@@ -90,7 +90,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;@SpringBootApplication
 <b class="nc">&nbsp;public class CodeLabellerApplication {</b>
 &nbsp;
-&nbsp;	public static void main(String[] args) {
+&nbsp;	public static void main(String[] args) throws SQLException {
 &nbsp;		try {
 <b class="nc">&nbsp;			Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</b>
 <b class="nc">&nbsp;			String url = &quot;jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT?sessionVariables=sql_mode=&#39;NO_ENGINE_SUBSTITUTION&#39;&amp;jdbcCompliantTruncation=false&quot;;</b>
@@ -111,7 +111,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;		} catch (ClassNotFoundException e) {</b>
 <b class="nc">&nbsp;			throw new RuntimeException(e);</b>
 <b class="nc">&nbsp;		} catch (SQLException e) {</b>
-<b class="nc">&nbsp;			throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;			throw new SQLException(&quot;Couldn&#39;t connect to database.&quot;,e);</b>
 <b class="nc">&nbsp;		}</b>
 &nbsp;
 <b class="nc">&nbsp;		SpringApplication.run(CodeLabellerApplication.class, args);</b>
@@ -141,7 +141,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-09 03:57</div>
+    <div style="float:right;">generated on 2023-04-09 18:28</div>
 </div>
 </body>
 </html>
