@@ -51,30 +51,30 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (25/25)
+    (28/28)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$8npJHFvO</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf$auxiliary$2s0fa7P2</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$bIxbvj7m</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf$auxiliary$gCraWMK2</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$CWgMy1ii</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf$auxiliary$gnIJ8u61</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$QxXZdXrJ</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf$auxiliary$KgHLRM1N</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$tUPQrJYm</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf$auxiliary$OOMnjm6p</td>
   </tr>
   <tr>
-    <td class="name">AnnotatorService$MockitoMock$pV9A7TWR$auxiliary$xzvzbLzq</td>
+    <td class="name">AnnotatorService$MockitoMock$CBbBzrsf$auxiliary$Wgb2y6vQ</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -91,7 +91,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     100%
   </span>
   <span class="absValue">
-    (25/25)
+    (28/28)
   </span>
 </td>
 </tr>
@@ -105,7 +105,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package com.csci5308.codeLabeller.Service;
 &nbsp;
 &nbsp;import com.csci5308.codeLabeller.Models.*;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.AnnotationResponse;
 &nbsp;import com.csci5308.codeLabeller.Models.DTO.AnnotatorHighlightTagResponse;
+&nbsp;import com.csci5308.codeLabeller.Models.DTO.CodeHighlightResponse;
 &nbsp;import com.csci5308.codeLabeller.Models.DTO.SurveyResponse;
 &nbsp;import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
@@ -179,7 +181,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;     * @param annotatorHighlightTagResponse: annotator highlighted information DTO.
 &nbsp;     */
 &nbsp;    public void tagSnippetWithAnnotations(String annotatorUsername, Long surveyId, Long snippetId, AnnotatorHighlightTagResponse annotatorHighlightTagResponse) {
-<b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotatorHighlightTagResponse.getAnnotationResponseList());</b>
+<b class="fc">&nbsp;        List&lt;AnnotationResponse&gt; annotationResponseList = annotatorHighlightTagResponse.getAnnotationResponseList();</b>
+<b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; codeAnnotationsSet = annotationService.getAllCodeAnnotations(annotationResponseList);</b>
 <b class="fc">&nbsp;        CodeSnippet codeSnippet = snippetService.getCodeSnippet(snippetId);</b>
 &nbsp;
 <b class="fc">&nbsp;        Set&lt;CodeAnnotations&gt; snippetTags = codeSnippet.getTags();</b>
@@ -188,7 +191,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        codeSnippet.setTags(snippetTags);</b>
 <b class="fc">&nbsp;        Set&lt;CodeHighlights&gt; codeHighlightsSet =  codeSnippet.getHighlightList();</b>
-<b class="fc">&nbsp;        codeHighlightsSet.addAll(highlighterService.getAllHighlights(annotatorUsername,codeSnippet,annotatorHighlightTagResponse.getCodeHighlightResponseList()));</b>
+<b class="fc">&nbsp;        List&lt;CodeHighlightResponse&gt; chrl = annotatorHighlightTagResponse.getCodeHighlightResponseList();</b>
+<b class="fc">&nbsp;        Set&lt;CodeHighlights&gt; sch = highlighterService.getAllHighlights(annotatorUsername,codeSnippet, chrl);</b>
+<b class="fc">&nbsp;        codeHighlightsSet.addAll(sch);</b>
 <b class="fc">&nbsp;        codeSnippet.setHighlightList(codeHighlightsSet);</b>
 <b class="fc">&nbsp;        snippetService.updateSnippet(codeSnippet);</b>
 &nbsp;    }
@@ -216,7 +221,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-09 03:01</div>
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
 </div>
 </body>
 </html>

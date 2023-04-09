@@ -48,48 +48,48 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    56.8%
+    57.9%
   </span>
   <span class="absValue">
-    (21/37)
+    (22/38)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$7Tz3Yy8s</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$A5p14kuH</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$a3U1KiRN</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$EXM3py9r</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$CXRrb2v5</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$gGvjnZHp</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$FHX1rxKR</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$h0XKkw9m</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$HzzGYoPR</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$icXDCEXV</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$i5GXogvO</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$k47PU4Su</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$jXuldx2T</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$MDzopd1B</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$ktGLzxco</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$oNWgTkHO</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$tNN8R7SI</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$QAlDtVrF</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$tr0tSlb9</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$vUljrwT7</td>
   </tr>
   <tr>
-    <td class="name">SnippetService$MockitoMock$onUE2GtI$auxiliary$yVzTqQAH</td>
+    <td class="name">SnippetService$MockitoMock$EZ5wHKg0$auxiliary$WYHfhwhf</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -103,10 +103,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    56.8%
+    57.9%
   </span>
   <span class="absValue">
-    (21/37)
+    (22/38)
   </span>
 </td>
 </tr>
@@ -203,7 +203,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;            annotationResponseList.add(annotationService.makeAnnotationResponse(codeAnnotations));</b>
 <b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        snippetResponse.setTaggedAnnotations(annotationResponseList);</b>
-<b class="fc">&nbsp;        Set&lt;CodeHighlightResponse&gt; highlightResponseList = highlighterService.makeAllHighlightResponse(codeSnippet.getHighlightList());</b>
+<b class="fc">&nbsp;        Set&lt;CodeHighlights&gt; setCh = codeSnippet.getHighlightList();</b>
+&nbsp;        Set&lt;CodeHighlightResponse&gt; highlightResponseList;
+<b class="fc">&nbsp;        highlightResponseList = highlighterService.makeAllHighlightResponse(setCh);</b>
 <b class="fc">&nbsp;        snippetResponse.setHighlightResponses(highlightResponseList);</b>
 <b class="fc">&nbsp;        return snippetResponse;</b>
 &nbsp;    }
@@ -299,7 +301,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-09 03:01</div>
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
 </div>
 </body>
 </html>

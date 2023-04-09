@@ -48,42 +48,42 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    87%
   </span>
   <span class="absValue">
-    (40/44)
+    (40/46)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$1BOrEFzG</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$3mNj7Rnc</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$5NybMx2w</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$88T48VjC</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$7lnyPJXq</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$9ZkVSJAP</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$fRv0V8fl</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$AuhOpvDr</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$INrH5JGW</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$ckg3NfjK</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$jdrFYZYO</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$hVeQO8fr</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$jqCGCEjq</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$ldFgzNpV</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$P3hjZOuG</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$p2uUpgNg</td>
   </tr>
   <tr>
-    <td class="name">SurveyService$MockitoMock$rWSWORe1$auxiliary$tOKnpbCI</td>
+    <td class="name">SurveyService$MockitoMock$ormEIu6d$auxiliary$RuTqlhrV</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -97,10 +97,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    90.9%
+    87%
   </span>
   <span class="absValue">
-    (40/44)
+    (40/46)
   </span>
 </td>
 </tr>
@@ -241,7 +241,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    public Page&lt;StartSurveyResponse&gt; startSurvey(Long surveyID, int page){
 <b class="nc">&nbsp;        CodeSurvey codeSurvey = surveyRepository.findById(surveyID).get();</b>
 <b class="nc">&nbsp;        Page&lt;CodeSnippet&gt; codeSnippetPage = snippetService.getSnippetPage(codeSurvey,page);</b>
-<b class="nc">&nbsp;        Page&lt;StartSurveyResponse&gt; startSurveyResponsePage = codeSnippetPage.map(codeSnippet -&gt; new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),annotationService.makeListAnnotationResponse(codeSurvey.getAnnotationList())));</b>
+&nbsp;        Page&lt;StartSurveyResponse&gt; startSurveyResponsePage;
+<b class="nc">&nbsp;        Set&lt;CodeAnnotations&gt; setCA = codeSurvey.getAnnotationList();</b>
+<b class="nc">&nbsp;        List&lt;AnnotationResponse&gt; listAnnRes = annotationService.makeListAnnotationResponse(setCA);</b>
+<b class="nc">&nbsp;        startSurveyResponsePage = codeSnippetPage.map(codeSnippet -&gt; new StartSurveyResponse(codeSnippet.getCodeSnippetId(),codeSnippet.getSnippetText(),listAnnRes));</b>
 <b class="nc">&nbsp;        return startSurveyResponsePage;</b>
 &nbsp;    }
 &nbsp;}
@@ -268,7 +271,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-09 03:01</div>
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
 </div>
 </body>
 </html>

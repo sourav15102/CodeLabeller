@@ -62,7 +62,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/15)
+    (0/18)
   </span>
 </td>
 </tr>
@@ -86,6 +86,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import org.springframework.beans.factory.annotation.Autowired;
 &nbsp;import org.springframework.boot.autoconfigure.security.SecurityProperties;
 &nbsp;import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+&nbsp;import org.springframework.security.core.GrantedAuthority;
 &nbsp;import org.springframework.security.core.context.SecurityContextHolder;
 &nbsp;import org.springframework.security.core.userdetails.UserDetails;
 &nbsp;import org.springframework.security.provisioning.UserDetailsManager;
@@ -95,6 +96,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import org.springframework.web.filter.OncePerRequestFilter;
 &nbsp;
 &nbsp;import java.io.IOException;
+&nbsp;import java.util.Collection;
 &nbsp;
 &nbsp;/**
 &nbsp; * jet filter chain to handle jwt token in header.
@@ -131,7 +133,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            userDetails = userDetailsManager.loadUserByUsername(username);</b>
 <b class="nc">&nbsp;            if(username!=null &amp;&amp; SecurityContextHolder.getContext().getAuthentication() == null){</b>
 <b class="nc">&nbsp;                if(jwtService.isValid(jwtToken, userDetails)){</b>
-<b class="nc">&nbsp;                    UsernamePasswordAuthenticationToken unpa = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());</b>
+&nbsp;                    UsernamePasswordAuthenticationToken unpa;
+<b class="nc">&nbsp;                    String usrDetName = userDetails.getUsername();</b>
+<b class="nc">&nbsp;                    String usrDetPass = userDetails.getPassword();</b>
+<b class="nc">&nbsp;                    Collection&lt;? extends GrantedAuthority&gt; authorities = userDetails.getAuthorities();</b>
+<b class="nc">&nbsp;                    unpa = new UsernamePasswordAuthenticationToken(usrDetName, usrDetPass, authorities);</b>
 <b class="nc">&nbsp;                    webAuthenticationDetails =  new WebAuthenticationDetailsSource().buildDetails(request);</b>
 <b class="nc">&nbsp;                    unpa.setDetails(webAuthenticationDetails);</b>
 <b class="nc">&nbsp;                    SecurityContextHolder.getContext().setAuthentication(unpa);</b>
@@ -164,7 +170,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-04-09 03:01</div>
+    <div style="float:right;">generated on 2023-04-09 03:57</div>
 </div>
 </body>
 </html>
