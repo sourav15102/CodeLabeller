@@ -14,7 +14,7 @@ import java.sql.Statement;
 @SpringBootApplication
 public class CodeLabellerApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			String url = "jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_8_DEVINT?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false";
@@ -35,7 +35,7 @@ public class CodeLabellerApplication {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new SQLException("Couldn't connect to database.",e);
 		}
 
 		SpringApplication.run(CodeLabellerApplication.class, args);
