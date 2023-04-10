@@ -48,6 +48,52 @@ Step 5:
 Create a pull request.
 ```
 
+### Use Cases: Flow:
+```
+The general flow here will demonstrate a complete and most general use case for both annotator and admin:
+
+Step 1:
+Admin Signs Up:
+Admin chooses a acceptable username and password, also they chooses their role as admin to sign up.
+
+Step 2:
+Admin starts creating a survey:
+Admin lands on their home page where they can see two options, to see or to create surveys.
+Admin chooses to create survey.
+
+Step 3:
+Admin creates a survey:
+Admin upload snippets( bunch of .java files), chooses language as .java, and upload snippets from their machine.
+Admin adds annotations to the survey and submit and logs out.
+
+Step 4:
+Annotator signs up/log in:
+Annotator lands on their home page where they can see list of surveys created.
+Annotator chooses a survey and start the pagination to start annotating the survey.
+
+Step 5:
+Annotator goes through each snippet of the chosen survey:
+Annotator sees one snippet at a time.
+Annotator highlights the code and marks it with an annotation.
+Annotator chooses a tag for the snippet and click on "next" button to move to next snippet.
+
+Step 6:
+Annotator submits:
+Annotator after annotating all the snippets, submits.
+
+Step 7:
+Admin logs in adn see the annotated snippets:
+Admin logs in.
+Admin lands on home page.
+Admin chooses "View Surveys".
+Admin clicks on the desired survey.
+Admin can see the annoated tags for each snippet under that survey.
+Admin can start the pagination for each snippet to see the highlighted part.
+Admin logs out.
+```
+
+
+
 ### Authors:
 Margin Patel mr353045@dal.ca \
 Aanandi Pankhania an936894@dal.ca \
