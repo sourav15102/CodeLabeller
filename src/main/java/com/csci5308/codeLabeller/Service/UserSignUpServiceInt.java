@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserSignUpServiceInt {
-    AuthResponse registerUser(UserSignUpDetails user);
+    AuthResponse registerUser(UserSignUpDetails user) throws RuntimeException;
     AuthResponse authenticate(UserLoginDetails userLoginDetails);
 }

@@ -22,7 +22,7 @@ public class SignUpController {
      * @return AuthResponse this returns jwtToken
      */
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> signUp(@RequestBody UserSignUpDetails user){
+    public ResponseEntity<AuthResponse> signUp(@RequestBody UserSignUpDetails user) throws RuntimeException{
         return ResponseEntity.ok(userSignUpService.registerUser(user));
     }
 

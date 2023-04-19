@@ -11,6 +11,7 @@ import com.csci5308.codeLabeller.Repsoitory.AnnotatorRepository;
 import com.csci5308.codeLabeller.Repsoitory.UserSignUpRepository;
 import com.csci5308.codeLabeller.Security.SecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,12 +50,16 @@ public class UserSignUpService implements UserSignUpServiceInt {
      * @param user: user information.
      * @return: this response contians jwt token.
      */
-    public AuthResponse registerUser(UserSignUpDetails user){
+    public AuthResponse registerUser(UserSignUpDetails user) throws RuntimeException{
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(grantedAuthority);
         UserDetails userDetails = new User(user.getUsername(), passwordEncoder.encode(user.getPassword()), authorities);
-        userSignUpRepository.registerTheUser(userDetails);
+        try {
+            userSignUpRepository.registerTheUser(userDetails);
+        } catch(DuplicateKeyException e){
+            throw new DuplicateKeyException("User already exists",e);
+        }
         if(user.getAuthority().equals(UserAuthority.ANNOTATOR.toString())){
             Annotator annotator = new Annotator();
             annotator.setUsername(user.getUsername());
