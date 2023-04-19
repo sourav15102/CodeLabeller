@@ -91,11 +91,3 @@ Admin can see the annoated tags for each snippet under that survey.
 Admin can start the pagination for each snippet to see the highlighted part.
 Admin logs out.
 ```
-
-
-
-### Authors:
-Margin Patel mr353045@dal.ca \
-Aanandi Pankhania an936894@dal.ca \
-Sourav sr734546@dal.ca \
-Harjot Singh hr744527@dal.ca
